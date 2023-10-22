@@ -8,10 +8,10 @@ import http from "../../../utils/http"
 import { TRepo } from "./type"
 
 
-export default function Repos({ colors }: { colors: { [key: string]: string } }) {
+export default function Repos({ colors, organization }: { colors: { [key: string]: string }, organization: string }) {
 
     const limit = 12
-    const genAPI = (page: number) => `https://api.github.com/users/innev/starred?page=${page + 1}&per_page=${limit}`
+    const genAPI = (page: number) => `https://api.github.com/users/${organization}/repos?page=${page + 1}&per_page=${limit}`
 
     const getKey = (pageIndex: number, previousPageData: TRepo[]) => {
         if (previousPageData && !previousPageData.length) return null

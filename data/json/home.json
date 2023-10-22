@@ -1,23 +1,23 @@
 {
     "user": {
-        "nickname": "Anoyi 🐬",
-        "avatar": "https://upload.jianshu.io/users/upload_avatars/3424642/abb0b8e9-cfb6-40a4-92d1-4e326aeebd32.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240",
+        "nickname": "Innev 🐬",
+        "avatar": "https://avatars.githubusercontent.com/u/2101841?v=4",
         "bio": "轻量级云原生架构实验室",
         "brands": [{
                 "icon": "github",
-                "url": "https://github.com/AnoyiX"
+                "url": "https://github.com/innev"
             }, {
                 "icon": "telegram",
-                "url": "https://t.me/fastweb3"
+                "url": "#"
             }, {
                 "icon": "twitter",
-                "url": "https://twitter.com/AnoyiX"
+                "url": "#"
             }, {
                 "icon": "tiktok",
-                "url": "https://www.douyin.com/user/MS4wLjABAAAAFS6CPjIHAim7TdTQjzevZX7LwfKCIi37PTVmqCpzdU0"
+                "url": "https://www.douyin.com/user/MS4wLjABAAAAuMw5gTp3HXiXngGfWKIRTvcr0qCeub13tDCDQTfrx9A"
             }, {
                 "icon": "youtube",
-                "url": "https://www.youtube.com/channel/UCL-w1IbRfznZauYz6JIZOBw"
+                "url": "#"
             }
         ]
     },

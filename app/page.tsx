@@ -1,14 +1,14 @@
-import Link from 'next/link'
-import FullContainer from '../components/server/Containers'
+import Dock from '@/components/client/Dock'
 import { readFileSync } from 'fs'
+import Link from 'next/link'
 import path from "path"
 import { Logos } from '../components/Icons'
-import Dock from '@/components/client/Dock'
+import FullContainer from '../components/server/Containers'
 
 export default function Page() {
 
-    const apps = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/apps.json'), 'utf-8'))
-    const home = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/home.json'), 'utf-8'))
+    const apps = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/apps.json'), 'utf-8'));
+    const home = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/home.json'), 'utf-8'));
 
     return (
         <div className='w-full flex flex-col flex-1 gap-4 md:gap-6 p-4 md:p-8'>
@@ -64,7 +64,7 @@ export default function Page() {
                             </Link>
                         </div>
                         <div className='text-center text-gray-400'>
-                            <a href="https://github.com/AnoyiX" target="_blank">Anoyi</a> © 2023 All Rights Reserved
+                            <a href="https://github.com/innev" target="_blank">Innev</a> © 2023 All Rights Reserved
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,8 @@ export default function Page() {
                                 name: string
                                 url: string
                                 icon: string
-                            }, index: number) => (
+                                visiable: boolean
+                            }, index: number) => !item.visiable ? null : (
                                 <div className='flex flex-col items-center gap-3' key={index}>
                                     <Link href={item.url} target={(item.url.startsWith('http://') || item.url.startsWith('https://')) ? '_blank' : '_self'} className='cursor-pointer'>
                                         <img src={item.icon} alt="" className='w-16 h-16 shadow rounded-2xl' />

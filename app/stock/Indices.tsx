@@ -2,9 +2,8 @@
 
 import Link from 'next/link'
 import useSWR from 'swr'
-import { TRealData } from './type'
 import http from '../../utils/http'
-import { Fragment } from 'react'
+import { TRealData } from './type'
 
 export default function Indices() {
 
@@ -15,6 +14,13 @@ export default function Indices() {
         '000688.SS',
         '399330.SZ',
         '000300.SS',
+        '000905.SS',
+        '000852.SS',
+
+        '603617.SS',
+        '603679.SS',
+        '603687.SS',
+        '300940.SZ',
     ]
 
     const fields = [
@@ -52,7 +58,7 @@ export default function Indices() {
     }
 
     return (
-        <div className="grid grid-cols-6 gap-4 w-full text-white">
+        <div className="grid grid-cols-8 gap-4 w-full text-white">
             {
                 code.map((item) => {
                     if (Object.keys(realResp.data.snapshot).length > 0) {

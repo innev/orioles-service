@@ -2,46 +2,73 @@
     {
         "name": "开源项目",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Github.svg",
-        "url": "/github/stars"
+        "url": "/github/stars",
+        "visiable": true
+    },
+    {
+        "name": "Aigrego Repo",
+        "icon": "https://avatars.githubusercontent.com/u/133929787?v=4",
+        "url": "/github/aigrego",
+        "visiable": true
+    },
+    {
+        "name": "Innev Repo",
+        "icon": "https://avatars.githubusercontent.com/u/2101841?v=4",
+        "url": "/github/innev",
+        "visiable": true
     },
     {
         "name": "股市",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Stock.svg",
-        "url": "/stock"
+        "url": "/stock",
+        "visiable": true
+    },
+    {
+        "name": "基金",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Fund.svg",
+        "url": "/fund",
+        "visiable": false
     },
     {
         "name": "短视频",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Tiktok.svg",
-        "url": "/video"
+        "url": "/video",
+        "visiable": false
     },
     {
         "name": "Rainbow",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Rainbow.svg",
-        "url": "/rainbow"
+        "url": "/rainbow",
+        "visiable": false
     },
     {
         "name": "博客",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/JianShu.svg",
-        "url": "https://www.jianshu.com/u/7b7ec6f2db21"
+        "url": "https://www.jianshu.com/u/a550becfc3f1",
+        "visiable": true
     },
     {
         "name": "Dev Icons",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/DevIcons.svg",
-        "url": "/dev-icons"
+        "url": "/dev-icons",
+        "visiable": true
     },
     {
         "name": "相册",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Photos.svg",
-        "url": "/photo"
+        "url": "/photo",
+        "visiable": false
     },
     {
         "name": "Git 表情",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitEmojis.svg",
-        "url": "/gitmojis"
+        "url": "/gitmojis",
+        "visiable": false
     },
     {
         "name": "CNCF",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/CNCF.svg",
-        "url": "/cncf"
+        "url": "/cncf",
+        "visiable": false
     }
 ]
