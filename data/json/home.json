@@ -40,6 +40,16 @@
                 "url": "https://www.java.com"
             },
             {
+                "name": "PHP",
+                "icon": "php",
+                "url": "https://www.php.net"
+            },
+            {
+                "name": "Lua",
+                "icon": "lua",
+                "url": "https://www.lua.org"
+            },
+            {
                 "name": "HTML5",
                 "icon": "HTML5",
                 "url": "https://developer.mozilla.org/zh-CN/docs/Web/HTML"
@@ -95,6 +105,11 @@
                 "url": "https://nextjs.org"
             },
             {
+                "name": "NodeJS",
+                "icon": "nodejs",
+                "url": "https://nodejs.org"
+            },
+            {
                 "name": "TailwindCSS",
                 "icon": "TailwindCSS",
                 "url": "https://tailwindcss.com"
@@ -133,6 +148,16 @@
                 "name": "Prometheus",
                 "icon": "Prometheus",
                 "url": "https://prometheus.io"
+            },
+            {
+                "name": "Tensorflow",
+                "icon": "tensorflow",
+                "url": "https://www.tensorflow.org"
+            },
+            {
+                "name": "CI/CD",
+                "icon": "circleci",
+                "url": "https://www.drone.io"
             }
         ]
     },
