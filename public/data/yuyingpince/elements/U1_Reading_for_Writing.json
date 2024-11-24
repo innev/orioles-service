@@ -1,0 +1,21 @@
+{
+  "id": "",
+  "name": "U1_Reading_for_Writing",
+  "category": "speech",
+  "word": [
+    { "id": "4bdeacc3e156c5d674ae9433cd17b996", "en":"behaviour", "cn":"n. 行为；举止", "ps":"/bIheIvj(r)/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "45bc526fdf0978c78a952918201c1293", "en":"generation", "cn":"n. 一代（人）", "ps":"/denreIn/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4441" },
+    { "id": "d8d196c339f989d762bebea17f1d8d6b", "en":"attract", "cn":"vt. 吸引；引起……的注意（或兴趣）", "ps":"/trkt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4650" },
+    { "id": "f5c7754520838258d6b4d1cb9d18fcea", "en":"be attracted to", "cn":"喜爱", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"5538" },
+    { "id": "68d85136bc97e87a9b455c2b95b70d58", "en":"focus", "cn":"vi. &amp; vt. 集中（精力、注意力等）；（使）调节焦距\nn. 中心；重点；焦点", "ps":"/fks/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4206" },
+    { "id": "b5c2f9001f84d1736d07310d514cb5a7", "en":"focus on", "cn":"集中；特别关注", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"5042" },
+    { "id": "8606f073bb1af1b78e3caea46423d146", "en":"addicted", "cn":"adj. 有瘾的；上瘾的；入迷的", "ps":"/dIktId/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4546" },
+    { "id": "7709cb7847a1b99866633597eff91ebd", "en":"addict", "cn":"n. 对……入迷的人；吸毒成瘾的人", "ps":"/dIkt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4206" },
+    { "id": "fec1d36f9a467d5d7e373bd0f4742bae", "en":"addicted to", "cn":"对……很入迷", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"5042" },
+    { "id": "ea40073e2daf8b8e78952735be7b1606", "en":"adult", "cn":"n. 成年人\nadj. 成年的；成熟的", "ps":"/dlt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4206" },
+    { "id": "08975d8655bd0bd7b906a349807076b1", "en":"Chicago", "cn":"芝加哥（美国城市）", "ps":"/Ik:g/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4833" },
+    { "id": "867ba4e4cbd4a5e5bed71112d45dcd87", "en":"Seoul", "cn":"首尔（韩国首都）", "ps":"/sl/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4546" }
+  ],
+  "dialogue": [],
+  "text": []
+}

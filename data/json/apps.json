@@ -70,5 +70,17 @@
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/CNCF.svg",
         "url": "/cncf",
         "visiable": false
+    },
+    {
+        "name": "电子课本",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/CNCF.svg",
+        "url": "/ebook",
+        "visiable": true
+    },
+    {
+        "name": "文档管理",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/CNCF.svg",
+        "url": "/explorer",
+        "visiable": true
     }
 ]

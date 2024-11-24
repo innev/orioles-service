@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "U2_Listening_and_Speaking",
+  "category": "speech",
+  "word": [
+    { "id": "58c64be8407583bc894f0323f3c0635a", "en":"castle", "cn":"n. 城堡；堡垒", "ps":"/k:sl/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "d2131779166c08d41d958a42f34921c6", "en":"apply", "cn":"vi. &amp; vt. 申请；请求\nvt. 应用；涂（油漆、乳剂）", "ps":"/plaI/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "08b8984adc41551d3708f00f229d43e3", "en":"apply for", "cn":"申请", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "b772a007edeabccd3498f8dc078b1949", "en":"visa", "cn":"n. 签证", "ps":"/vi:z/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3788" },
+    { "id": "10e4a7ee5c5993f9bf76f7746f7b5657", "en":"rent", "cn":"vt. 租用；出租\nvi. 租用；租金为\nn. 租金", "ps":"/rent/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3710" },
+    { "id": "ec0500e47bf599baaedbc889194c74f1", "en":"pack", "cn":"vi. &amp; vt. 收拾（行李）\nvt. 包装\nn.（商品的）纸包；纸袋；大包", "ps":"/pk/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "c9026a988ceb6730b70c4687f0789eef", "en":"amazing", "cn":"adj. 令人惊奇的；令人惊喜的", "ps":"/meIzIN/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4363" },
+    { "id": "0327cd322523c58b6776297a7636b64b", "en":"amazed", "cn":"adj. 惊奇的；惊喜的", "ps":"/meIzd/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4624" },
+    { "id": "658443ece4cd41d5ed98fc0be2639397", "en":"arrangement", "cn":"n. 安排；筹备", "ps":"/reIndmnt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4650" },
+    { "id": "e3ff726d8e49377b30a188887703e510", "en":"extremely", "cn":"adv. 极其；非常", "ps":"/Ikstri:mli/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4206" },
+    { "id": "f8e8905afa2ee40a4213ea756b88fa81", "en":"the Eiffel Tower", "cn":"埃菲尔铁塔", "ps":"/aIflta(r)/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"5721" },
+    { "id": "27878200e083fcf51efec56a6c5cd307", "en":"Neuschwanstein Castle", "cn":"新天鹅堡", "ps":"/nOIv:ntaIn/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"5930" },
+    { "id": "62978f2f8363eb99614407cf97192fbe", "en":"Iceland", "cn":"冰岛（国家名）", "ps":"/aIslnd/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4624" },
+    { "id": "8da12664c61f7d3a3a058dfb2c9ab115", "en":"Disneyland", "cn":"迪士尼乐园", "ps":"/dIznilnd/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4546" }
+  ],
+  "dialogue": [],
+  "text": []
+}

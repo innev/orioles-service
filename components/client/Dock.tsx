@@ -1,8 +1,8 @@
 'use client';
 
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import CDN from '../../utils/cdn'
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import CDN from '../../utils/cdn';
 
 interface IDock {
     name: string
@@ -26,7 +26,7 @@ export function DockItem({ name, url, icon }: IDockItem) {
     )
 }
 
-export default function Dock({ name, data }: IDock) {
+export default function Dock({ name, data = [] }: IDock) {
     let [isOpen, setIsOpen] = useState(false)
 
     function closeModal() {
@@ -42,7 +42,7 @@ export default function Dock({ name, data }: IDock) {
             <div className='flex flex-col gap-2 text-center cursor-pointer' onClick={openModal}>
                 <div className='w-16 h-16 rounded-2xl bg-slate-100 p-1'>
                     {
-                        data.length > 0 && <img src={CDN.icon(data[0].icon)} alt='' />
+                        data.length > 0 && <img src={CDN.icon(data[0]?.icon||'')} alt='' />
                     }
                 </div>
                 <span className='text-gray-800 text-xs'>{name}</span>

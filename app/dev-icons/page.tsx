@@ -1,5 +1,5 @@
-import CDN from '@/utils/cdn'
-import http from '@/utils/http'
+import CDN from '../../utils/cdn'
+import http from '../../utils/http'
 import DevIcon, { DevIconProps } from './DevIcon'
 
 export default async function Page() {

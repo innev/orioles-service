@@ -1,11 +1,23 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    './src/**/*.{js,ts,jsx,tsx}',
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      skew: {
+        '10': '10deg',
+      },
+      fontFamily: {
+        times: ['TimesNewRomanPS-BoldMT', 'TimesNewRomanPS'],
+        tic: ['TimesNewRomanPSMT'],
+        title: ['STYuanti-SC-Regular', 'STYuanti-SC'],
+        word: ['STYuanti-SC-Bold', 'STYuanti-SC'],
+        ipa: ['CBIPA']
+      },
       typography: (theme) => ({
         DEFAULT: {
           css: {
@@ -35,6 +47,6 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),
+    // require('@tailwindcss/typography')
   ],
-}
+};

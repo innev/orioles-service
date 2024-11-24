@@ -1,0 +1,10 @@
+{
+  "id": "",
+  "name": "U2_Assessing_Your_Progress",
+  "category": "speech",
+  "word": [
+    { "id": "094dc04d53d87e81e205e8c61f105cc1", "en":"hike", "cn":"vi. 徒步旅行\nvt. 去……远足\nn. 远足；徒步旅行", "ps":"/haIk/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3527" }
+  ],
+  "dialogue": [],
+  "text": []
+}

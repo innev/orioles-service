@@ -26,4 +26,8 @@ export type TRepo = {
     forks: number
     open_issues: number
     watchers: number
-}
+};
+
+export type TParams = {
+    organization: string
+};

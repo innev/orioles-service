@@ -1,0 +1,25 @@
+{
+  "id": "FLTC_YY8A_M4",
+  "name": "M4",
+  "category": "speech",
+  "word": [
+    { "id": "FLTC_YY8A_M4_1", "lang": "en", "en": "road", "cn": "n. 路；（尤指）公路", "ps": "/r2%d/" },
+    { "id": "FLTC_YY8A_M4_2", "lang": "en", "en": "accident", "cn": "n. 交通事故；意外事件", "ps": "/'æks!d2nt/" },
+    { "id": "FLTC_YY8A_M4_3", "lang": "en", "en": "except", "cn": "prep. 除……之外", "ps": "/!k'sept/" },
+    { "id": "FLTC_YY8A_M4_4", "lang": "en", "en": "choice", "cn": "n. 选择", "ps": "/t10!s/" },
+    { "id": "FLTC_YY8A_M4_5", "lang": "en", "en": "classmate", "cn": "n. 同班同学", "ps": "/'kl4ːs;me!t/" },
+    { "id": "FLTC_YY8A_M4_6", "lang": "en", "en": "far", "cn": ["adv. 远；遥远", "adj. 远的；遥远的 "], "ps": "/f4ː/", "star": true },
+    { "id": "FLTC_YY8A_M4_7", "lang": "en", "en": "far from", "cn": "远离" },
+    { "id": "FLTC_YY8A_M4_8", "lang": "en", "en": "close", "cn": ["adj. （距离上）近的，接近的", "adv. （距离上）接近地"], "ps": "/kl2%s/" },
+    { "id": "FLTC_YY8A_M4_9", "lang": "en", "en": "crowded", "cn": "adj. 拥挤的；人数过多的", "ps": "/'kra%d!d/" },
+    { "id": "FLTC_YY8A_M4_10", "lang": "en", "en": "all the time", "cn": "一直；不断地" },
+    { "id": "FLTC_YY8A_M4_11", "lang": "en", "en": "journey", "cn": "n. 旅行；旅程", "ps": "/'d3^ːni/" },
+    { "id": "FLTC_YY8A_M4_12", "lang": "en", "en": "book", "cn": "v. 预订", "ps": "/b%k/" },
+    { "id": "FLTC_YY8A_M4_13", "lang": "en", "en": "park", "cn": "v. 停放（车）；泊（车）", "ps": "/p4ːk/" },
+    { "id": "FLTC_YY8A_M4_14", "lang": "en", "en": "outside", "cn": ["prep. 在……之外", "adv. 在外面；朝户外", "n. 外面；外部", "adj. 外部的；外表的"], "ps": "/;a%t'sa!d/" },
+    { "id": "FLTC_YY8A_M4_15", "lang": "en", "en": "however", "cn": "adv. 然而；但是", "ps": "/ha%'ev2/" },
+    { "id": "FLTC_YY8A_M4_16", "lang": "en", "en": "cost", "cn": ["v. (cost /k=st/) 价钱为；花费", "n. 价钱；成本；代价"], "ps": "/k=st/" }
+  ],
+  "dialogue": [],
+  "text": []
+}

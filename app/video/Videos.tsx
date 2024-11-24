@@ -2,8 +2,8 @@
 
 import { Fragment, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
-import { Loading } from '../../components/Icons'
 import useSWRInfinite from 'swr/infinite'
+import { Loading } from '../../components/Icons'
 import http from "../../utils/http"
 import { PageData } from "../../utils/types"
 import Video from "./Video"
@@ -53,10 +53,10 @@ export default function Videos() {
         if (previousPageData && !previousPageData.data.length) return null
         return [`/api/mongo/find`, genBody(pageIndex)]
     }
-    const { data = [], size, setSize } = useSWRInfinite<PageData<TVideo>>(getKey, http.post)
-
-    const [showVideo, setShowVideo] = useState(false)
-    const [vid, setVid] = useState('')
+    const { data = [], size, setSize } = useSWRInfinite<PageData<TVideo>>(getKey, http.post);
+    const [showVideo, setShowVideo] = useState(false);
+    const [vid, setVid] = useState('');
+    const dataLength = data.slice(-1)[0]?.data.length || 0;
 
     const playVideo = (vid: string) => {
         setVid(vid)
@@ -69,7 +69,7 @@ export default function Videos() {
                 className="w-full grid grid-cols-1 p-4 md:p-8 gap-4 md:gap-8 lg:grid-cols-2"
                 dataLength={new Array<TVideo>().concat.apply([], data.map(item => item.data)).length}
                 next={() => setSize(size + 1)}
-                hasMore={!data.length || data.slice(-1)[0].data.length >= limit}
+                hasMore={!data.length || dataLength >= limit}
                 loader={<div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>}
             >
                 {

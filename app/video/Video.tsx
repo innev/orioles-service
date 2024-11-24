@@ -16,13 +16,13 @@ export default function Video({ video, onPlay }: VideoProps) {
     return (
         <div className="video-card">
             <div onClick={() => onPlay(video.video.play_addr.uri)} className='h-full aspect-[7/10]'>
-                <ImageSkeleton src={video.video.cover.url_list[0]} className="video-cover" />
+                <ImageSkeleton src={video.video.cover.url_list[0] as string} className="video-cover" />
             </div>
             <div className="flex flex-col p-4 justify-between">
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row gap-2">
                         <a href={`https://www.douyin.com/user/${video.author.sec_uid}`} target="_blank" rel='noreferrer'>
-                            <ImageSkeleton src={video.author.avatar_thumb.url_list[0]} className="w-12 h-12 rounded-full" />
+                            <ImageSkeleton src={video.author.avatar_thumb.url_list[0] as string} className="w-12 h-12 rounded-full" />
                         </a>
                         <div className="flex flex-col justify-center gap-1">
                             <a href={`https://www.douyin.com/user/${video.author.sec_uid}`} className="text-lg font-bold text-gray-900 hover:text-blue-600" target="_blank" rel='noreferrer'>{video.author.nickname}</a>

@@ -1,11 +1,11 @@
 'use client'
 
-import moment from "moment"
-import 'moment/locale/zh-cn'
-import useSWR from "swr"
-import http from "../../../utils/http"
-import { TRealData } from "../type"
-import { Loading } from "@/components/Icons"
+import moment from "moment";
+import 'moment/locale/zh-cn';
+import useSWR from "swr";
+import { Loading } from "../../../components/Icons";
+import http from "../../../utils/http";
+import { TRealData } from "../type";
 
 const StockMetric = ({ name, value, valueStyle = '' }: { name: string, value: string, valueStyle?: string }) => {
     return (
@@ -14,8 +14,7 @@ const StockMetric = ({ name, value, valueStyle = '' }: { name: string, value: st
             <span className={`font-semibold ${valueStyle}`}>{value}</span>
         </div>
     )
-
-}
+};
 
 export default function Stock({ code }: { code: string }) {
 
@@ -73,7 +72,7 @@ export default function Stock({ code }: { code: string }) {
         return `${tmp.toFixed(2)}${['', '万', '亿'][i]}`
     }
     const stock = realResp.data.snapshot[code]
-    const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stock[i]]))
+    const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stock?.[i]]))
 
     return (
         <div className="w-full flex flex-col gap-8 p-6">

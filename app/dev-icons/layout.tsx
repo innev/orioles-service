@@ -1,5 +1,5 @@
-import AppNav from '@/components/server/AppNav';
-import FullContainer from '@/components/server/Containers';
+import AppNav from '../../components/server/AppNav';
+import FullContainer from '../../components/server/Containers';
 
 export const metadata = {
   title: 'Dev Icons',

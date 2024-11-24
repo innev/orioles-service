@@ -1,0 +1,67 @@
+.module_shadow {
+  box-shadow: 0px 0px 16px 2px rgba(0, 0, 0, 0.3);
+  -ms-box-shadow: 0px 0px 16px 2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 16px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 16px 2px rgba(0, 0, 0, 0.3);
+  -o-box-shadow: 0px 0px 16px 2px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+}
+
+.carousel_item {
+  left: 100px;
+  opacity: 0;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+
+.carousel_item_active {
+  left: 0;
+  opacity: 1;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -ms-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -moz-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -webkit-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -o-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.module_item {
+  transform: skewX(-10deg) translateY(-50%);
+  -ms-transform: skewX(-10deg) translateY(-50%);
+  -moz-transform: skewX(-10deg) translateY(-50%);
+  -webkit-transform: skewX(-10deg) translateY(-50%);
+  -o-transform: skewX(-10deg) translateY(-50%);
+}
+
+.module_item_active {
+  transform: skewX(-10deg) translateY(-50%);
+  -ms-transform: skewX(-10deg) translateY(-50%);
+  -moz-transform: skewX(-10deg) translateY(-50%);
+  -webkit-transform: skewX(-10deg) translateY(-50%);
+  -o-transform: skewX(-10deg) translateY(-50%);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -ms-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -moz-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -webkit-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -o-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.module_item_p {
+  white-space: nowrap;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+}

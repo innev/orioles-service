@@ -1,8 +1,8 @@
 'use client'
 
-import { XIcon } from '@/components/Icons'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import { XIcon } from '../../components/Icons'
 import { TPhoto } from './type'
 
 export type PhotoModalProps = {

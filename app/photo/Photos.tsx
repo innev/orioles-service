@@ -4,8 +4,8 @@ import { Fragment, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useSWRInfinite from 'swr/infinite'
 import { Loading } from '../../components/Icons'
-import { PageData } from "../../utils/types"
 import http from "../../utils/http"
+import { PageData } from "../../utils/types"
 import Photo from "./Photo"
 import PhotoModal from "./PhotoModal"
 import { TPhoto } from "./type"
@@ -28,9 +28,10 @@ export default function Photos() {
         if (previousPageData && !previousPageData.data.length) return null
         return [`/api/mongo/find`, genBody(pageIndex)]
     }
-    const { data = [], size, setSize } = useSWRInfinite<PageData<TPhoto>>(getKey, http.post)
-    const [photo, setPhoto] = useState<TPhoto | undefined>()
-    const [showPhotos, setShowPhotos] = useState(false)
+    const { data = [], size, setSize } = useSWRInfinite<PageData<TPhoto>>(getKey, http.post);
+    const [photo, setPhoto] = useState<TPhoto | undefined>();
+    const [showPhotos, setShowPhotos] = useState(false);
+    const dataLength = data.slice(-1)[0]?.data.length || 0;
 
     const showPhoto = (photo: TPhoto) => {
         setPhoto(photo)
@@ -43,7 +44,7 @@ export default function Photos() {
                 className="w-full grid grid-cols-1 p-4 md:p-8 gap-4 md:gap-8 md:grid-cols-2 lg:grid-cols-4"
                 dataLength={new Array<TPhoto>().concat.apply([], data.map(item => item.data)).length}
                 next={() => setSize(size + 1)}
-                hasMore={!data.length || data.slice(-1)[0].data.length >= limit}
+                hasMore={!data.length || dataLength >= limit}
                 loader={<div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>}
             >
                 {

@@ -1,0 +1,32 @@
+{
+  "id": "FLTC_YY8A_M9",
+  "name": "M9",
+  "category": "speech",
+  "word": [
+    { "id": "FLTC_YY8A_M9_1", "lang": "en", "en": "noise ", "cn": "n. 噪声；杂音", "ps": "/n0!z/" },
+    { "id": "FLTC_YY8A_M9_2", "lang": "en", "en": "prepare ", "cn": "v. 准备；预备", "ps": "/pr!'pe2/" },
+    { "id": "FLTC_YY8A_M9_3", "lang": "en", "en": "notes ", "cn": "n. (pl.) 笔记；随笔", "ps": "/n2%ts/" },
+    { "id": "FLTC_YY8A_M9_4", "lang": "en", "en": "report ", "cn": "n. 报告；汇报", "ps": "/r!'p0ːt/" },
+    { "id": "FLTC_YY8A_M9_5", "lang": "en", "en": "grow ", "cn": "v. (grew /gruː/) 增长；增大", "ps": "/gr2%/" },
+    { "id": "FLTC_YY8A_M9_6", "lang": "en", "en": "huge ", "cn": "adj. 巨大的；庞大的", "ps": "/hjuːd3/" },
+    { "id": "FLTC_YY8A_M9_7", "lang": "en", "en": "cause ", "cn": "v. 造成；引起", "ps": "/k0ːz/" },
+    { "id": "FLTC_YY8A_M9_8", "lang": "en", "en": "problem ", "cn": "n. 麻烦；问题", "ps": "/'pr=bl2m/" },
+    { "id": "FLTC_YY8A_M9_9", "lang": "en", "en": "increase ", "cn": "n. 增大；增长 v. 增大；增长", "ps": "n./'!9kriːs/ v./!n'kriːs/" },
+    { "id": "FLTC_YY8A_M9_10", "lang": "en", "en": "birth ", "cn": "n. 出生", "ps": "/b^ː8/" },
+    { "id": "FLTC_YY8A_M9_11", "lang": "en", "en": "billion ", "cn": "num. 十亿", "ps": "/'b!lj2n/" },
+    { "id": "FLTC_YY8A_M9_12", "lang": "en", "en": "fifth ", "cn": "num. 第五；五分之一", "ps": "/f!f8/" },
+    { "id": "FLTC_YY8A_M9_13", "lang": "en", "en": "hang on ", "cn": "[ 口 ] 稍等" },
+    { "id": "FLTC_YY8A_M9_14", "lang": "en", "en": "flat ", "cn": "n. 套房；公寓", "ps": "/flæt/" },
+    { "id": "FLTC_YY8A_M9_15", "lang": "en", "en": "rubbish ", "cn": "n. 垃圾；废弃物", "ps": "/'r7b!1/" },
+    { "id": "FLTC_YY8A_M9_16", "lang": "en", "en": "quiet ", "cn": "adj. 寂静的；安静的", "ps": "/'kwa!2t/" },
+    { "id": "FLTC_YY8A_M9_17", "lang": "en", "en": "local ", "cn": "adj. 当地的；本地的", "ps": "/'l2%kl/" },
+    { "id": "FLTC_YY8A_M9_18", "lang": "en", "en": "close down ", "cn": "（永久）关闭，关停" },
+    { "id": "FLTC_YY8A_M9_19", "lang": "en", "en": "pupil ", "cn": "n. 学生；（尤指）小学生", "ps": "/'pjuːpl/" },
+    { "id": "FLTC_YY8A_M9_20", "lang": "en", "en": "pollution ", "cn": "n. 污染", "ps": "/p2'luː1n/" },
+    { "id": "FLTC_YY8A_M9_21", "lang": "en", "en": "public ", "cn": "adj. 公共的；公众的", "ps": "/'p7bl!k/" },
+    { "id": "FLTC_YY8A_M9_22", "lang": "en", "en": "service ", "cn": "n. 公共服务；服务", "ps": "/'s^ːv!s/" },
+    { "id": "FLTC_YY8A_M9_23", "lang": "en", "en": "solve ", "cn": "v. 解决问题", "ps": "/'s=lv/" }
+    ],
+    "dialogue": [],
+  "text": []
+}

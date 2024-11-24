@@ -1,0 +1,13 @@
+{
+  "id": "",
+  "name": "U1_Listening_and_Talking",
+  "category": "speech",
+  "word": [
+    { "id": "8a17816b535aabbf241f8a3b6d1e8bb0", "en":"adventure", "cn":"n. 冒险；奇遇", "ps":"/ədˈventʃə(r)/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4206" },
+    { "id": "a1fd5693472ebc27dba030c7b933415f", "en":"youth", "cn":"n. 青年时期；青春", "ps":"/juːθ/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "f0cbc0960ecab76e8d41fe4a7fa53394", "en":"survival", "cn":"n. 生存；幸存；幸存事物", "ps":"/səˈvaɪvl/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4624" },
+    { "id": "7e70a1ccc9eaf2e8e1a544a58fd5caee", "en":"expert", "cn":"n. 专家；行家\nadj. 熟练的；内行的；专家的", "ps":"/ˈekspɜːt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4415" }
+  ],
+  "dialogue": [],
+  "text": []
+}

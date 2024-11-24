@@ -1,0 +1,30 @@
+{
+  "id": "FLTC_YY8A_M2",
+  "name": "M2",
+  "category": "speech",
+  "word": [
+    { "id": "FLTC_YY8A_M2_1", "lang": "en", "en":"hill", "cn": "n. 小山；小丘", "ps": "/h!l/" },
+    { "id": "FLTC_YY8A_M2_2", "lang": "en", "en":"population", "cn": "n. （某一地区的）人口，全体居民 ", "ps": "/;p=pj%'le!1n/" },
+    { "id": "FLTC_YY8A_M2_3", "lang": "en", "en":"wide", "cn": "adj. 宽的；宽阔的 ", "ps": "/wa!d/" },
+    { "id": "FLTC_YY8A_M2_4", "lang": "en", "en":"million", "cn": "num. 百万", "ps": "/'m!lj2n/" },
+    { "id": "FLTC_YY8A_M2_5", "lang": "en", "en":"pretty", "cn": "/'pr!ti/", "ps": "/adv. [ 主口 ] 相当地；非常；很/" },
+    { "id": "FLTC_YY8A_M2_6", "lang": "en", "en":"pretty good", "cn": "相当好；很好" },
+    { "id": "FLTC_YY8A_M2_7", "lang": "en", "en":"than", "cn": "prep. 比", "ps": "/6æn；62n/" },
+    { "id": "FLTC_YY8A_M2_8", "lang": "en", "en":"get", "cn": "v. 变成；成为", "ps": "/get/" },
+    { "id": "FLTC_YY8A_M2_9", "lang": "en", "en":"north", "cn": ["n. 北；北方", "adj. 在北方的；朝北的"], "ps": "/n0ː8/" },
+    { "id": "FLTC_YY8A_M2_10", "lang": "en", "en":"south", "cn": ["n. 南；南方", "adj. 在南方的；朝南的"], "ps": "/sa%8/" },
+    { "id": "FLTC_YY8A_M2_11", "lang": "en", "en":"west", "cn": ["n. 西；西方", "adj. 在西方的；朝西的"], "ps": "/west/" },
+    { "id": "FLTC_YY8A_M2_12", "lang": "en", "en":"home town", "cn": "故乡；家乡" },
+    { "id": "FLTC_YY8A_M2_13", "lang": "en", "en":"especially", "cn": "adv. 尤其 ", "ps": "/!'spe1li/" },
+    { "id": "FLTC_YY8A_M2_14", "lang": "en", "en":"be famous for", "cn": "因……而闻名" },
+    { "id": "FLTC_YY8A_M2_15", "lang": "en", "en": "university", "cn": "n. 大学", "ps": "/;juːn!'v^ːs2ti/" },
+    { "id": "FLTC_YY8A_M2_16", "lang": "en", "en": "island", "cn": "n. 岛；岛屿", "ps": "/'a!l2nd/" },
+    { "id": "FLTC_YY8A_M2_17", "lang": "en", "en": "area", "cn": "n. 地区；区域", "ps": "/'e2ri2/" },
+    { "id": "FLTC_YY8A_M2_18", "lang": "en", "en": "low", "cn": "adj. 矮的；低的", "ps": "/l2%/" },
+    { "id": "FLTC_YY8A_M2_19", "lang": "en", "en": "mountain", "cn": "n. 山；山岳", "ps": "/'ma%nt!n/" },
+    { "id": "FLTC_YY8A_M2_20", "lang": "en", "en": "countryside", "cn": "n. 农村地区；乡下", "ps": "/'k7ntri;sa!d/" },
+    { "id": "FLTC_YY8A_M2_21", "lang": "en", "en": "umbrella", "cn": "n. 雨伞", "ps": "/7m'brel2/", "star": true }
+  ],
+  "dialogue": [],
+  "text": []
+}

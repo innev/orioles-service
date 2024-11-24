@@ -1,0 +1,18 @@
+{
+  "id": "",
+  "name": "U2_Listening_and_Talking",
+  "category": "speech",
+  "word": [
+    { "id": "68412ea9d26cc47e6c04b44bee722f11", "en":"economy", "cn":"n. 经济；节约", "ps":"/IknmI/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4258" },
+    { "id": "d162fcde9ea5b154b11b1c8b7ff666da", "en":"economic", "cn":"adj. 经济（上）的；经济学的", "ps":"/i:knmIk/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "91c23239767f247421c9ab0f44b6ded0", "en":"credit", "cn":"n. 借款；信用；称赞；学分", "ps":"/kredIt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3919" },
+    { "id": "184d7ba96d5fbb5439cb5d5fbdbc0d8a", "en":"credit card", "cn":"信用卡", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "d06d156e3b9579fd20a87a8bbb11ec8c", "en":"detail", "cn":"n. 细节；详情；细微之处", "ps":"/di:teIl/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4258" },
+    { "id": "f24b96adef79325e7b4b9072d88fb0a0", "en":"check in", "cn":"（在旅馆、机场等）登记", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4337" },
+    { "id": "71a3368d337bdee3cfe0a28d4b2c1c20", "en":"check out", "cn":"结账离开（旅馆等）", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "95f5697aab6b83d23eb9dd33a21a749a", "en":"request", "cn":"n.（正式或礼貌的）要求；请求\nvt. （正式或礼貌地）要求；请求", "ps":"/rIkwest/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "07640b3b30baebed1f043fbbfacf3503", "en":"view", "cn":"n. 视野；景色；看法", "ps":"/vju:/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4546" }
+  ],
+  "dialogue": [],
+  "text": []
+}

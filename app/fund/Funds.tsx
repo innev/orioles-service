@@ -1,10 +1,10 @@
 'use client'
 
-import FullContainer from "@/components/server/Containers"
 import { debounce } from "lodash"
 import { useCallback, useEffect, useRef, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import { Loading, SearchIcon } from '../../components/Icons'
+import FullContainer from "../../components/server/Containers"
 import http from "../../utils/http"
 import FundsFilter from "./FundsFilter"
 import { TFund } from "./typs"
@@ -59,7 +59,7 @@ export default function Funds() {
         }
         return body
     }
-    const [filters, setFilters] = useState<{ [key: string]: boolean }>(Object.fromEntries(keys.map((key, index) => [key, values[index]])))
+    const [filters, setFilters] = useState<{ [key: string]: boolean|undefined }>(Object.fromEntries(keys.map((key, index) => [key, values[index]])))
     const [query, setQuery] = useState({
         page: 0,
         keyword: '',

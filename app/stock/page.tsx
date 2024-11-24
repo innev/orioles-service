@@ -8,8 +8,7 @@ export const metadata = {
     title: '股市',
 }
 
-export default function Page() {
-
+export default () => {
     return (
         <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
 
@@ -40,5 +39,4 @@ export default function Page() {
             </div>
         </div>
     )
-
-}
+};

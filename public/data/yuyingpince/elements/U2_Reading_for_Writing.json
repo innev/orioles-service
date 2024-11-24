@@ -1,0 +1,16 @@
+{
+  "id": "",
+  "name": "U2_Reading_for_Writing",
+  "category": "speech",
+  "word": [
+    { "id": "6100ad3d556adf01711aa18ad472fd9e", "en":"sight", "cn":"n. 景象；视野；视力", "ps":"/saIt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "80393d9548649dbf1b31b127d3fc2d09", "en":"statue", "cn":"n. 雕塑；雕像", "ps":"/sttu:/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4546" },
+    { "id": "33af7fdee593196f452ef96889e2fc94", "en":"BCE", "cn":"（= before the Common Era） 公元前", "ps":"/bi: si: i:/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4546" },
+    { "id": "38887caa7611ddcde8e6937dc37923ea", "en":"tomb", "cn":"n. 坟墓", "ps":"/tu:m/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3684" },
+    { "id": "c9cb4b3b60a33d0a177ff5b757b6e150", "en":"unearth", "cn":"vt. 挖掘；发掘", "ps":"/n:/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "d454ed13c49c07d6e2e070d9e500a5da", "en":"comment", "cn":"n. 议论；评论\nvi. &amp; vt. 发表意见；评论", "ps":"/kment/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4232" },
+    { "id": "f11b11ae5f3506ced36d94bb143ac2c2", "en":"the Terracotta Army", "cn":"兵马俑", "ps":"/terkt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"6531" }
+  ],
+  "dialogue": [],
+  "text": []
+}

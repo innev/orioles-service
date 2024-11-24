@@ -1,0 +1,49 @@
+{
+  "id": "",
+  "name": "U1_Reading_and_Thinking",
+  "category": "speech",
+  "word": [
+    { "id": "311b42d84eebc4c12af98328e3b49469", "en":"challenge", "cn":"n. 挑战；艰巨任务\nvt. 怀疑；向……挑战", "ps":"/ˈtʃælɪndʒ/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4154" },
+    { "id": "3ccc7d04eb50f14d21348768699df384", "en":"title", "cn":"n. （书、诗歌等的）名称；标题；职称；头衔", "ps":"/taɪtl/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3919" },
+    { "id": "fcc258595cb3ff4176e1c882fbc81bd9", "en":"topic", "cn":"n. 话题；标题", "ps":"/ˈtɒpɪk/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3423" },
+    { "id": "121adc1b3aef2bb759a64c85669575f3", "en":"freshman", "cn":"n.（especially NAmE）（中学）九年级学生；（大学）一年级新生", "ps":"/ˈfreʃmən/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "6893e293c92338237539ada900ecacc7", "en":"confusing", "cn":"adj. 难以理解的；不清楚的", "ps":"/kənˈfjuːzɪŋ/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3971" },
+    { "id": "89b27b1757f4ade440d4592750bd68c3", "en":"confuse", "cn":"vt. 使糊涂；使迷惑", "ps":"/kənˈfjuːz/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3736" },
+    { "id": "5919417f123db5ac4f50c5c71ee610af", "en":"confused", "cn":"adj. 糊涂的；迷惑的", "ps":"/kənˈfjuːzd/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4206" },
+    { "id": "c87ef52b480420c67d4a740f40d7b987", "en":"fluent", "cn":"adj. （尤指外语）流利的；熟练的", "ps":"/ˈfluːənt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3788" },
+    { "id": "d88e95139eb9b25723ac21bf7df1785f", "en":"graduate", "cn":"vi. &amp; vt. 毕业；获得学位\nn. 毕业生", "ps":"/ˈɡrædʒuət / /ˈɡrædʒueɪt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"7550" },
+    { "id": "a3d93136e2f843144facc6c77fe2064f", "en":"recommend", "cn":"vt. 建议；推荐；介绍", "ps":"ˌrekəˈmend/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4337" },
+    { "id": "6c237231bf1bc007aa99133e142f4606", "en":"sign up (for sth)", "cn":"报名（参加课程）", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"8543" },
+    { "id": "b9b483483f4e300ef88a448d9b5be55a", "en":"advanced", "cn":"adj. 高级的；高等的；先进的", "ps":"/ədˈvɑːnst/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4311" },
+    { "id": "a2f3bb176e0e14193f6ccba0a4956c77", "en":"advance", "cn":"n. 前进；发展\nvi. 前进；发展\nvt. 发展；促进", "ps":"/ədˈvɑːns/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4363" },
+    { "id": "387960f29c5aa20b3b1f7defddd35a79", "en":"literature", "cn":"n. 文学；文学作品", "ps":"/ˈlɪtrətʃə(r)/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3919" },
+    { "id": "557076ca184b4a64752c03646f56fcce", "en":"extra-curricular", "cn":"adj. 课外的；课程以外的", "ps":"/ekstrə kəˈrɪkjələ(r)/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"5016" },
+    { "id": "d157b6b4c6bcd0f07e183ed665478fc7", "en":"extra", "cn":"adj. 额外的；附加的", "ps":"/ˈekstrə/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4363" },
+    { "id": "598843199a992157472210ed4ecbc3ab", "en":"obviously", "cn":"adv. 显然；明显地", "ps":"/ˈɒbviəsli/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4441" },
+    { "id": "6c0c804f419cf5c7a05527e13dfa41a2", "en":"quit", "cn":"vi. &amp; vt. （quit, quit）停止；戒掉；离开（工作职位、学校等）", "ps":"/kwIt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3840" },
+    { "id": "1483bb126ae6901da03ba74c41759a1a", "en":"responsible", "cn":"adj. 负责的；有责任的", "ps":"/rɪˈspɒnsəbl/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4755" },
+    { "id": "9871a67e663dd5b049d1f2ed759736ab", "en":"responsibility", "cn":"n. 责任；义务", "ps":"/rɪˌspɒnsəˈbɪləti/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4912" },
+    { "id": "9ef4008c27137f5dfa7ad111be024458", "en":"be responsible for", "cn":"对……负责", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"5643" },
+    { "id": "c398e6176f199a2c1dadc57f9e746903", "en":"solution", "cn":"n. 解决办法；答案", "ps":"/səˈluːʃn/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4258" },
+    { "id": "71c424bd3383346d88eba724ffb165cd", "en":"schedule", "cn":"n. 工作计划；日程安排\nvt. 安排；预定", "ps":"/edju:l; NAmE skedu:l/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "209fda5b0a3ba239747a6c5456b1ae94", "en":"editor", "cn":"n. 主编；编辑；编者", "ps":"/edIt(r)/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" }
+  ],
+  "dialogue": [
+    {"id":"cd8810b7759d52ae4f432b31b9b63b40","en":"Good morning, Jane.", "src":"assets/demo/audios/CZYY_7S_U2_SA_2d_01.mp3", "align":"center", "duration":"2273", "role":"Sally"},
+    {"id":"a638f3a2b10b174d0da36147bd9efd01", "en":"Good morning, Sally.", "src":"assets/demo/audios/CZYY_7S_U2_SA_2d_02.mp3", "align":"center", "duration":"2090", "role":"Jane"},
+    {"id":"d189401143675da6c73e772f44c32cc3", "en":"Oh, Jane, this is my sister Kate. Kate, this is my friend Jane.", "src":"assets/demo/audios/CZYY_7S_U2_SA_2d_03.mp3", "align":"center", "duration":"10267", "role":"Sally"},
+    {"id":"3298d1b206ad8df00da7078fd1214b40", "en":"Nice to meet you, Jane.", "src":"assets/demo/audios/CZYY_7S_U2_SA_2d_04.mp3", "align":"left", "duration":"2508", "role":"Kate"},
+    {"id":"1e2fd441444abedf46cd4d5197e8ad35", "en":"Nice to meet you, too. Are those your parents?", "src":"assets/demo/audios/CZYY_7S_U2_SA_2d_05.mp3", "align":"center", "duration":"5147", "role":"Jane"},
+    {"id":"70a6e42415d9375b0130db931fcb33e8", "en":"Yes, they are.", "src":"assets/demo/audios/CZYY_7S_U2_SA_2d_06.mp3", "align":"center", "duration":"1960", "role":"Kate"},
+    {"id":"460312668b57e6d56b3064fdfc2d6c77", "en":"And who's he?", "src":"assets/demo/audios/CZYY_7S_U2_SA_2d_07.mp3", "align":"center", "duration":"2247", "role":"Jane"},
+    {"id":"718c2f03b5d75e7e384ca6bccf13845e", "en":"He's my brother, Paul.", "src":"assets/demo/audios/CZYY_7S_U2_SA_2d_08.mp3", "align":"center", "duration":"3109", "role":"Sally"},
+    {"id":"07b83cfda9ac3561439adf2b80a7de11", "en":"Oh, I see. Well, have a good day!", "src":"assets/demo/audios/CZYY_7S_U2_SA_2d_09.mp3", "align":"center", "duration":"5277", "role":"Jane"},
+    {"id":"098918f7138b28cceea61ca03d83c648", "en":"Thanks! You, too. Bye!", "src":"assets/demo/audios/CZYY_7S_U2_SA_2d_10.mp3", "align":"center", "duration":"3423", "role":"Sally/Kate"}
+  ],
+  "text": [
+    {"id":"708338bcea3e692f6a0e04307c076f09", "en":"My name is Jenny Green. My phone number is 281-9176. My friend is Gina Smith. Her phone number is 232-4672.", "number_replace":"281-9176/two eight one nine one seven six/232-4672/two three two four six seven two/", "src":"assets/demo/audios/CZYY_7S_U1_SB_2b_P01.mp3","align":"center", "duration":"20559"},
+    {"id":"c118b6fff7d6a84884f04037ecdfbc79", "en":"I'm Dale Miller and my friend is Eric Brown. His telephone number is 357-5689. My telephone number is 358-6344.", "number_replace":"357-5689/three five seven five six eight nine/358-6344/three five eight six three four four/" ,"src":"assets/demo/audios/CZYY_7S_U1_SB_2b_P02.mp3","align":"center", "duration":"20716"},
+    {"id":"fa4adc2fd67f4ba7ecf0f955e6872ff2", "en":"My name is Mary Brown. My friend is in China. Her name is Zhang Mingming. My phone number is 257-8900 and her number is 929-3155.", "vocabulary":"Zhang/jh ah ng/Mingming/m ih ng m ih ng/", "number_replace":"257-8900/two five seven eight nine zero zero/929-3155/nine two nine three one five five/","src":"assets/demo/audios/CZYY_7S_U1_SB_2b_P03.mp3","align":"center", "duration":"29362"}
+  ]
+}
+

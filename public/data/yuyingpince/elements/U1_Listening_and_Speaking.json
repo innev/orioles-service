@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "U1_Listening_and_Speaking",
+  "category": "speech",
+  "word": [
+    { "id": "7ff0f6f6a406ce5b5293ba55f50fe75f", "lang": "en", "en":"teenage", "cn":"adj. 十几岁的（指13 至19 岁）；青少年的", "ps":"/tiːneɪdʒ/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3684" },
+    { "id": "20255b61f67f8460217474eb5c871652", "lang": "en", "en":"teenager", "cn":"n. （13 至19 岁之间的）青少年", "ps":"/tiːneɪdʒə(r)/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4049" },
+    { "id": "ba8cd28825334b357e53c089d6531422", "lang": "en", "en":"ballet", "cn":"n. 芭蕾舞", "ps":"/bæleɪ/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4102" },
+    { "id": "a394df8923bd00b470015793ab6de85a", "lang": "en", "en":"volunteer", "cn":"n. 志愿者", "ps":"/vɒlənˈtɪə(r)/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4363" },
+    { "id": "db33426765df5b93c110806609f11ad6", "lang": "en", "en":"debate", "cn":"n. 辩论；争论\nvt. &amp; vi. 辩论；争论", "ps":"/dɪˈbeɪt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4206" },
+    { "id": "a754f99ba8930268f8f15e2f57bdeca9", "lang": "en", "en":"prefer", "cn":"vt. 较喜欢", "ps":"/prɪˈfɜː(r)/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4441" },
+    { "id": "3ae59c0c61b7b413ed26ad1ca5ff5465", "lang": "en", "en":"prefer … to …", "cn":"喜欢……多于……", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4441" },
+    { "id": "ef76e1f0dfbbacf12a3a88245e701c0e", "lang": "en", "en":"content", "cn":"n. 内容；[pl.] 目录；（书、讲话、节目等的）主题", "ps":"/kɒntent , kənˈtent/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4154" },
+    { "id": "96a33df2ff591e869b66e6001af250f4", "lang": "en", "en":"movement", "cn":"n. 动作；运动；活动", "ps":"/muːvmənt/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4441" },
+    { "id": "196d5e1abf7a541f80c14ffdecfac12c", "lang": "en", "en":"greenhouse", "cn":"n. 温室；暖房", "ps":"/ˈɡriːnhaʊs/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4363" },
+    { "id": "874ebc5effe692693dd35f86a3faf802", "lang": "en", "en":"clean up", "cn":"打扫（或清除）干净", "src":"assets/demo/audios/GZ_YY1B_U1_clean_up.mp3", "duration":"4076" },
+    { "id": "f5977e7c08d20ba66e30bcef1c69ced5", "lang": "en", "en":"suitable", "cn":"adj. 合适的；适用的", "ps":"/ˈsuːtəbl/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"4154" },
+    { "id": "93315b73beccdb5e91b1f7693cadb7fa", "lang": "en", "en":"suitable for", "cn":"对……适合的", "src":"assets/demo/audios/GZ_YY1B_U1_suitable_for.mp3", "duration":"4781" },
+    { "id": "dac5241dc1083ba60d9fc67af8e038d3", "lang": "en", "en":"actually", "cn":"adv. 事实上；的确", "ps":"/ˈæktʃuəli/", "src":"assets/demo/audios/GZ_YY1B_U1_plate.mp3", "duration":"3867" }
+  ],
+  "dialogue": [],
+  "text": []
+}

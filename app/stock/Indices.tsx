@@ -63,7 +63,7 @@ export default function Indices() {
                 code.map((item) => {
                     if (Object.keys(realResp.data.snapshot).length > 0) {
                         const stock = realResp.data.snapshot[item]
-                        const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stock[i]]))
+                        const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stock?.[i]]))
                         return (
                             <Link href={`/stock/${item}`} key={stockObj['prod_code']}>
                                 <div className={`cursor-pointer rounded-lg w-full flex flex-col shadow gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>
@@ -81,5 +81,4 @@ export default function Indices() {
             }
         </div>
     )
-
 }

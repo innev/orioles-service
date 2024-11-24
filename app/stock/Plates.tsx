@@ -1,9 +1,9 @@
 'use client'
 
 import useSWR from 'swr'
-import { TPlate, TPlates, StockPlatesProps } from './type'
+import Skeleton from '../../components/server/Skeleton'
 import http from '../../utils/http'
-import Skeleton from '@/components/server/Skeleton'
+import { StockPlatesProps, TPlate, TPlates } from './type'
 
 export default function Plates({ limit, is_acs }: StockPlatesProps) {
 

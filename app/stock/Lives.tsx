@@ -7,8 +7,8 @@ import { useCallback, useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useSWR from "swr"
 import { Loading } from "../../components/Icons"
-import { TLive, TLivesMap, TRealData, TSymbol } from "./type"
 import http from "../../utils/http"
+import { TLive, TLivesMap, TRealData, TSymbol } from "./type"
 
 function StocksTag({ symbols }: { symbols: TSymbol[] }) {
 
@@ -88,7 +88,7 @@ export default function Lives() {
         if (lives.length === 0) {
             setLives(data.items)
         } else {
-            const index = data.items.findIndex((item: TLive) => item.id === lives[0].id)
+            const index = data.items.findIndex((item: TLive) => item.id === lives?.[0]?.id)
             index > 0 && setLives(pre => [...(data.items.subarray(0, index)), ...pre])
             index < 0 && setLives(pre => [...(data.items), ...pre])
         }
@@ -112,7 +112,7 @@ export default function Lives() {
             lives.forEach((item, index) => {
                 const date = new Date(item.display_time * 1000).toLocaleDateString('zh-CN')
                 if (date in tmp) {
-                    tmp[date].push(index)
+                    tmp?.[date]?.push(index)
                 } else {
                     tmp[date] = [index]
                 }
@@ -138,7 +138,7 @@ export default function Lives() {
                                 <span className="absolute bg-gray-800 font-medium px-4 py-2 text-gray-100 rounded-r-full -left-8">{month}月{day}日</span>
                             </div>
                             {
-                                livesMap[date].map((liveIndex) => lives[liveIndex] != undefined && <Live key={liveIndex} live={lives[liveIndex]} />)
+                                livesMap?.[date]?.map((liveIndex) => lives[liveIndex] != undefined && <Live key={liveIndex} live={lives[liveIndex] as TLive} />)
                             }
                         </div>
                     )

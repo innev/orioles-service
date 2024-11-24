@@ -23,7 +23,7 @@ function CheckBox(props: CheckBoxProps) {
     )
 }
 
-export default function FundsFilter({ filters, onToggleFilterItem }: { filters: { [key: string]: boolean }, onToggleFilterItem: (id: string) => void }) {
+export default function FundsFilter({ filters, onToggleFilterItem }: { filters: { [key: string]: boolean|undefined }, onToggleFilterItem: (id: string) => void }) {
 
     return (
         <Popover className="relative">
@@ -39,7 +39,7 @@ export default function FundsFilter({ filters, onToggleFilterItem }: { filters: 
                         <p className='font-medium'>基金类型</p>
                         <div className='mt-3 flex-row-center gap-y-3 gap-x-2 flex-wrap'>
                             {
-                                Object.keys(TYPE).map(key => <CheckBox key={key} id={key} checked={filters[key]} onToggle={onToggleFilterItem}>{TYPE[key as keyof typeof TYPE]}</CheckBox>)
+                                Object.keys(TYPE).map(key => <CheckBox key={key} id={key} checked={Boolean(filters[key])} onToggle={onToggleFilterItem}>{TYPE[key as keyof typeof TYPE]}</CheckBox>)
                             }
                         </div>
                     </div>
@@ -47,7 +47,7 @@ export default function FundsFilter({ filters, onToggleFilterItem }: { filters: 
                         <p className='font-medium'>风险等级</p>
                         <div className='mt-3 flex-row-center gap-y-3 gap-x-2 flex-wrap'>
                             {
-                                Object.keys(RISKLEVEL).map(key => <CheckBox key={key} id={key} checked={filters[key]} onToggle={onToggleFilterItem}>{RISKLEVEL[key as keyof typeof RISKLEVEL]}</CheckBox>)
+                                Object.keys(RISKLEVEL).map(key => <CheckBox key={key} id={key} checked={Boolean(filters[key])} onToggle={onToggleFilterItem}>{RISKLEVEL[key as keyof typeof RISKLEVEL]}</CheckBox>)
                             }
                         </div>
                     </div>
@@ -55,7 +55,7 @@ export default function FundsFilter({ filters, onToggleFilterItem }: { filters: 
                         <p className='font-medium'>免赎回费</p>
                         <div className='mt-3 flex-row-center gap-y-3 gap-x-2 flex-wrap'>
                             {
-                                Object.keys(SH).map(key => <CheckBox key={key} id={key} checked={filters[key]} onToggle={onToggleFilterItem}>{SH[key as keyof typeof SH]}</CheckBox>)
+                                Object.keys(SH).map(key => <CheckBox key={key} id={key} checked={Boolean(filters[key])} onToggle={onToggleFilterItem}>{SH[key as keyof typeof SH]}</CheckBox>)
                             }
                         </div>
                     </div>

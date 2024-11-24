@@ -1,15 +1,14 @@
-import Dock from '@/components/client/Dock'
-import { readFileSync } from 'fs'
-import Link from 'next/link'
-import path from "path"
-import { Logos } from '../components/Icons'
-import FullContainer from '../components/server/Containers'
+import { readFileSync } from 'fs';
+import Link from 'next/link';
+import path from "path";
+import { Logos } from '../components/Icons';
+import Dock from '../components/client/Dock';
+import FullContainer from '../components/server/Containers';
 
-export default function Page() {
-
+export default () => {
     const apps = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/apps.json'), 'utf-8'));
     const home = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/home.json'), 'utf-8'));
-
+    
     return (
         <div className='w-full flex flex-col flex-1 gap-4 md:gap-6 p-4 md:p-8'>
 
@@ -91,5 +90,4 @@ export default function Page() {
             </div>
         </div>
     )
-
-}
+};

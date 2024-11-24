@@ -1,0 +1,27 @@
+{
+  "id": "FLTC_YY8A_M7",
+  "name": "M7",
+  "category": "speech",
+  "word": [
+    { "id": "FLTC_YY8A_M7_1", "lang": "en", "en": "fall", "cn": "下落；跌落", "ps": "/f0ːl/" },
+    { "id": "FLTC_YY8A_M7_2", "lang": "en", "en": "follow", "cn": "v. 跟随；紧跟", "ps": "/'f=l2%/" },
+    { "id": "FLTC_YY8A_M7_3", "lang": "en", "en": "hole", "cn": "n. 洞；孔；穴", "ps": "/h2%/" },
+    { "id": "FLTC_YY8A_M7_4", "lang": "en", "en": "rabbit", "cn": "n. 兔；家兔", "ps": "/'ræb!t/" },
+    { "id": "FLTC_YY8A_M7_5", "lang": "en", "en": "ssh", "cn": "int. 嘘（示意某人不要说话)", "ps": "/1/" },
+    { "id": "FLTC_YY8A_M7_6", "lang": "en", "en": "ground", "cn": "n. 地面", "ps": "/gra%nd/" },
+    { "id": "FLTC_YY8A_M7_7", "lang": "en", "en": "tea party", "cn": "茶会" },
+    { "id": "FLTC_YY8A_M7_8", "lang": "en", "en": "twice", "cn": "adv. 两次；两倍", "ps": "/twa!s/" },
+    { "id": "FLTC_YY8A_M7_9", "lang": "en", "en": "once or twice", "cn": "偶尔；一两次" },
+    { "id": "FLTC_YY8A_M7-10", "lang": "en", "en": "suddenly", "cn": "[adv. 突然地；出乎意料地]", "ps": "/'s7dnli/" },
+    { "id": "FLTC_YY8A_M7_11", "lang": "en", "en": "pink", "cn": "adj. 粉红色的n. 粉红色", "ps": "/p!9k/" },
+    { "id": "FLTC_YY8A_M7_12", "lang": "en", "en": "pocket", "cn": "n. 衣袋；口袋", "ps": "/'p=k!t/" },
+    { "id": "FLTC_YY8A_M7_13", "lang": "en", "en": "field", "cn": "n. 牧场；田地", "ps": "/fiːld/" },
+    { "id": "FLTC_YY8A_M7_14", "lang": "en", "en": "think about", "cn": "考虑" },
+    { "id": "FLTC_YY8A_M7_15", "lang": "en", "en": "deep", "cn": "adj. （从顶部向下）深的", "ps": "/diːp/" },
+    { "id": "FLTC_YY8A_M7_16", "lang": "en", "en": "while", "cn": "conj. 当……的时候", "ps": "/wa!l/" },
+    { "id": "FLTC_YY8A_M7_17", "lang": "en", "en": "land", "cn": "v. 降落（或跳落、跌落）到地面（或水面上）", "ps": "/l*nd/" },
+    { "id": "FLTC_YY8A_M7_18", "lang": "en", "en": "dry", "cn": "adj. 干的；干燥的", "ps": "/dra!/" }
+  ],
+  "dialogue": [],
+  "text": []
+}

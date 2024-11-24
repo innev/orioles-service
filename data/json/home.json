@@ -41,12 +41,12 @@
             },
             {
                 "name": "PHP",
-                "icon": "php",
+                "icon": "Php",
                 "url": "https://www.php.net"
             },
             {
                 "name": "Lua",
-                "icon": "lua",
+                "icon": "Lua",
                 "url": "https://www.lua.org"
             },
             {
@@ -106,7 +106,7 @@
             },
             {
                 "name": "NodeJS",
-                "icon": "nodejs",
+                "icon": "NodeJS",
                 "url": "https://nodejs.org"
             },
             {
@@ -151,12 +151,12 @@
             },
             {
                 "name": "Tensorflow",
-                "icon": "tensorflow",
+                "icon": "TensorFlow",
                 "url": "https://www.tensorflow.org"
             },
             {
                 "name": "CI/CD",
-                "icon": "circleci",
+                "icon": "CircleCI",
                 "url": "https://www.drone.io"
             }
         ]

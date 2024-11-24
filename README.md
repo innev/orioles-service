@@ -1,20 +1,20 @@
 <p align="center">
-  <img width="140" src="https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/logo.png" />  
-  <h2 align="center">Anoyi's Personal Website 🐬</h2>
+  <!-- <img width="140" src="https://cdn.jsdelivr.net/gh/innev/cdn@main/logo.png" />   -->
+  <h2 align="center">Innev's Personal Website 🐬</h2>
   <p align="center">Lightweight full stack web application development</p>
 </p>
 <p align="center">
-  <a href="https://github.com/AnoyiX/anoyi/LICENSE">
-    <img src="https://img.shields.io/github/license/AnoyiX/anoyi"/> 
+  <a href="https://github.com/innev/orioles-service/LICENSE">
+    <img src="https://img.shields.io/github/license/innev/orioles-service"/> 
   </a>
-  <a href="https://github.com/AnoyiX/anoyi/network/members">
-    <img src="https://img.shields.io/github/forks/AnoyiX/anoyi"/> 
+  <a href="https://github.com/innev/orioles-service/network/members">
+    <img src="https://img.shields.io/github/forks/innev/orioles-service"/> 
   </a>  
-  <a href="https://github.com/AnoyiX/anoyi/stargazers">
-    <img src="https://img.shields.io/github/stars/AnoyiX/anoyi"/> 
+  <a href="https://github.com/innev/orioles-service/stargazers">
+    <img src="https://img.shields.io/github/stars/innev/orioles-service"/> 
   </a>
-    <a href="https://github.com/AnoyiX/anoyi/issues">
-    <img src="https://img.shields.io/github/issues/AnoyiX/anoyi"/> 
+    <a href="https://github.com/innev/orioles-service/issues">
+    <img src="https://img.shields.io/github/issues/innev/orioles-service"/> 
   </a>
 </p>
 <p align="center">
@@ -40,17 +40,17 @@
 First, clone the repo:
 
 ```
-git clone https://github.com/AnoyiX/anoyi.git
+git clone https://github.com/innev/orioles-service.git
 ```
 
 ### ▼ Local Development
 
 ```shell
 # install packages
-yarn
+pnpm i
 
 # run
-yarn dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -72,8 +72,8 @@ Custom user data saved in `./data`, you can change them to yourself.
 
 #### Docker
 
-- Build: `docker build -t nextjs-anoyi .`
-- Run: `docker run -d -p 3000:3000 nextjs-anoyi`
+- Build: `docker build -t orioles-service .`
+- Run: `docker run -d -p 3000:3000 orioles-service`
 
 #### Vercel
 
@@ -87,6 +87,5 @@ Then vercel will deploy your application automatically when you push your code.
 
 To learn more, see [Next.js Deployment](https://nextjs.org/docs/deployment).
 
-## 🧿 Activity
-
-![](https://repobeats.axiom.co/api/embed/a35b540b024b7b7aeac7ef2e9ec4340aab76cff3.svg)
+<!-- ## 🧿 Activity -->
+<!-- ![](https://repobeats.axiom.co/api/embed/a35b540b024b7b7aeac7ef2e9ec4340aab76cff3.svg) -->

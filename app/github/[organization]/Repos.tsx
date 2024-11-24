@@ -11,21 +11,21 @@ import { TRepo } from "./type"
 export default function Repos({ colors, organization }: { colors: { [key: string]: string }, organization: string }) {
 
     const limit = 12
-    const genAPI = (page: number) => `https://api.github.com/users/${organization}/repos?page=${page + 1}&per_page=${limit}`
-
+    const genAPI = (page: number) => `https://api.github.com/users/${organization === 'stars' ? 'innev/starred' : `${organization}/repos`}?page=${page + 1}&per_page=${limit}`;
+    
     const getKey = (pageIndex: number, previousPageData: TRepo[]) => {
         if (previousPageData && !previousPageData.length) return null
         return genAPI(pageIndex)
     }
-    const { data = [], size, setSize } = useSWRInfinite<TRepo[]>(getKey, http.getAll)
+    const { data = [], size, setSize } = useSWRInfinite<TRepo[]>(getKey, http.getAll);
+    const dataLength = data.slice(-1)[0]?.length || 0;
 
     return (
-
         <InfiniteScroll
             className="w-full grid grid-cols-1 p-4 gap-4 lg:p-8 lg:gap-8 lg:grid-cols-2"
             dataLength={new Array<TRepo>().concat.apply([], data.map(resp => resp)).length}
             next={() => setSize(size + 1)}
-            hasMore={!data.length || data.slice(-1)[0].length >= limit}
+            hasMore={!data.length || dataLength >= limit}
             loader={<div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>}
         >
             {

@@ -1,0 +1,30 @@
+{
+  "id": "FLTC_YY8A_M8",
+  "name": "M8",
+  "category": "speech",
+  "word": [
+    { "id": "FLTC_YY8A_M8_1", "lang": "en", "en": "pale", "cn": "adj. （肤色）苍白的", "ps": "/pe!l/" },
+    { "id": "FLTC_YY8A_M8_2", "lang": "en", "en": "appear", "cn": "v. 出现；显露", "ps": "/2'p!2/" },
+    { "id": "FLTC_YY8A_M8_3", "lang": "en", "en": "round", "cn": "prep. 转到（某物的）另一边", "ps": "/ra%nd/" },
+    { "id": "FLTC_YY8A_M8_4", "lang": "en", "en": "corner", "cn": "n. 拐角；街角", "ps": "/'k0ːn2/" },
+    { "id": "FLTC_YY8A_M8_5", "lang": "en", "en": "hit", "cn": "v. (hit /h!t/)（使）碰撞", "ps": "/h!t/" },
+    { "id": "FLTC_YY8A_M8_7", "lang": "en", "en": "glad", "cn": "adj. 高兴的；欢喜的", "ps": "/glæd/" },
+    { "id": "FLTC_YY8A_M8_8", "lang": "en", "en": "in time", "cn": "及时" },
+    { "id": "FLTC_YY8A_M8_9", "lang": "en", "en": "fall off...", "cn": "从……跌落" },
+    { "id": "FLTC_YY8A_M8_10", "lang": "en", "en": "risk", "cn": "n. 危险；风险", "ps": "/r!sk/" },
+    { "id": "FLTC_YY8A_M8_11", "lang": "en", "en": "attention", "cn": "n. 注意力", "ps": "/2'ten1n/" },
+    { "id": "FLTC_YY8A_M8_12", "lang": "en", "en": "pay attention", "cn": "注意；留心" },
+    { "id": "FLTC_YY8A_M8_13", "lang": "en", "en": "sideside by side", "cn": "n. （物体或形状的）侧面", "ps": "/sa!d/" },
+    { "id": "FLTC_YY8A_M8_14", "lang": "en", "en": "bite", "cn": "并排地；肩并肩地" },
+    { "id": "FLTC_YY8A_M8_15", "lang": "en", "en": "climb", "cn": "v. (bit /b!t/) 咬；叮", "ps": "/ba!t/" },
+    { "id": "FLTC_YY8A_M8_16", "lang": "en", "en": "hide", "cn": "v. 爬；攀爬", "ps": "/kla!m/" },
+    { "id": "FLTC_YY8A_M8_17", "lang": "en", "en": "hide", "cn": "v. (hid /h!d/) 躲；躲藏", "ps": "/ha!d/" },
+    { "id": "FLTC_YY8A_M8_18", "lang": "en", "en": "throw", "cn": "v. (threw /8ruː/) 扔；掷", "ps": "/8r2%/" },
+    { "id": "FLTC_YY8A_M8_19", "lang": "en", "en": "fridge", "cn": "n. 冰箱", "ps": "/fr!d3/" },
+    { "id": "FLTC_YY8A_M8_20", "lang": "en", "en": "pain", "cn": "n. 痛；疼痛", "ps": "/pe!n/" },
+    { "id": "FLTC_YY8A_M8_21", "lang": "en", "en": "worse", "cn": "adj. 更糟的；更坏的adv. 更糟；更严重", "ps": "/w^ːs" },
+    { "id": "FLTC_YY8A_M8_22", "lang": "en", "en": "medicine", "cn": "n. 药；药物", "ps": "/'medsn/" }
+  ],
+    "dialogue": [],
+  "text": []
+}
