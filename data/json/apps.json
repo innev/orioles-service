@@ -19,7 +19,7 @@
     },
     {
         "name": "股市",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Stock.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/e1/38/69/e1386957-0bcc-7314-6746-23b96a2c05bb/AppIcon-0-0-1x_U007emarketing-0-0-0-8-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp",
         "url": "/stock",
         "visiable": true
     },
@@ -27,13 +27,13 @@
         "name": "基金",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Fund.svg",
         "url": "/fund",
-        "visiable": false
+        "visiable": true
     },
     {
         "name": "短视频",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Tiktok.svg",
         "url": "/video",
-        "visiable": false
+        "visiable": true
     },
     {
         "name": "Rainbow",
