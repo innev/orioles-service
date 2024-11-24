@@ -21,6 +21,7 @@ export default function Indices() {
         '603679.SS',
         '603687.SS',
         '300940.SZ',
+        '002515.SZ'
     ]
 
     const fields = [

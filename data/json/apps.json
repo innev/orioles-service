@@ -27,13 +27,13 @@
         "name": "基金",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Fund.svg",
         "url": "/fund",
-        "visiable": true
+        "visiable": false
     },
     {
         "name": "短视频",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Tiktok.svg",
         "url": "/video",
-        "visiable": true
+        "visiable": false
     },
     {
         "name": "Rainbow",
