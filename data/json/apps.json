@@ -1,7 +1,7 @@
 [
     {
         "name": "开源项目",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Github.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/dc/7c/ec/dc7cec80-cd34-b0e3-981f-22af7c915823/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/230x0w.webp",
         "url": "/github/stars",
         "visiable": true
     },
@@ -25,7 +25,7 @@
     },
     {
         "name": "基金",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Fund.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e8/b6/f1/e8b6f1ba-b9c2-8463-cfed-37f4868e05e7/AppIcon-0-0-1x_U007emarketing-0-10-0-0-85-220.jpeg/230x0w.webp",
         "url": "/fund",
         "visiable": false
     },
@@ -49,13 +49,13 @@
     },
     {
         "name": "Dev Icons",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/DevIcons.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/4b/45/5e/4b455e92-06ba-cd3b-0e59-069096692f10/AppIcon-0-1x_U007emarketing-0-7-0-85-220-0.png/230x0w.webp",
         "url": "/dev-icons",
         "visiable": true
     },
     {
         "name": "相册",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Photos.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/9c/be/25/9cbe25e9-4fc6-2c25-d4b3-b06aefe9f96f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp",
         "url": "/photo",
         "visiable": false
     },
@@ -67,20 +67,134 @@
     },
     {
         "name": "CNCF",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/CNCF.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/16/a7/a2/16a7a2ef-523a-19d1-4b79-89172e519d5e/AppIcon-0-1x_U007emarketing-0-7-0-85-220-0.png/230x0w.webp",
         "url": "/cncf",
         "visiable": false
     },
     {
         "name": "电子课本",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/CNCF.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/59/00/a0/5900a0ef-5f34-feee-820e-8518866403f0/AppIcon-0-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp",
         "url": "/ebook",
         "visiable": true
     },
     {
         "name": "文档管理",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/CNCF.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/81/26/40/812640fd-8023-3d4a-ac3d-22713baf5253/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp",
         "url": "/explorer",
+        "visiable": true
+    },
+    {
+        "name": "Rancher",
+        "icon": "https://www.rancher.com/assets/img/logos/rancher-suse-logo-horizontal-color.svg",
+        "url": "https://www.rancher.com",
+        "visiable": true
+    },
+    {
+        "name": "Rancher Desktop",
+        "icon": "https://docs.rancherdesktop.io/img/logo.svg",
+        "url": "https://docs.rancherdesktop.io",
+        "visiable": true
+    },
+    {
+        "name": "mqttx",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3f/3a/65/3f3a6572-cedd-0406-6350-51960183856c/AppIcon-purple-AI-0-2x_U007euniversal-0-4-85-220-0.png/460x0w.webp",
+        "url": "https://mqttx.app/zh/docs",
+        "visiable": true
+    },
+    {
+        "name": "MT4 Docs",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2c/b4/59/2cb45934-ce20-1cd2-e32a-03aebecf1000/icon-0-0-1x_U007emarketing-0-4-0-0-85-220.png/460x0w.webp",
+        "url": "https://support.metaquotes.net/en/docs/mt4/api/manager_api",
+        "visiable": true
+    },
+    {
+        "name": "MT5 Docs",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b6/c3/44/b6c3449b-a7d7-355c-e638-2454147faf38/icon-0-0-1x_U007emarketing-0-5-0-0-85-220.png/460x0w.webp",
+        "url": "https://support.metaquotes.net/en/docs/mt5/api/webapi_main",
+        "visiable": true
+    },
+    {
+        "name": "MT4 RPC API",
+        "icon": "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9jMzZlN2UwZDU1NTRjNGFiMmQ2NWU2YzdjYWY2OGRiMz9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.O37XV2RbayE9Yj62zRQxEjS2EQghPrDJtysC0cY65X0",
+        "url": "https://mt4.mtapi.io/index.html",
+        "visiable": true
+    },
+    {
+        "name": "XSwipe API",
+        "icon": "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9jMzZlN2UwZDU1NTRjNGFiMmQ2NWU2YzdjYWY2OGRiMz9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.O37XV2RbayE9Yj62zRQxEjS2EQghPrDJtysC0cY65X0",
+        "url": "https://sandbox.dtpspartnerapi.backofficeportal.app/docs/index.html",
+        "visiable": true
+    },
+    {
+        "name": "AI工具箱",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/1b/dc/71/1bdc710d-452c-e34b-9a37-72957a9eb52e/AppIcon-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp",
+        "url": "https://www.ailookme.com",
+        "visiable": true
+    },
+    {
+        "name": "ChatGPT",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8f/5b/bc/8f5bbca7-555e-2c7a-df65-a4457a2056b4/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/230x0w.webp",
+        "url": "https://chatgpt.com",
+        "visiable": true
+    },
+    {
+        "name": "v0.dev",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ec/cd/3e/eccd3e4b-6fea-ca53-7376-155d5bf98ed4/AppIcon-0-0-1x_U007emarketing-0-8-0-sRGB-85-220.png/460x0w.webp",
+        "url": "https://v0.dev",
+        "visiable": true
+    },
+    {
+        "name": "Claude",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/da/a4/82/daa48224-ca5b-9fcb-1276-dae5db9dda3f/AppIcon-0-0-1x_U007epad-0-1-85-220.png/230x0w.webp",
+        "url": "https://claude.ai",
+        "visiable": true
+    },
+    {
+        "name": "通义千问",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/48/fa/36/48fa3634-959c-4fd5-31fb-b23cb2212db9/AppIcon-0-1x_U007epad-0-0-85-220-0.png/460x0w.webp",
+        "url": "https://tongyi.aliyun.com/qianwen",
+        "visiable": true
+    },
+    {
+        "name": "语雀",
+        "icon": "https://mdn.alipayobjects.com/huamei_0prmtq/afts/img/A*9uyGR6gGcI4AAAAAAAAAAAAADvuFAQ/original",
+        "url": "https://www.yuque.com",
+        "visiable": true
+    },
+    {
+        "name": "Notion(OX)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/70/c1/98/70c19803-78aa-2f62-b1ce-d0be58a73012/AppIconProd-0-0-1x_U007emarketing-0-11-0-85-220.png/460x0w.webp",
+        "url": "https://www.notion.so/ox-securities/cd8645ad326c410d9c3b3646fb19f6f2?v=fd00c4e1d27244a68e492dd2d6cdf135",
+        "visiable": true
+    },
+    {
+        "name": "Log(OX)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b9/80/9c/b9809ccc-1d9c-45b1-db17-1d240c88b7e2/AppIcon-0-0-1x_U007epad-0-0-0-1-0-0-sRGB-85-220.png/460x0w.webp",
+        "url": "https://ox-log.gen-x.dev/dashboard",
+        "visiable": true
+    },
+    {
+        "name": "n8n(OX)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/19/28/a7/1928a778-3fb4-b144-c5cd-f0e3cfebfcf0/AppIcon-0-1x_U007ephone-0-1-sRGB-85-220-0.jpeg/512x512bb.jpg",
+        "url": "https://ox-n8n.gen-x.dev",
+        "visiable": true
+    },
+    {
+        "name": "Plane(OX)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/97/f9/43/97f943a9-8561-6522-a05c-cc34815b9038/AppIcon-1x_U007ephone-0-85-220-0.png/460x0w.webp",
+        "url": "https://plane.gen-x.tech/crm-team",
+        "visiable": true
+    },
+    {
+        "name": "Lucid(OX)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/59/9b/35/599b35b9-1a7b-b636-1e1e-35d2cd899889/Lucidchart-AppIcon-0-1x_U007emarketing-0-11-0-85-220-0.png/460x0w.webp",
+        "url": "https://lucid.app",
+        "visiable": true
+    },
+    {
+        "name": "Whats app",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b9/a4/2a/b9a42ad1-74b5-9c7c-20eb-939897afb5f7/AppIconCatalystRelease-0-0-2x_U007euniversal-0-0-0-4-0-0-0-85-220.png/460x0w.webp",
+        "url": "https://web.whatsapp.com",
         "visiable": true
     }
 ]
