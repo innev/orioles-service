@@ -72,6 +72,12 @@
         "visiable": false
     },
     {
+        "name": "Authenticator",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e5/f9/e9/e5f9e91d-6cbd-bd40-44af-0cf8f41222af/logo_authenticator_color-0-1x_U007emarketing-0-0-0-6-0-0-0-85-220-0.png/460x0w.webp",
+        "url": "/2fa",
+        "visiable": true
+    },
+    {
         "name": "电子课本",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/59/00/a0/5900a0ef-5f34-feee-820e-8518866403f0/AppIcon-0-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp",
         "url": "/ebook",
