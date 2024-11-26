@@ -192,6 +192,60 @@
         "visiable": true
     },
     {
+        "name": "Figma(OX)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b9/93/c7/b993c7f9-aa66-f3a1-b2f9-c09d5b15722c/AppIcon-0-1x_U007emarketing-0-8-0-85-220-0.png/460x0w.webp",
+        "url": "https://www.figma.com",
+        "visiable": true
+    },
+    {
+        "name": "Dev Admin CRM(OX)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0b/96/81/0b9681be-2adb-56e6-4202-ddc25e0fb199/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp",
+        "url": "https://bull-crm-admin.gen-x.dev",
+        "visiable": true
+    },
+    {
+        "name": "Dev Protal CRM(OX)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0b/96/81/0b9681be-2adb-56e6-4202-ddc25e0fb199/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp",
+        "url": "https://bull-crm-client.gen-x.dev",
+        "visiable": true
+    },
+    {
+        "name": "CRM API Doc(OX)",
+        "icon": "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9jMzZlN2UwZDU1NTRjNGFiMmQ2NWU2YzdjYWY2OGRiMz9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.O37XV2RbayE9Yj62zRQxEjS2EQghPrDJtysC0cY65X0",
+        "url": "https://bull-crm-client.gen-x.dev/api/admin/v1/doc",
+        "visiable": true
+    },
+    {
+        "name": "Prod Admin CRM(OX)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0b/96/81/0b9681be-2adb-56e6-4202-ddc25e0fb199/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp",
+        "url": "https://admin-crm.oxsecurities.com",
+        "visiable": true
+    },
+    {
+        "name": "Prod Protal CRM(OX)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0b/96/81/0b9681be-2adb-56e6-4202-ddc25e0fb199/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp",
+        "url": "https://clientportal.oxsecurities.com",
+        "visiable": true
+    },
+    {
+        "name": "1.2 Admin(RZ)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0b/96/81/0b9681be-2adb-56e6-4202-ddc25e0fb199/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp",
+        "url": "https://dev-rzforex-admin-1.2.gen-x.dev/",
+        "visiable": true
+    },
+    {
+        "name": "2.0 Admin(RZ)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0b/96/81/0b9681be-2adb-56e6-4202-ddc25e0fb199/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp",
+        "url": "https://dev-rzforex-2.0.gen-x.dev",
+        "visiable": true
+    },
+    {
+        "name": "Prod Protal(RZ)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0b/96/81/0b9681be-2adb-56e6-4202-ddc25e0fb199/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp",
+        "url": "https://portal.rzforex.com",
+        "visiable": true
+    },
+    {
         "name": "Whats app",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b9/a4/2a/b9a42ad1-74b5-9c7c-20eb-939897afb5f7/AppIconCatalystRelease-0-0-2x_U007euniversal-0-0-0-4-0-0-0-85-220.png/460x0w.webp",
         "url": "https://web.whatsapp.com",
