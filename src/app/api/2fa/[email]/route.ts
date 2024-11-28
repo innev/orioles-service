@@ -1,6 +1,6 @@
 import { DAuth } from '@/components/iv-ui/typings/DAuth';
 import { handleApiError } from '@/utils/api-response'
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { authenticator } from 'otplib';
 
 const secrets: { [key: string]: string | { [key: string]: string } } = JSON.parse(process.env.SECRETS||'');
@@ -31,10 +31,10 @@ export async function GET(_: NextRequest, { params }: RouteParams) {
                 break;
             }
         }
-        return Response.json({ code: 200, data, mas: '请求成功'});
+        return NextResponse.json({ code: 200, data, mas: '请求成功'});
 
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             handleApiError(error),
             { status: error instanceof Error ? 404 : 200 }
         )
@@ -50,9 +50,9 @@ export async function GET(_: NextRequest, { params }: RouteParams) {
 export async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
     const body = await request.json()
-    return Response.json({ success: true, data: body })
+    return NextResponse.json({ success: true, data: body })
   } catch (error) {
-    return Response.json(
+    return NextResponse.json(
       handleApiError(error),
       { status: error instanceof Error ? 400 : 200 }
     )
@@ -68,9 +68,9 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 export async function DELETE(_: NextRequest, { params }: RouteParams) {
   try {
     console.debug("删除的Email:", params.email);
-    return Response.json({ success: true }, { status: 200 })
+    return NextResponse.json({ success: true }, { status: 200 })
   } catch (error) {
-    return Response.json(
+    return NextResponse.json(
       handleApiError(error),
       { status: error instanceof Error ? 404 : 200 }
     )

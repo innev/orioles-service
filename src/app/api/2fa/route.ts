@@ -1,7 +1,7 @@
 import { DAuth } from '@/components/iv-ui/typings/DAuth';
 import { handleApiError } from '@/utils/api-response'
 import { NextApiRequest, NextApiResponse } from 'next';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { authenticator } from 'otplib';
 
 const secrets: { [key: string]: string | { [key: string]: string } } = JSON.parse(process.env.SECRETS||'');
@@ -47,14 +47,14 @@ export async function GET(request: NextRequest) {
                 code: authenticator.generate(secrets[name] as string)
             });
         }
-        return Response.json({
+        return NextResponse.json({
             code: 200,
             data: data.slice(0, (pageIndex + 1) * pageSize),
             mas: '请求成功'
         });
 
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             handleApiError(error),
             { status: error instanceof Error ? 404 : 200 }
         )
