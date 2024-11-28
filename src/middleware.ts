@@ -14,8 +14,8 @@ export async function middleware(request: NextRequest) {
   if (authResponse.status === 307) return authResponse // 307 是重定向状态码
   
   // 3. 国际化处理
-  const i18nResponse = withI18n(request)
-  if (i18nResponse.status === 307) return i18nResponse
+  // const i18nResponse = withI18n(request)
+  // if (i18nResponse.status === 307) return i18nResponse
   
   // 4. 如果所有中间件都通过，添加一些通用的响应头
   const response = NextResponse.next()
