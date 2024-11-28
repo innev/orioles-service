@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server';
+
 export async function GET() {
     const docs = {
         openapi: '3.0.0',
@@ -48,5 +50,5 @@ export async function GET() {
         }
     }
 
-    return Response.json(docs)
+    return NextResponse.json(docs)
 }
