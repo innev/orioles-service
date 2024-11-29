@@ -1,4 +1,4 @@
-import { RecordIcon } from '@/components/icons';
+import RecordIcon from '@/components/icons/Record';
 import HomeLayout from '@/components/layouts/HomeLayout';
 import useMediaRecorder from '@/hooks/useMediaRecorder';
 import { audioReader, transcriptions } from '@/utils';

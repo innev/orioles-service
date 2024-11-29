@@ -12,6 +12,9 @@ coverage
 .next/
 out/
 
+# Logs
+logs/*.log
+
 # production
 build
 

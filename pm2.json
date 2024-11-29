@@ -1,0 +1,20 @@
+{
+  "apps": [
+    {
+      "name": "Orioles-Service",
+      "script": "pnpm",
+      "args": "start",
+      "instances": "1",
+      "exec_mode": "cluster",
+      "watch": false,
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 3000
+      },
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "error_file": "./logs/Orioles-Service-error.log",
+      "out_file": "./logs/Orioles-Service-out.log",
+      "merge_logs": true
+    }
+  ]
+}
