@@ -1,5 +1,9 @@
 import RecordIcon from "./Record";
+import Github from "./github";
+import Google from "./google";
 
 export {
-    RecordIcon
+    RecordIcon,
+    Github,
+    Google
 };
