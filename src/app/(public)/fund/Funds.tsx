@@ -3,7 +3,7 @@
 import { debounce } from "lodash"
 import { useCallback, useEffect, useRef, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
-import { Loading, SearchIcon } from '@/components/Icons2'
+import { Loading, SearchIcon } from '@/components/Icons'
 import FullContainer from "@/components/server/Containers"
 import http from "@/utils/http"
 import FundsFilter from "./FundsFilter"

@@ -1,51 +1,52 @@
-import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-// import { compare } from 'bcrypt';
-import prisma from '@/lib/prisma';
+import NextAuth from "next-auth";
+import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 
 export default NextAuth({
+  secret: process.env.SECRET,
   providers: [
-    CredentialsProvider({
-      name: 'Credentials',
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
-      },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          return null
-        }
-
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email
-          }
-        })
-
-        if (!user) {
-          return null
-        }
-
-        // const isPasswordValid = await compare(credentials.password, user.password);
-        const isPasswordValid = credentials.password === user.password;
-
-        if (!isPasswordValid) {
-          return null
-        }
-
-        return {
-          id: user.id.toString(),
-          email: user.email,
-          name: user.name,
-        }
-      }
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
     })
   ],
-  session: {
-    strategy: 'jwt'
-  },
+  session: { strategy: "jwt" },
   pages: {
-    signIn: '/login'
+    signIn: '/api/auth/signin',
+    signOut: '/api/auth/signout',
+    error: '/api/auth/error',
+    verifyRequest: '/api/auth/verify-request',
+    newUser: '/api/auth/new-user'
+  },
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.debug("signIn:", user, account, profile, email, credentials);
+      const isAllowedToSignIn = true
+      if (isAllowedToSignIn) {
+        return true
+      } else {
+        return false
+      }
+    },
+    jwt({ token, trigger, session, account }) {
+      console.debug("jwt:", token, trigger, session, account);
+      if (trigger === "update" && session?.user?.name) {
+        token.name = session.user.name
+      }
+      if (account?.provider === "keycloak" && account.access_token) {
+        return { ...token, accessToken: account.access_token }
+      }
+      return token
+    },
+    session({ session, token }) {
+      if (token?.accessToken) {
+        session.accessToken = token.accessToken
+      }
+      return session
+    }
   }
-})
-
+});

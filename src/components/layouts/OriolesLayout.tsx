@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from '@/providers/AuthProvider';
 import LoginModal from '@/components/LoginModal';
-import { Logos } from '@/components/Icons2';
+import { Logos } from '@/components/Icons';
 import Dock, { TDock } from '@/components/client/Dock';
 import Toaster from '@/components/client/Toaster';
 

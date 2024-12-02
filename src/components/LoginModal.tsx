@@ -2,12 +2,13 @@
 
 import { Dispatch, ReactNode, SetStateAction, useCallback, useMemo, useState } from "react";
 import { signIn } from 'next-auth/react';
+// import { signIn } from '@/lib/auth';
 import Image from "next/image";
 // import { useTranslation } from "next-i18next";
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/providers/AuthProvider';
 import LoadingDots from "@/components/iv-ui/LoadingDots";
-import { Github, Google  } from "@/components/icons";
+import { GithubIcon, GoogleIcon } from "@/components/Icons";
 
 const SignInOAuth2Button = ({ label = 'Sign In', provider = 'google', icon }: { label: string, provider: string, icon?: ReactNode }) => {
   const [signInClicked, setSignInClicked] = useState(false);
@@ -97,13 +98,13 @@ export default () => {
         {/* <h2 className="text-2xl mb-4">Or</h2> */}
         <div className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 md:px-16">
           <SignInOAuth2Button
-            icon={<Google className="h-5 w-5" />}
+            icon={<GoogleIcon className="h-5 w-5" />}
             label={t("sign_in_with_google")}
             provider="google"
           />
 
           <SignInOAuth2Button
-            icon={<Github className="h-5 w-5" />}
+            icon={<GithubIcon className="h-5 w-5" />}
             label={t("sign_in_with_github")}
             provider="github"
           />

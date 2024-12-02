@@ -3,7 +3,7 @@
 import moment from "moment";
 import 'moment/locale/zh-cn';
 import useSWR from "swr";
-import { Loading } from "@/components/Icons2";
+import { Loading } from "@/components/Icons";
 import http from "@/utils/http";
 import { TRealData } from "../type";
 

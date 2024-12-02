@@ -2,7 +2,7 @@
 
 import moment from "moment"
 import 'moment/locale/zh-cn'
-import { Location } from '@/components/Icons2'
+import { Location } from '@/components/Icons'
 import ImageSkeleton from "@/components/client/ImageSkeleton"
 import { TVideo } from "./type"
 

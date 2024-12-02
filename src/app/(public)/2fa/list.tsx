@@ -5,7 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import useSWRInfinite from 'swr/infinite';
 import { getAuthenticators } from '@/apis/2fa';
 import { DAuth } from '@/components/iv-ui/typings/DAuth';
-import { Loading } from "@/components/Icons2";
+import { Loading } from "@/components/Icons";
 import { useEffect, useState } from "react";
 
 const copyName = (text: string) => {

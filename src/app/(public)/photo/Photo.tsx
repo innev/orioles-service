@@ -3,7 +3,7 @@
 import moment from "moment"
 import 'moment/locale/zh-cn'
 import ImageSkeleton from "@/components/client/ImageSkeleton"
-import { Location } from "@/components/Icons2"
+import { Location } from "@/components/Icons"
 import { TPhoto } from "./type"
 
 export type PhotoProps = {

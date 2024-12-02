@@ -6,7 +6,7 @@ import Link from "next/link"
 import { useCallback, useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useSWR from "swr"
-import { Loading } from "@/components/Icons2"
+import { Loading } from "@/components/Icons"
 import http from "@/utils/http"
 import { TLive, TLivesMap, TRealData, TSymbol } from "./type"
 

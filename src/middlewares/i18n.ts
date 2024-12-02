@@ -4,8 +4,8 @@ import type { NextRequest } from 'next/server'
 // import Negotiator from 'negotiator'
 
 // 支持的语言列表
-const locales = ['en', 'zh', 'ja']
-const defaultLocale = 'zh'
+const locales = ['en', 'zh', 'ja'];
+const defaultLocale = 'zh';
 
 // function getLocale(request: NextRequest): string {
 //   const negotiatorHeaders: Record<string, string> = {}

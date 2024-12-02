@@ -3,7 +3,7 @@
 import { Fragment, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useSWRInfinite from 'swr/infinite'
-import { Loading } from '@/components/Icons2'
+import { Loading } from '@/components/Icons'
 import http from "@/utils/http"
 import { PageData } from "@/utils/types"
 import Video from "./Video"

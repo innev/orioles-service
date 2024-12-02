@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Fragment } from 'react'
-import { ChevronRightIcon } from '@/components/Icons2'
+import { ChevronRightIcon } from '@/components/Icons'
 
 type TAppNav = {
     paths: {

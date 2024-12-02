@@ -2,7 +2,7 @@
 
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef } from 'react'
-import { XIcon } from '@/components/Icons2'
+import { XIcon } from '@/components/Icons'
 
 type VideoModalProps = {
     isOpen: boolean

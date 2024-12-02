@@ -18,7 +18,8 @@ i18n
       escapeValue: false, // React 已经默认转义
     },
     backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json', // 加载语言文件的路径
+      // loadPath: '/locales/{{lng}}/{{ns}}.json', // 加载语言文件的路径
+      loadPath: '/locales/{{lng}}/common.json', // 加载语言文件的路径
     },
     detection: {
       order: ['querystring', 'cookie', 'localStorage', 'navigator'], // 语言检测优先级

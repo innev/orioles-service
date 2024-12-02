@@ -2,7 +2,7 @@
 
 import { Popover } from '@headlessui/react'
 import { ReactNode } from 'react'
-import { FilterIcon } from '@/components/Icons2'
+import { FilterIcon } from '@/components/Icons'
 import { RISKLEVEL, SH, TYPE } from './Funds'
 
 type CheckBoxProps = {
