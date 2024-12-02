@@ -10,8 +10,7 @@
     "db:pull": "prisma db pull",
     "db:seed": "prisma db seed",
     "db:push": "prisma db push",
-    "db:view": "prisma studio",
-    "postinstall": "prisma:generate"
+    "db:view": "prisma studio"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
