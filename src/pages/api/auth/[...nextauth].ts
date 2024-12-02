@@ -43,9 +43,9 @@ export default NextAuth({
       return token
     },
     session({ session, token }) {
-      if (token?.accessToken) {
-        session.accessToken = token.accessToken
-      }
+      // if (token?.accessToken) {
+      //   session.accessToken = token.accessToken
+      // }
       return session
     }
   }
