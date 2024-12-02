@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from '@/providers/AuthProvider';
 import LoginModal from '@/components/LoginModal';
 import { Logos } from '@/components/Icons2';
@@ -16,6 +17,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                     <LoginModal />
                 </AuthProvider>
                 <Toaster />
+                <Analytics />
             </body>
         </html>
     )
