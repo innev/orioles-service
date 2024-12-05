@@ -24,6 +24,24 @@
         "visiable": true
     },
     {
+        "name": "akshare",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e8/b6/f1/e8b6f1ba-b9c2-8463-cfed-37f4868e05e7/AppIcon-0-0-1x_U007emarketing-0-10-0-0-85-220.jpeg/230x0w.webp",
+        "url": "https://akshare.akfamily.xyz",
+        "visiable": true
+    },
+    {
+        "name": "baostock",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e8/b6/f1/e8b6f1ba-b9c2-8463-cfed-37f4868e05e7/AppIcon-0-0-1x_U007emarketing-0-10-0-0-85-220.jpeg/230x0w.webp",
+        "url": "http://baostock.com/baostock/index.php",
+        "visiable": true
+    },
+    {
+        "name": "tushare",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e8/b6/f1/e8b6f1ba-b9c2-8463-cfed-37f4868e05e7/AppIcon-0-0-1x_U007emarketing-0-10-0-0-85-220.jpeg/230x0w.webp",
+        "url": "https://www.tushare.pro",
+        "visiable": true
+    },
+    {
         "name": "基金",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e8/b6/f1/e8b6f1ba-b9c2-8463-cfed-37f4868e05e7/AppIcon-0-0-1x_U007emarketing-0-10-0-0-85-220.jpeg/230x0w.webp",
         "url": "/fund",
