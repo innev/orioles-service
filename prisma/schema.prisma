@@ -48,6 +48,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   articles      Article[]
+  App           App[]
 }
 
 model VerificationToken {
@@ -100,4 +101,22 @@ model Media {
 
   @@index([id])
   @@index([articleId])
+}
+
+model App {
+  id           String    @id @default(cuid())
+  name         String    @unique
+  icon         String    @db.VarChar(1000)
+  hint         BigInt?   @default(0)
+  url          String    @db.VarChar(200)
+  visiable     Boolean   @default(false)
+  requiresAuth Boolean   @default(false)
+  sort         BigInt    @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  userId       String?
+  user         User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([id])
+  @@index([userId])
 }

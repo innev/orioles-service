@@ -5,7 +5,7 @@ import FullContainer from '@/components/server/Containers';
 import Apps from '@/components/client/Apps';
 
 export default () => {
-    const apps = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/apps.json'), 'utf-8'));
+    // const apps = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/apps.json'), 'utf-8'));
     const userSetting = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/home.json'), 'utf-8'));
 
     return (
@@ -13,7 +13,7 @@ export default () => {
             <div className='flex flex-col md:flex-row flex-1 gap-4 md:gap-6'>
                 <Sider userSetting={userSetting} />
                 <FullContainer>
-                    <Apps data={apps} />
+                    <Apps />
                 </FullContainer>
             </div>
         </div>

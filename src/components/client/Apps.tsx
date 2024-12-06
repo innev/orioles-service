@@ -2,6 +2,8 @@
 
 import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { getApps } from '@/apis/apps';
 
 interface App {
     name: string
@@ -11,8 +13,15 @@ interface App {
     requiresAuth?: boolean
 };
 
-export default ({ data }: { data: Array<App> }) => {
+export default () => {
     const { showLoginModal, setShowLoginModal } = useAuth();
+
+    const [ apps, setApps ] = useState<Array<App>|undefined>([]);
+
+    useEffect(() => {
+        getApps().then(setApps);
+    }, []);
+    
 
     const handleAppClick = (e: React.MouseEvent<HTMLAnchorElement>, app: App) => {
         if (app?.requiresAuth) {
@@ -32,7 +41,7 @@ export default ({ data }: { data: Array<App> }) => {
     return (
         <div className='flex flex-1 flex-row flex-wrap p-8 gap-10'>
             {
-                data.map((app: App, index: number) => !app.visiable ? null : (
+                apps?.map((app: App, index: number) => !app.visiable ? null : (
                     <div className='flex flex-col items-center gap-3' key={index}>
                         <Link
                             href={app.url}

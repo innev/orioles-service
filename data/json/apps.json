@@ -18,6 +18,12 @@
         "visiable": true
     },
     {
+        "name": "TIDB",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e4/83/d4/e483d421-265c-0129-b6b4-f3211fff7123/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/460x0w.webp",
+        "url": "https://tidbcloud.com/enterprise/signin/innev",
+        "visiable": true
+    },
+    {
         "name": "股市",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/e1/38/69/e1386957-0bcc-7314-6746-23b96a2c05bb/AppIcon-0-0-1x_U007emarketing-0-0-0-8-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp",
         "url": "/stock",
