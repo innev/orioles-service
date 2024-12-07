@@ -8,49 +8,6 @@ datasource db {
   relationMode = "prisma"
 }
 
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-  @@index([userId])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  password      String?
-  passwordSalt  String?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  articles      Article[]
-  App           App[]
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -59,64 +16,80 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Category {
-  id       Int       @id @default(autoincrement())
-  name     String
-  articles Article[]
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  expires      DateTime
+  user         String
+  User         User     @relation(fields: [user], references: [id], onDelete: Cascade)
+
+  @@index([user])
 }
 
-model Article {
-  id          String    @id @default(cuid())
-  title       String
-  content     String
-  description String
-  thumbnail   String
-  categoryId  Int?
-  series      String?
-  userId      String?
-  hint        BigInt    @default(1)
-  usedCount   BigInt    @default(1)
-  collect     BigInt    @default(1)
-  shared      BigInt    @default(1)
-  sort        BigInt    @default(100)
-  isDeleted   Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  user        User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  category    Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  medias      Media[]
-
-  @@index([id])
-  @@index([userId])
-  @@index([categoryId])
+model User {
+  id            String      @id @default(uuid())
+  name          String?
+  nickname      String?
+  email         String?     @unique
+  emailVerified DateTime?
+  password      String?
+  passwordSalt  String?
+  avatar        String?
+  bio           String?
+  sessions      Session[]
+  App           App[]
+  Skills        Skills[]
+  UserBrand     UserBrand[]
 }
 
-model Media {
-  id          String  @id @default(cuid())
-  name        String
-  src         String
-  description String?
-  articleId   String
-  article     Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+model UserBrand {
+  icon String @id @db.VarChar(500)
+  url  String @db.VarChar(200)
+  user String
+  User User   @relation(fields: [user], references: [id], onDelete: Cascade)
 
-  @@index([id])
-  @@index([articleId])
+  @@index([user])
 }
 
 model App {
-  id           String    @id @default(cuid())
-  name         String    @unique
-  icon         String    @db.VarChar(1000)
-  hint         BigInt?   @default(0)
-  url          String    @db.VarChar(200)
-  visiable     Boolean   @default(false)
-  requiresAuth Boolean   @default(false)
-  sort         BigInt    @default(0)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  userId       String?
-  user         User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           Int      @id @default(autoincrement())
+  name         String   @unique
+  icon         String   @db.VarChar(500)
+  url          String   @db.VarChar(200)
+  hint         BigInt?  @default(0)
+  visiable     Boolean  @default(false)
+  requiresAuth Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         String
+  User         User     @relation(fields: [user], references: [id], onDelete: Cascade)
 
-  @@index([id])
-  @@index([userId])
+  @@index([user])
+}
+
+// 定义一个枚举类型
+enum SkillsType {
+  professional
+  language
+  technical
+  software
+  life
+  academic
+  social
+}
+
+model Skills {
+  id        Int         @id @default(autoincrement())
+  name      String      @unique
+  icon      String      @db.VarChar(500)
+  url       String      @db.VarChar(200)
+  visiable  Boolean     @default(false)
+  type      SkillsType  @default(technical)
+  typeName  String      @db.VarChar(100)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  user      String
+  User      User        @relation(fields: [user], references: [id], onDelete: Cascade)
+
+  @@index([user])
 }

@@ -164,9 +164,15 @@
         "visiable": true
     },
     {
-        "name": "XSwipe API",
+        "name": "XSwipe API(Dev)",
         "icon": "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9jMzZlN2UwZDU1NTRjNGFiMmQ2NWU2YzdjYWY2OGRiMz9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.O37XV2RbayE9Yj62zRQxEjS2EQghPrDJtysC0cY65X0",
         "url": "https://sandbox.dtpspartnerapi.backofficeportal.app/docs/index.html",
+        "visiable": true
+    },
+    {
+        "name": "XSwipe API(Prod)",
+        "icon": "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9jMzZlN2UwZDU1NTRjNGFiMmQ2NWU2YzdjYWY2OGRiMz9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.O37XV2RbayE9Yj62zRQxEjS2EQghPrDJtysC0cY65X0",
+        "url": "https://dtpspartnerapi.backofficeportal.app/docs/index.html",
         "visiable": true
     },
     {

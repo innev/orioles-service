@@ -1,33 +1,94 @@
 const { PrismaClient } = require('@prisma/client');
-const appsData = require('../data/json/apps.json');
+const apps = require('../data/json/apps.json');
+const { user, languages, skills, softwares } = require('../data/json/home.json');
 
 const prisma = new PrismaClient();
 
-const main = async () =>{
+const main = async () => {
   console.log('Importing data from JSON...');
 
-  // 遍历 JSON 数据并插入到数据库
-  for (const [index, app] of appsData.entries()) {
-    try {
-      await prisma.app.create({
+  // Create
+  const email = "zhaozhao200295@gmail.com";
+  let userInfo = await prisma.user.findUnique({ where: { email }, select: { id: true } });
+  if (!userInfo) {
+    userInfo = await prisma.user
+      .create({
         data: {
-          name: app.name,
-          icon: app.icon,
-          url: app.url,
-          visiable: app?.visiable||false,
-          requiresAuth: app?.requiresAuth||false,
-          sort: index,
-          // user: {
-          //   connect: { id: 'cljlkvjy1000juzo9dz6drihh' }
-          // },
-        },
-      });
-      console.log(`Inserted app: ${app.name}`);
-    } catch (error) {
-      console.error(`Failed to insert app: ${app.name}`, error);
-    }
+          name: "Innev",
+          email,
+          nickname: user.nickname,
+          avatar: user.avatar,
+          bio: user.bio,
+          UserBrand: { create: user.brands }
+        }
+      })
+      .then(() => {
+        console.log(`User completed!`);
+        return prisma.user.findUnique({ where: { email }, select: { id: true } });
+      })
+      .catch(error => console.error('Failed to insert user:', error));
+  } else {
+    console.log(`User ${userInfo.id} already exists!`)
   }
-  console.log('Data import completed!');
+  
+
+  // Create many app
+  await prisma.app
+    .createMany({
+      data: apps.map(app => ({
+        ...app,
+        user: userInfo.id
+        // User: { connect: { email } }
+      })),
+      skipDuplicates: true
+    })
+    .then(() => console.log(`App import completed!`))
+    .catch(error => console.error(`Failed to insert app.`, error));
+
+  // Create many skills
+  await prisma.skills
+    .createMany({
+      data: languages.children.map(item => ({
+        ...item,
+        type: 'language',
+        typeName: languages.name,
+        user: userInfo.id
+        // User: { connect: { email } }
+      })),
+      skipDuplicates: true
+    })
+    .then(() => console.log(`Language Skills import completed!`))
+    .catch(error => console.error(`Failed to insert language skills.`, error));
+
+  await prisma.skills
+    .createMany({
+      data: skills.children.map(item => ({
+        ...item,
+        type: 'technical',
+        typeName: skills.name,
+        user: userInfo.id
+        // User: { connect: { email } }
+      })),
+      skipDuplicates: true
+    })
+    .then(() => console.log(`Technical Skills import completed!`))
+    .catch(error => console.error(`Failed to insert technical skills.`, error));
+
+  await prisma.skills
+    .createMany({
+      data: softwares.children.map(item => ({
+        ...item,
+        type: 'software',
+        typeName: softwares.name,
+        user: userInfo.id
+        // User: { connect: { email } }
+      })),
+      skipDuplicates: true
+    })
+    .then(() => console.log(`Software Skills import completed!`))
+    .catch(error => console.error(`Failed to insert software skills.`, error));
+
+  console.log('JSON data import completed.');
 };
 
 main()

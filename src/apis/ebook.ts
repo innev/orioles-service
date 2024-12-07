@@ -2,7 +2,7 @@
 import { DBook, DModule } from "@/components/iv-ui/typings/DBook";
 import Axios from "@/utils/Axios";
 
-const axios: Axios = new Axios("");
+const axios: Axios = new Axios();
 
 export const getBookList = async (): Promise<Array<DBook>|undefined> => {
     const { code, data } = await axios.get("/api/ebook/list");

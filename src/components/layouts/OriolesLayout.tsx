@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from '@/providers/AuthProvider';
 import LoginModal from '@/components/LoginModal';
 import { Logos } from '@/components/Icons';
-import Dock, { TDock } from '@/components/client/Dock';
+import Dock, { TDockItem } from '@/components/client/Dock';
 import Toaster from '@/components/client/Toaster';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -28,20 +28,17 @@ type UserBrand = {
     url: string
 };
 export type UserInfo = {
+    id: string,
+    name: string,
     nickname: string,
+    email: string,
     avatar: string,
     bio: string,
-    brands: Array<UserBrand>
-};
-export type UserSetting = {
-    user: UserInfo
-    languages: TDock
-    skills: TDock
-    softwares: TDock
+    UserBrand: Array<UserBrand>
 };
 
-export const Sider = ({ userSetting }: { userSetting: UserSetting }) => {
-    const { user, languages, skills, softwares } = userSetting;
+export const Sider = ({ skills, user }: { skills: Record<string, TDockItem[]> | undefined, user: UserInfo }) => {
+    const { language = [], technical = [], software = [] } = skills||{};
     return (
         <div className='flex flex-col gap-4 md:gap-6'>
             <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-col gap-4 items-center justify-center'>
@@ -54,7 +51,7 @@ export const Sider = ({ userSetting }: { userSetting: UserSetting }) => {
                 </div>
                 <div className='flex flex-row gap-3 items-center justify-center text-lg border-t border-gray-200 py-3 w-full'>
                     {
-                        user.brands.map((brand: UserBrand) => (
+                        user.UserBrand.map((brand: UserBrand) => (
                             <Link href={brand.url} target="_blank" key={brand.url}>
                                 {Logos[brand.icon]({ className: 'text-xl text-gray-500/75 hover:text-gray-700' })}
                             </Link>
@@ -64,7 +61,7 @@ export const Sider = ({ userSetting }: { userSetting: UserSetting }) => {
             </div>
 
             <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
-                {[languages, skills, softwares].map((item, index) => <Dock key={index} {...item}></Dock>)}
+                {[language, technical, software].map((item, index) => <Dock key={index} children={item}></Dock>)}
             </div>
 
             <div className='md:flex hidden flex-col items-center space-y-2 text-gray-500 text-xs'>

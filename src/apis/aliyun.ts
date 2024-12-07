@@ -3,7 +3,7 @@ import { INLSConfig } from "@/utils/NLSClient";
 import session from "@/utils/session";
 import OSS from "ali-oss";
 
-const axios: Axios = new Axios("");
+const axios: Axios = new Axios();
 
 export const getAliNlSToken = async (): Promise<INLSConfig | undefined> => {
     const { code, data } = await axios.get("/api/nls/ali-token");

@@ -2,17 +2,16 @@
 
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import { PrismaClient, SkillsType } from '@prisma/client';
 import CDN from '@/utils/cdn';
 
 export type TDockItem = {
     name: string,
     icon: string,
-    url: string
+    url: string,
+    type: SkillsType,
+    typeName: string
 };
-export type TDock = {
-    name: string,
-    children: Array<TDockItem>
-}
 
 export const DockItem = ({ name, url, icon }: TDockItem) => {
     return (
@@ -25,12 +24,11 @@ export const DockItem = ({ name, url, icon }: TDockItem) => {
     )
 }
 
-export default ({ name, children = [] }: TDock) => {
+export default ({ children = [] }: { children: Array<TDockItem>|undefined }) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const closeModal = () => setIsOpen(false);
     const openModal = () => setIsOpen(true);
-
     return (
         <>
             <div className='flex flex-col gap-2 text-center cursor-pointer' onClick={openModal}>
@@ -39,7 +37,7 @@ export default ({ name, children = [] }: TDock) => {
                         children.length > 0 && <img src={CDN.icon(children[0]?.icon||'')} alt='' />
                     }
                 </div>
-                <span className='text-gray-800 text-xs'>{name}</span>
+                <span className='text-gray-800 text-xs'>{children[0]?.typeName}</span>
             </div>
 
             <Transition appear show={isOpen} as={Fragment}>
@@ -60,13 +58,11 @@ export default ({ name, children = [] }: TDock) => {
                             leaveTo="opacity-0 scale-95"
                         >
                             <div className='w-full md:h-full transition-all transform'>
-                                <p className='text-gray-500 text-lg mb-4 w-fit mx-auto'>{name}</p>
+                                <p className='text-gray-500 text-lg mb-4 w-fit mx-auto'>{children[0]?.typeName}</p>
                                 <div className='bg-white w-full h-full p-6 md:p-8 shadow-xl rounded-2xl overflow-y-scroll'>
                                     <div className=" flex flex-wrap justify-center gap-6 md:gap-10">
                                         {
-                                            children.map((item: TDockItem, index: number) => (
-                                                <DockItem key={index} {...item} />
-                                            ))
+                                            children.map((item: TDockItem, index: number) => <DockItem key={index} {...item} />)
                                         }
                                     </div>
                                 </div>

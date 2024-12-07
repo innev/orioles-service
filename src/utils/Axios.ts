@@ -4,11 +4,11 @@ export default class Axios {
   private instance: AxiosInstance;
   private tokenStoreKey: string;
 
-  constructor(baseURL: string, localStoreKey: string = 'orioles') {
+  constructor(baseURL: string = '', localStoreKey: string = 'orioles') {
     this.tokenStoreKey = `${localStoreKey}.token`;
 
     this.instance = axios.create({
-      baseURL: baseURL,
+      baseURL,
       timeout: 10000, // 设置请求超时时间
       responseType: 'json',
       headers: {

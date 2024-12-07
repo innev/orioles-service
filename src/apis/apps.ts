@@ -1,6 +1,6 @@
 import Axios from "@/utils/Axios";
 
-const axios: Axios = new Axios("");
+const axios: Axios = new Axios();
 
 interface App {
     name: string
