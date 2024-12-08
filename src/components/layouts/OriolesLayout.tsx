@@ -3,7 +3,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from '@/providers/AuthProvider';
 import LoginModal from '@/components/LoginModal';
 import { Logos } from '@/components/Icons';
-import Dock, { TDockItem } from '@/components/client/Dock';
+import Dock from '@/components/client/Dock';
+import { TDockItem } from '@/service/model/skills';
 import Toaster from '@/components/client/Toaster';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
