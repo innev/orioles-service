@@ -2,7 +2,7 @@
 
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import { TDockItem } from '@/service/model/skills';
+import { TDockItem } from '@/service/model/Skills';
 import CDN from '@/utils/cdn';
 
 

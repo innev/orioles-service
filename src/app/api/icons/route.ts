@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { handleApiError } from '@/utils/api-response'
-import { getIcons } from '@/service/model/icons';
+import { getIcons } from '@/service/model/Icon';
 import { map } from 'lodash';
 
 /**

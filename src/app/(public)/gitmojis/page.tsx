@@ -1,7 +1,7 @@
 import AppNav from '@/components/server/AppNav'
 import FullContainer from '@/components/server/Containers'
 import Emoji from './Emoji'
-import { getGitmojis, EmojiProps } from '@/service/model/gitmojis';
+import { getGitmojis, EmojiProps } from '@/service/model/GitMojis';
 
 export const metadata = {
     title: 'An emoji guide for your commit messages',

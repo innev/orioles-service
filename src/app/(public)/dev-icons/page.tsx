@@ -1,6 +1,6 @@
 import CDN from '@/utils/cdn';
 import DevIcon from './DevIcon';
-import { getIcons, DevIconProps } from '@/service/model/icons';
+import { getIcons, DevIconProps } from '@/service/model/Icon';
 
 export default async () => {
 

@@ -35,6 +35,11 @@
                 "url": "https://www.runoob.com/cprogramming/c-tutorial.html"
             },
             {
+                "name": "C++",
+                "icon": "C++",
+                "url": "https://www.runoob.com/cplusplus/cpp-tutorial.html"
+            },
+            {
                 "name": "Java",
                 "icon": "Java",
                 "url": "https://www.java.com"
@@ -105,6 +110,11 @@
                 "url": "https://nextjs.org"
             },
             {
+                "name": "Vercel",
+                "icon": "Vercel",
+                "url": "https://vercel.io"
+            },
+            {
                 "name": "NodeJS",
                 "icon": "NodeJS",
                 "url": "https://nodejs.org"
@@ -158,6 +168,11 @@
                 "name": "CI/CD",
                 "icon": "CircleCI",
                 "url": "https://www.drone.io"
+            },
+            {
+                "name": "Arduino",
+                "icon": "arduino",
+                "url": "https://www.arduino.cc"
             }
         ]
     },
@@ -183,6 +198,16 @@
                 "name": "Git",
                 "icon": "Git",
                 "url": "https://git-scm.com"
+            },
+            {
+                "name": "Mqttx",
+                "icon": "Mqttx",
+                "url": "https://mqttx.app/zh/docs"
+            },
+            {
+                "name": "TIDB",
+                "icon": "TIDB",
+                "url": "https://tidbcloud.com/enterprise/signin/innev"
             }
         ]
     }

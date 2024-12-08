@@ -2,28 +2,12 @@
 
 import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { getApps } from '@/service/apis/apps';
+import { TApp } from '@/service/model/App';
 
-interface App {
-    name: string
-    url: string
-    icon: string
-    visiable: boolean,
-    requiresAuth?: boolean
-};
-
-export default () => {
+export default ({ apps }: { apps: Array<TApp>}) => {
     const { showLoginModal, setShowLoginModal } = useAuth();
 
-    const [ apps, setApps ] = useState<Array<App>|undefined>([]);
-
-    useEffect(() => {
-        getApps().then(setApps);
-    }, []);
-    
-
-    const handleAppClick = (e: React.MouseEvent<HTMLAnchorElement>, app: App) => {
+    const handleAppClick = (e: React.MouseEvent<HTMLAnchorElement>, app: TApp) => {
         if (app?.requiresAuth) {
             e.preventDefault()
             setShowLoginModal(true);
@@ -41,7 +25,7 @@ export default () => {
     return (
         <div className='flex flex-1 flex-row flex-wrap p-8 gap-10'>
             {
-                apps?.map((app: App, index: number) => !app.visiable ? null : (
+                apps?.map((app: TApp, index: number) => !app.visiable ? null : (
                     <div className='flex flex-col items-center gap-3' key={index}>
                         <Link
                             href={app.url}

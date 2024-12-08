@@ -2,7 +2,7 @@
 
 import toast from "react-hot-toast";
 import ImageSkeleton from "@/components/client/ImageSkeleton";
-import { DevIconProps } from '@/service/model/icons';
+import { DevIconProps } from '@/service/model/Icon';
 
 export default ({ icon }: { icon: DevIconProps }) => {
 

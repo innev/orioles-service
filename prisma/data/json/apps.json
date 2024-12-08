@@ -21,7 +21,7 @@
         "name": "TIDB",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e4/83/d4/e483d421-265c-0129-b6b4-f3211fff7123/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/460x0w.webp",
         "url": "https://tidbcloud.com/enterprise/signin/innev",
-        "visiable": true
+        "visiable": false
     },
     {
         "name": "股市",
@@ -137,7 +137,7 @@
         "name": "mqttx",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3f/3a/65/3f3a6572-cedd-0406-6350-51960183856c/AppIcon-purple-AI-0-2x_U007euniversal-0-4-85-220-0.png/460x0w.webp",
         "url": "https://mqttx.app/zh/docs",
-        "visiable": true
+        "visiable": false
     },
     {
         "name": "汇星科技",
