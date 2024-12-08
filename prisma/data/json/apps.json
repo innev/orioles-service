@@ -18,12 +18,6 @@
         "visiable": true
     },
     {
-        "name": "TIDB",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e4/83/d4/e483d421-265c-0129-b6b4-f3211fff7123/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/460x0w.webp",
-        "url": "https://tidbcloud.com/enterprise/signin/innev",
-        "visiable": false
-    },
-    {
         "name": "股市",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/e1/38/69/e1386957-0bcc-7314-6746-23b96a2c05bb/AppIcon-0-0-1x_U007emarketing-0-0-0-8-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp",
         "url": "/stock",
@@ -33,23 +27,29 @@
         "name": "基金",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e8/b6/f1/e8b6f1ba-b9c2-8463-cfed-37f4868e05e7/AppIcon-0-0-1x_U007emarketing-0-10-0-0-85-220.jpeg/230x0w.webp",
         "url": "/fund",
-        "visiable": false
+        "visiable": true
+    },
+    {
+        "name": "ETF",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/64/fe/e3/64fee350-f578-85ed-7ce1-1ad75e8721f1/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/460x0w.webp",
+        "url": "/etf",
+        "visiable": true
     },
     {
         "name": "短视频",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Tiktok.svg",
+        "icon": "https://d.innev.cn/icons/1.0.0/Tiktok.svg",
         "url": "/video",
         "visiable": false
     },
     {
         "name": "Rainbow",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Rainbow.svg",
+        "icon": "https://d.innev.cn/icons/1.0.0/Rainbow.svg",
         "url": "/rainbow",
         "visiable": false
     },
     {
         "name": "博客",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/JianShu.svg",
+        "icon": "https://d.innev.cn/icons/1.0.0/JianShu.svg",
         "url": "https://www.jianshu.com/u/a550becfc3f1",
         "visiable": true
     },
@@ -60,6 +60,12 @@
         "visiable": true
     },
     {
+        "name": "Remixicon",
+        "icon": "https://d.innev.cn/icons/1.0.0/Remixicon.svg",
+        "url": "https://remixicon.com",
+        "visiable": true
+    },
+    {
         "name": "相册",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/9c/be/25/9cbe25e9-4fc6-2c25-d4b3-b06aefe9f96f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp",
         "url": "/photo",
@@ -67,7 +73,7 @@
     },
     {
         "name": "Git 表情",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitEmojis.svg",
+        "icon": "https://d.innev.cn/icons/1.0.0/GitEmojis.svg",
         "url": "/gitmojis",
         "visiable": true
     },
@@ -123,21 +129,21 @@
     },
     {
         "name": "Rancher",
-        "icon": "https://www.rancher.com/assets/img/logos/rancher-suse-logo-horizontal-color.svg",
+        "icon": "https://d.innev.cn/icons/1.0.0/Rancher.svg",
         "url": "https://www.rancher.com",
         "visiable": true
     },
     {
         "name": "Rancher Desktop",
-        "icon": "https://docs.rancherdesktop.io/img/logo.svg",
+        "icon": "https://d.innev.cn/icons/1.0.0/RancherDesktop.svg",
         "url": "https://docs.rancherdesktop.io",
         "visiable": true
     },
     {
-        "name": "mqttx",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3f/3a/65/3f3a6572-cedd-0406-6350-51960183856c/AppIcon-purple-AI-0-2x_U007euniversal-0-4-85-220-0.png/460x0w.webp",
-        "url": "https://mqttx.app/zh/docs",
-        "visiable": false
+        "name": "SVG Editor",
+        "icon": "https://d.innev.cn/icons/1.0.0/SVGEditor.svg",
+        "url": "https://www.jyshare.com/more/svgeditor",
+        "visiable": true
     },
     {
         "name": "汇星科技",

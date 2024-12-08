@@ -10,8 +10,8 @@
                 "icon": "telegram",
                 "url": "#"
             }, {
-                "icon": "twitter",
-                "url": "#"
+                "icon": "x",
+                "url": "https://x.com/JunzhaoSun"
             }, {
                 "icon": "tiktok",
                 "url": "https://www.douyin.com/user/MS4wLjABAAAAuMw5gTp3HXiXngGfWKIRTvcr0qCeub13tDCDQTfrx9A"
@@ -171,7 +171,7 @@
             },
             {
                 "name": "Arduino",
-                "icon": "arduino",
+                "icon": "Arduino",
                 "url": "https://www.arduino.cc"
             }
         ]

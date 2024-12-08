@@ -1,5 +1,5 @@
 <p align="center">
-  <!-- <img width="140" src="https://cdn.jsdelivr.net/gh/innev/cdn@main/logo.png" />   -->
+  <img width="140" src="https://d.innev.cn/logo/orioles.svg" />  
   <h2 align="center">Innev's Personal Website 🐬</h2>
   <p align="center">Lightweight full stack web application development</p>
 </p>

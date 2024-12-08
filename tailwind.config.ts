@@ -1,5 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss"
+
+export default {
+  darkMode: ["class"],
   content: [
     './src/**/*.{js,ts,jsx,tsx}',
     "./app/**/*.{js,ts,jsx,tsx}",
@@ -7,10 +9,15 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      skew: {
-        '10': '10deg',
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
       },
+    },
+    extend: {
+      skew: { '10': '10deg' },
       fontFamily: {
         times: ['TimesNewRomanPS-BoldMT', 'TimesNewRomanPS'],
         tic: ['TimesNewRomanPSMT'],
@@ -18,7 +25,21 @@ module.exports = {
         word: ['STYuanti-SC-Bold', 'STYuanti-SC'],
         ipa: ['CBIPA']
       },
-      typography: (theme) => ({
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      typography: (theme: any) => ({
         DEFAULT: {
           css: {
             a: {
@@ -47,6 +68,7 @@ module.exports = {
     },
   },
   plugins: [
-    // require('@tailwindcss/typography')
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography")
   ],
-};
+} satisfies Config;

@@ -53,7 +53,7 @@ export const Sider = ({ skills, user }: { skills: Record<string, TDockItem[]> | 
                 <div className='flex flex-row gap-3 items-center justify-center text-lg border-t border-gray-200 py-3 w-full'>
                     {
                         user.UserBrand.map((brand: UserBrand) => (
-                            <Link href={brand.url} target="_blank" key={brand.url}>
+                            <Link href={brand.url} target="_blank" key={brand.icon}>
                                 {Logos[brand.icon]({ className: 'text-xl text-gray-500/75 hover:text-gray-700' })}
                             </Link>
                         ))

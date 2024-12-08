@@ -1,6 +1,6 @@
-### 友情链接
-- [程序员DD](https://blog.didispace.com/)
-- [芋道源码](https://www.iocoder.cn/)
+<!-- ### 友情链接 -->
+<!-- - [程序员DD](https://blog.didispace.com/)
+- [芋道源码](https://www.iocoder.cn/) -->
 
 ### 申请友链
 

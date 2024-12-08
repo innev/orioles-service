@@ -39,13 +39,10 @@ export const XIcon = ({ fill = 'currentColor', size = 24, ...props }) => {
             width={size}
             height={size}
             viewBox="0 0 24 24"
-            fill="none"
+            fill={fill}
             {...props}
         >
-            <path
-                d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"
-                fill={fill}
-            />
+            <path d="M10.4883 14.651L15.25 21H22.25L14.3917 10.5223L20.9308 3H18.2808L13.1643 8.88578L8.75 3H1.75L9.26086 13.0145L2.31915 21H4.96917L10.4883 14.651ZM16.25 19L5.75 5H7.75L18.25 19H16.25Z" />
         </svg>
     )
 }
@@ -195,75 +192,7 @@ export const LicenseIcon = ({ fill = 'currentColor', size = 16, ...props }) => {
 }
 
 export const Loading = ({ ...props }) => {
-    // return <img src={"https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/loading.svg"} {...props} />
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg"
-            // xmlns:xlink="http://www.w3.org/1999/xlink"
-            // style="margin: auto; background: rgba(255, 255, 255, 0); display: block;"
-            width="240px" height="240px" viewBox="0 0 100 100"
-            preserveAspectRatio="xMidYMid"
-            {...props}
-        >
-            <defs>
-                <filter id="ldio-644utclqlpq-filter" x="-100%" y="-100%" width="300%" height="300%" color-interpolation-filters="sRGB">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="3.2"></feGaussianBlur>
-                    <feComponentTransfer result="cutoff">
-                        <feFuncA type="table" tableValues="0 0 0 0 0 0 1 1 1 1 1"></feFuncA>
-                    </feComponentTransfer>
-                </filter>
-            </defs>
-            <g filter="url(#ldio-644utclqlpq-filter)"><g transform="translate(50 50)">
-                <g>
-                    <circle cx="24" cy="0" r="5" fill="#e6261f">
-                        <animate attributeName="r" keyTimes="0;0.5;1" values="4.8;11.2;4.8" dur="6.25s" repeatCount="indefinite" begin="-0.16s"></animate>
-                    </circle>
-                    <animateTransform attributeName="transform" type="rotate" keyTimes="0;1" values="0;360" dur="6.25s" repeatCount="indefinite" begin="0s"></animateTransform>
-                </g>
-            </g><g transform="translate(50 50)">
-                    <g>
-                        <circle cx="24" cy="0" r="5" fill="#eb7532">
-                            <animate attributeName="r" keyTimes="0;0.5;1" values="4.8;11.2;4.8" dur="3.125s" repeatCount="indefinite" begin="-0.13714285714285715s"></animate>
-                        </circle>
-                        <animateTransform attributeName="transform" type="rotate" keyTimes="0;1" values="0;360" dur="3.125s" repeatCount="indefinite" begin="-0.022857142857142857s"></animateTransform>
-                    </g>
-                </g><g transform="translate(50 50)">
-                    <g>
-                        <circle cx="24" cy="0" r="5" fill="#f7d038">
-                            <animate attributeName="r" keyTimes="0;0.5;1" values="4.8;11.2;4.8" dur="2.0833333333333335s" repeatCount="indefinite" begin="-0.1142857142857143s"></animate>
-                        </circle>
-                        <animateTransform attributeName="transform" type="rotate" keyTimes="0;1" values="0;360" dur="2.0833333333333335s" repeatCount="indefinite" begin="-0.045714285714285714s"></animateTransform>
-                    </g>
-                </g><g transform="translate(50 50)">
-                    <g>
-                        <circle cx="24" cy="0" r="5" fill="#a3e048">
-                            <animate attributeName="r" keyTimes="0;0.5;1" values="4.8;11.2;4.8" dur="1.5625s" repeatCount="indefinite" begin="-0.09142857142857143s"></animate>
-                        </circle>
-                        <animateTransform attributeName="transform" type="rotate" keyTimes="0;1" values="0;360" dur="1.5625s" repeatCount="indefinite" begin="-0.06857142857142857s"></animateTransform>
-                    </g>
-                </g><g transform="translate(50 50)">
-                    <g>
-                        <circle cx="24" cy="0" r="5" fill="#49da9a">
-                            <animate attributeName="r" keyTimes="0;0.5;1" values="4.8;11.2;4.8" dur="1.25s" repeatCount="indefinite" begin="-0.06857142857142857s"></animate>
-                        </circle>
-                        <animateTransform attributeName="transform" type="rotate" keyTimes="0;1" values="0;360" dur="1.25s" repeatCount="indefinite" begin="-0.09142857142857143s"></animateTransform>
-                    </g>
-                </g><g transform="translate(50 50)">
-                    <g>
-                        <circle cx="24" cy="0" r="5" fill="#34bbe6">
-                            <animate attributeName="r" keyTimes="0;0.5;1" values="4.8;11.2;4.8" dur="1.0416666666666667s" repeatCount="indefinite" begin="-0.045714285714285714s"></animate>
-                        </circle>
-                        <animateTransform attributeName="transform" type="rotate" keyTimes="0;1" values="0;360" dur="1.0416666666666667s" repeatCount="indefinite" begin="-0.1142857142857143s"></animateTransform>
-                    </g>
-                </g><g transform="translate(50 50)">
-                    <g>
-                        <circle cx="24" cy="0" r="5" fill="#4355db">
-                            <animate attributeName="r" keyTimes="0;0.5;1" values="4.8;11.2;4.8" dur="0.8928571428571428s" repeatCount="indefinite" begin="-0.022857142857142857s"></animate>
-                        </circle>
-                        <animateTransform attributeName="transform" type="rotate" keyTimes="0;1" values="0;360" dur="0.8928571428571428s" repeatCount="indefinite" begin="-0.13714285714285715s"></animateTransform>
-                    </g>
-                </g></g>
-        </svg>
-    );
+    return <img src={"https://d.innev.cn/icons/1.0.0/loading.svg"} {...props} />
 }
 
 export const GoogleIcon = ({ fill = 'currentColor', size = 100, ...props }) => {
@@ -413,8 +342,8 @@ export const TelegramIcon = ({ fill = 'currentColor', size = 24, ...props }) => 
 
 export const Logos = {
     github: (props: React.SVGProps<SVGSVGElement>) => <GithubIcon {...props} size={20} />,
-    twitter: (props: React.SVGProps<SVGSVGElement>) => <TwitterIcon {...props} />,
+    x: (props: React.SVGProps<SVGSVGElement>) => <XIcon {...props} />,
     tiktok: (props: React.SVGProps<SVGSVGElement>) => <TiktokIcon {...props} />,
     youtube: (props: React.SVGProps<SVGSVGElement>) => <YoutubeIcon {...props} />,
-    telegram:  (props: React.SVGProps<SVGSVGElement>) => <TelegramIcon {...props} />,
+    telegram:  (props: React.SVGProps<SVGSVGElement>) => <TelegramIcon {...props} />
 }

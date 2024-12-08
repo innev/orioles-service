@@ -8,8 +8,11 @@ Innev，目前在广州工作，全栈工程师。
 
 ### 意见反馈
 
-如果您访问本站遇到什么问题，或者您对本站的设计、交互体验有任何建议，都可以通过以下联系方式联系作者。也可以通过 [Github Issue](https://github.com/innev/anoyi/issues) 直接反馈。
+如果您访问本站遇到什么问题，或者您对本站的设计、交互体验有任何建议，都可以通过以下联系方式联系作者。也可以通过 [Github Issue](https://github.com/innev/orioles-service/issues) 直接反馈。
 
 ### 联系方式
-- 微信：`binghe300`
-- 邮箱：`393715354@qq.com`
+
+- 微信：
+![微信](/weixin.png)
+
+- [发送邮件给我: 393715354@qq.com](mailto:393715354@qq.com)

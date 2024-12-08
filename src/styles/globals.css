@@ -8,7 +8,7 @@ md	768px	@media (min-width: 768px) { ... }
 lg	1024px	@media (min-width: 1024px) { ... }
 xl	1280px	@media (min-width: 1280px) { ... }
 2xl	1536px	@media (min-width: 1536px) { ... } */
-
+/* 
 @font-face {
   font-family: 'CBIPA';
   src: url('/assets/fonts/VEXSHG+CBIPA.ttf') format('truetype');
@@ -68,10 +68,10 @@ code {
   font-size: 1.1rem;
   font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
     DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-}
+} */
 
 /* smil */
-@keyframes smil-scan {
+/* @keyframes smil-scan {
   0% {
     background-size: 0 100%;
   }
@@ -86,4 +86,4 @@ a.smil-text {
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-size: 0 100%;
-}
+} */

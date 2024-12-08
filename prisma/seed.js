@@ -1,6 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const apps = require('./data/json/apps.json');
-const { user, languages, skills, softwares } = require('./data/json/home.json');
+const { user, languages, skills, softwares } = require('./data/json/skills.json');
 const icons = require('./data/json/icons.json');
 const gitmojis = require('./data/json/gitmojis.json');
 const githubColors = require('./data/json/github-colors.json');

@@ -2,9 +2,7 @@
 
 import { Dispatch, ReactNode, SetStateAction, useCallback, useMemo, useState } from "react";
 import { signIn } from 'next-auth/react';
-// import { signIn } from '@/lib/auth';
 import Image from "next/image";
-// import { useTranslation } from "next-i18next";
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/providers/AuthProvider';
 import LoadingDots from "@/components/iv-ui/LoadingDots";
@@ -51,7 +49,6 @@ export default () => {
     if (result?.ok) {
       setShowLoginModal(false)
     } else {
-      // Handle error
       console.error('Login failed')
     }
   }
