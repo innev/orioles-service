@@ -1,4 +1,4 @@
-import { getArticleList } from '@/service/apis/wechat';
+import { getArticleList } from '@/service/wechat';
 import DArticle from '@/components/iv-ui/typings/DArticle';
 import AdminLayout from '@/components/layouts/AdminLayout';
 import { ReactNode, useEffect, useState } from 'react';

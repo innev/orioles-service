@@ -1,6 +1,6 @@
 'use client'
 
-import { getModuleDetail } from '@/service/apis/ebook';
+import { getModuleDetail } from '@/service/ebook';
 import SpeechProcess from '@/components/SpeechProcess';
 import ToolBar from '@/components/ToolBar';
 import { Spin, Tree } from '@/components/iv-ui';

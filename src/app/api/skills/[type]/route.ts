@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { SkillsType } from '@prisma/client';
 import { handleApiError } from '@/utils/api-response'
-import { getSkillsByType } from '@/service/model/Skills';
+import { getSkillsByType } from '@/model/Skills';
 
 /**
  * app/api 中的GET方法

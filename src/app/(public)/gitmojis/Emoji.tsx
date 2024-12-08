@@ -1,7 +1,7 @@
 'use client';
 
 import toast from "react-hot-toast";
-import { EmojiProps } from '@/service/model/GitMojis';
+import { EmojiProps } from '@/model/GitMojis';
 
 export default function Emoji({ emoji }: { emoji: EmojiProps }) {
 

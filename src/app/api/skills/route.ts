@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { handleApiError } from '@/utils/api-response'
-import { getSkills, TDockItem } from '@/service/model/Skills';
+import { getSkills, TDockItem } from '@/model/Skills';
 
 /**
  * 获取详情

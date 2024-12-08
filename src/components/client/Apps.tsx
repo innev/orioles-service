@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
-import { TApp } from '@/service/model/App';
+import { TApp } from '@/model/App';
 
 export default ({ apps }: { apps: Array<TApp>}) => {
     const { showLoginModal, setShowLoginModal } = useAuth();

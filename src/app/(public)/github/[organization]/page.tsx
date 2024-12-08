@@ -3,7 +3,7 @@ import AppNav from "@/components/server/AppNav";
 import FullContainer from "@/components/server/Containers";
 import Repos from "./Repos";
 import { TParams } from "./type";
-import { getGithubColors } from "@/service/model/GithubColor";
+import { getGithubColors } from "@/model/GithubColor";
 
 const _genTitle = (params: TParams): string => {
     const organization = params.organization.charAt(0).toUpperCase() + params.organization.slice(1);
