@@ -2,16 +2,9 @@
 
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import { PrismaClient, SkillsType } from '@prisma/client';
+import { TDockItem } from '@/service/model/skills';
 import CDN from '@/utils/cdn';
 
-export type TDockItem = {
-    name: string,
-    icon: string,
-    url: string,
-    type: SkillsType,
-    typeName: string
-};
 
 export const DockItem = ({ name, url, icon }: TDockItem) => {
     return (

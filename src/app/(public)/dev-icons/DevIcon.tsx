@@ -2,13 +2,9 @@
 
 import toast from "react-hot-toast";
 import ImageSkeleton from "@/components/client/ImageSkeleton";
+import { DevIconProps } from '@/service/model/icons';
 
-export type DevIconProps = {
-    name: string
-    url: string
-}
-
-export default function DevIcon({ icon }: { icon: DevIconProps }) {
+export default ({ icon }: { icon: DevIconProps }) => {
 
     const copyName = (text: string) => {
         navigator.clipboard.writeText(text)
@@ -20,7 +16,7 @@ export default function DevIcon({ icon }: { icon: DevIconProps }) {
             className="icon-card"
             onClick={() => copyName(icon.name.toLowerCase())}
         >
-            <ImageSkeleton src={icon.url} className='icon-image' />
+            <ImageSkeleton src={icon?.url||''} className='icon-image' />
             <p className="text-sm">{icon.name}</p>
         </div>
     )

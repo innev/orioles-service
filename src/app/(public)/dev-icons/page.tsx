@@ -1,24 +1,21 @@
-import CDN from '@/utils/cdn'
-import http from '@/utils/http'
-import DevIcon, { DevIconProps } from './DevIcon'
+import CDN from '@/utils/cdn';
+import DevIcon from './DevIcon';
+import { getIcons, DevIconProps } from '@/service/model/icons';
 
-export default async function Page() {
+export default async () => {
 
-    const iconNames: string[] = await http.getAll('https://icons.anoyi.com/api/icons')
-
-    const icons = iconNames.filter(item => item.toLowerCase()).map(item => ({
-        name: item,
-        url: CDN.icon(item)
-    }))
-
+    const icons: DevIconProps[] = await getIcons();
     return (
         <div className='p-6 w-fit'>
             <div className="flex flex-row flex-wrap gap-2">
                 {
-                    icons.map((item: DevIconProps) => <DevIcon key={item.name} icon={item} />)
+                    icons.map((item: DevIconProps) => {
+                        item.url = CDN.icon(item.name);
+                        item.name = item.name.toLowerCase();
+                        return <DevIcon key={item.name} icon={item} />
+                    })
                 }
             </div>
         </div>
     )
-
 }

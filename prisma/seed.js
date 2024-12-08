@@ -1,6 +1,9 @@
 const { PrismaClient } = require('@prisma/client');
-const apps = require('../data/json/apps.json');
-const { user, languages, skills, softwares } = require('../data/json/home.json');
+const apps = require('./data/json/apps.json');
+const { user, languages, skills, softwares } = require('./data/json/home.json');
+const icons = require('./data/json/icons.json');
+const gitmojis = require('./data/json/gitmojis.json');
+const githubColors = require('./data/json/github-colors.json');
 
 const prisma = new PrismaClient();
 
@@ -87,6 +90,32 @@ const main = async () => {
     })
     .then(() => console.log(`Software Skills import completed!`))
     .catch(error => console.error(`Failed to insert software skills.`, error));
+
+  /*===================================ICONS==============================================*/
+  await prisma.icon
+    .createMany({
+      data: icons.map(name => ({ name })),
+      skipDuplicates: true
+    })
+    .then(() => console.log(`Icons import completed!`))
+    .catch(error => console.error(`Failed to insert icons.`, error));
+
+  await prisma.gitMojis
+    .createMany({
+      data: gitmojis,
+      skipDuplicates: true
+    })
+    .then(() => console.log(`Gitmojis import completed!`))
+    .catch(error => console.error(`Failed to insert gitmojis.`, error));
+
+  await prisma.githubColor
+    .createMany({
+      data: Object.keys(githubColors).map(name => ({ name, color: githubColors[name] })),
+      skipDuplicates: true
+    })
+    .then(() => console.log(`Github colors import completed!`))
+    .catch(error => console.error(`Failed to insert github colors.`, error));
+
 
   console.log('JSON data import completed.');
 };

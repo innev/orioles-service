@@ -1,11 +1,11 @@
 'use client'
 
-import InfiniteScroll from "react-infinite-scroll-component"
-import useSWRInfinite from 'swr/infinite'
-import { ForkIcon, IssueIcon, LicenseIcon, Loading, StarIcon } from "@/components/Icons"
-import ImageSkeleton from "@/components/client/ImageSkeleton"
-import http from "@/utils/http"
-import { TRepo } from "./type"
+import InfiniteScroll from "react-infinite-scroll-component";
+import useSWRInfinite from 'swr/infinite';
+import { ForkIcon, IssueIcon, LicenseIcon, Loading, StarIcon } from "@/components/Icons";
+import ImageSkeleton from "@/components/client/ImageSkeleton";
+import http from "@/utils/http";
+import { TRepo } from "./type";
 
 
 export default function Repos({ colors, organization }: { colors: { [key: string]: string }, organization: string }) {
@@ -43,7 +43,7 @@ export default function Repos({ colors, organization }: { colors: { [key: string
                                 {
                                     item.language && (
                                         <div className="cursor-default">
-                                            <span className="px-2 py-1 rounded-full mr-1 text-white" style={Object.keys(colors).includes(item.language) ? { backgroundColor: colors[item.language] } : {}}>
+                                            <span className="px-2 py-1 rounded-full mr-1 text-white" style={colors[item.language] ? { backgroundColor: colors[item.language] } : {}}>
                                                 {item.language}
                                             </span>
                                         </div>

@@ -1,4 +1,4 @@
-import { getAliSTS } from "@/apis/aliyun";
+import { getAliSTS } from "@/service/apis/aliyun";
 import OSS from 'ali-oss';
 import { generateUUID, randomID } from ".";
 import './extensions/string';

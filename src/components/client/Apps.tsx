@@ -3,7 +3,7 @@
 import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { getApps } from '@/apis/apps';
+import { getApps } from '@/service/apis/apps';
 
 interface App {
     name: string

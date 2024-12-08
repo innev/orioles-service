@@ -1,4 +1,4 @@
-import { getAliNlSToken } from "@/apis/aliyun";
+import { getAliNlSToken } from "@/service/apis/aliyun";
 import NLSClient, { INLSConfig, SpeakerVoiceCn, SpeakerVoiceEn, SpeakerVoiceUs } from "@/utils/NLSClient";
 import { useState } from "react";
 

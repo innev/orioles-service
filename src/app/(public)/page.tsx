@@ -1,8 +1,8 @@
 import { Sider } from '@/components/layouts/OriolesLayout';
 import FullContainer from '@/components/server/Containers';
 import Apps from '@/components/client/Apps';
-import { getSkills } from '@/apis/server/skills';
-import { getUserInfo } from '@/apis/server/user';
+import { getSkills } from '@/service/model/skills';
+import { getUserInfo } from '@/service/model/user';
 
 export default async () => {
     const skills = await getSkills();

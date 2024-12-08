@@ -79,17 +79,45 @@ enum SkillsType {
 }
 
 model Skills {
-  id        Int         @id @default(autoincrement())
-  name      String      @unique
-  icon      String      @db.VarChar(500)
-  url       String      @db.VarChar(200)
-  visiable  Boolean     @default(false)
-  type      SkillsType  @default(technical)
-  typeName  String      @db.VarChar(100)
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  icon      String     @db.VarChar(500)
+  url       String     @db.VarChar(200)
+  visiable  Boolean    @default(false)
+  type      SkillsType @default(technical)
+  typeName  String     @db.VarChar(100)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   user      String
-  User      User        @relation(fields: [user], references: [id], onDelete: Cascade)
+  User      User       @relation(fields: [user], references: [id], onDelete: Cascade)
 
   @@index([user])
+}
+
+// Isons
+model Icon {
+  name String @unique
+
+  @@index([name])
+}
+
+// gitmojis
+model GitMojis {
+  name        String  @unique
+  code        String  @db.VarChar(50)
+  emoji       String  @db.VarChar(50)
+  entity      String  @db.VarChar(50)
+  description String  @db.VarChar(200)
+  semver      String?
+  color       String
+
+  @@index([name])
+}
+
+// Github colors
+model GithubColor {
+  name        String  @unique
+  color       String
+
+  @@index([name])
 }

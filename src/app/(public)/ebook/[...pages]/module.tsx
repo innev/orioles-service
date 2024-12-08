@@ -1,6 +1,6 @@
 'use client'
 
-import { getBookDetail } from '@/apis/ebook';
+import { getBookDetail } from '@/service/apis/ebook';
 import ModuleCarousel from '@/components/ModuleCarousel';
 import ToolBar from '@/components/ToolBar';
 import { Spin } from '@/components/iv-ui';

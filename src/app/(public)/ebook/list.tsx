@@ -1,6 +1,6 @@
 'use client';
 
-import { getBookList } from '@/apis/ebook';
+import { getBookList } from '@/service/apis/ebook';
 import { DBook } from '@/components/iv-ui/typings/DBook';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';

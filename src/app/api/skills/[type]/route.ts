@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, SkillsType } from '@prisma/client';
 import { handleApiError } from '@/utils/api-response'
-import { TDockItem } from '@/components/client/Dock';
-import { groupBy } from 'lodash';
+import { getSkillsByType } from '@/service/model/skills';
+
+/**
+ * app/api 中的GET方法
+ */
+interface RouteParams {
+  params: { type: SkillsType }
+};
 
 /**
  * 获取详情
@@ -10,23 +16,11 @@ import { groupBy } from 'lodash';
  * @param {Object} payload
  * @property {RouteParams} [payload.param]
  */
-export async function GET(_: NextRequest) {
-  const prisma = new PrismaClient();
-
+export const GET = async (_: NextRequest, { params }: RouteParams) => {
   try {
-    const data: Array<TDockItem> = await prisma.skills.findMany({
-      select: {
-        name: true,
-        url: true,
-        icon: true,
-        visiable: true,
-        type: true,
-        typeName: true
-      }
-    });
     return NextResponse.json({
       code: 200,
-      data: groupBy(data, 'type'),
+      data: await getSkillsByType(params.type),
       mas: '请求成功'
     });
 

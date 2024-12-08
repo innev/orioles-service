@@ -1,16 +1,7 @@
 'use client';
 
 import toast from "react-hot-toast";
-
-export interface EmojiProps {
-    emoji: string
-    entity: string
-    code: string
-    description: string
-    name: string
-    semver: string | null
-    color: string
-}
+import { EmojiProps } from '@/service/model/gitmojis';
 
 export default function Emoji({ emoji }: { emoji: EmojiProps }) {
 
