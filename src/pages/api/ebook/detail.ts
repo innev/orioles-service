@@ -14,6 +14,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).json({
         code: 200,
         data,
-        mas: '请求成功'  
+        msg: '请求成功'  
     });
 };

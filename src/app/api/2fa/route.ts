@@ -24,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         code: 200,
         size: data.length,
         data: data.slice(0, (Number(req.query.pageIndex) + 1) * Number(req.query.pageSize)),
-        mas: '请求成功'  
+        msg: '请求成功'  
     });
 };
 */
@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({
             code: 200,
             data: data.slice(0, (pageIndex + 1) * pageSize),
-            mas: '请求成功'
+            msg: '请求成功'
         });
 
     } catch (error) {

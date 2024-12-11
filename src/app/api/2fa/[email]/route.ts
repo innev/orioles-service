@@ -31,7 +31,7 @@ export async function GET(_: NextRequest, { params }: RouteParams) {
                 break;
             }
         }
-        return NextResponse.json({ code: 200, data, mas: '请求成功'});
+        return NextResponse.json({ code: 200, data, msg: '请求成功'});
 
     } catch (error) {
         return NextResponse.json(
@@ -68,7 +68,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 export async function DELETE(_: NextRequest, { params }: RouteParams) {
   try {
     console.debug("删除的Email:", params.email);
-    return NextResponse.json({ success: true }, { status: 200 })
+    return NextResponse.json({ success: true }, { code: 200 })
   } catch (error) {
     return NextResponse.json(
       handleApiError(error),

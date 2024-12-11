@@ -1,4 +1,14 @@
 const http = {
+  find_: async (url: string, init?: RequestInit) => {
+    const resp = await fetch(url, init);
+    if (resp.status == 200) {
+      const { code, data, message } = await resp.json();
+      if(code == 200) return data;
+      throw new Error(message);
+    } else {
+      throw new Error('请求失败');
+    }
+  },
 
   get: async (url: string, init?: RequestInit) => {
     const resp = await fetch(url, init)
@@ -16,7 +26,7 @@ const http = {
   getAll: async (url: string, init?: RequestInit) => {
     const resp = await fetch(url, init)
     if (resp.status == 200) {
-      return await resp.json()
+      return resp.json();
     } else {
       throw new Error('请求失败')
     }

@@ -2,7 +2,7 @@
 
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { XIcon } from '@/components/Icons'
+import { CloseIcon } from '@/components/Icons'
 import { TPhoto } from './type'
 
 export type PhotoModalProps = {
@@ -34,7 +34,7 @@ export default function PhotoModal({ isOpen, photo, onClose }: PhotoModalProps) 
                         <div className='flex flex-col h-full transition-all transform'>
                             <div className='flex-none h-10 bg-black bg-opacity-90 px-4'>
                                 <div className='flex flex-row h-full justify-end items-center'>
-                                    <XIcon className="fa-solid fa-xmark w-6 h-6 text-gray-400 cursor-pointer" onClick={onClose} />
+                                    <CloseIcon className="fa-solid fa-xmark w-6 h-6 text-gray-400 cursor-pointer" onClick={onClose} />
                                 </div>
                             </div>
                             <div className='flex h-full items-center justify-center'>

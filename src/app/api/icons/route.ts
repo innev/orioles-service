@@ -12,7 +12,7 @@ export const GET = async (_: NextRequest) => {
     return NextResponse.json({
       code: 200,
       data: await getIcons().then(_d => map(_d, 'name')),
-      mas: '请求成功'
+      msg: '请求成功'
     });
 
   } catch (error) {

@@ -21,7 +21,7 @@ export const GET = async (_: NextRequest, { params }: RouteParams) => {
     return NextResponse.json({
       code: 200,
       data: await getSkillsByType(params.type),
-      mas: '请求成功'
+      msg: '请求成功'
     });
 
   } catch (error) {

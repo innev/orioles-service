@@ -36,8 +36,7 @@ export const SH = {
     S1: '持有天数≥30天',
 }
 
-export default function Funds() {
-
+export default () => {
     const limit = 20
     const keys = [...Object.keys(TYPE), ...Object.keys(RISKLEVEL), ...Object.keys(SH)]
     const values = Array.from({ length: keys.length }, _ => false)
@@ -85,7 +84,7 @@ export default function Funds() {
             }
             setLoading(false)
         })
-    }, [query])
+    }, [query]);
 
     useEffect(() => {
         if (initialRender.current) {

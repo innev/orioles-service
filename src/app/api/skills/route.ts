@@ -12,7 +12,7 @@ export const GET = async (_: NextRequest) => {
     return NextResponse.json({
       code: 200,
       data,
-      mas: '请求成功'
+      msg: '请求成功'
     });
 
   } catch (error) {

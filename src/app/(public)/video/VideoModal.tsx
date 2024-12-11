@@ -2,7 +2,7 @@
 
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef } from 'react'
-import { XIcon } from '@/components/Icons'
+import { CloseIcon } from '@/components/Icons'
 
 type VideoModalProps = {
     isOpen: boolean
@@ -56,7 +56,7 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
                         <div className='max-w-4xl mx-auto h-full transition-all transform'>
                             <div className='w-full h-full flex flex-col items-center justify-center'>
                                 <div className='relative w-full'>
-                                    <XIcon className="fa-solid fa-xmark absolute -top-8 right-1 lg:top-0 lg:-right-8 h-8 w-8 cursor-pointer text-gray-100" onClick={onClose} />
+                                    <CloseIcon className="fa-solid fa-xmark absolute -top-8 right-1 lg:top-0 lg:-right-8 h-8 w-8 cursor-pointer text-gray-100" onClick={onClose} />
                                 </div>
                                 <video ref={videoRef} controls className='w-full max-h-[520px] bg-black rounded-lg outline-0 shadow shadow-gray-900' /> 
                             </div>

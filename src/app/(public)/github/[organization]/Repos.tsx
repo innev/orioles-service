@@ -9,7 +9,6 @@ import { TRepo } from "./type";
 
 
 export default function Repos({ colors, organization }: { colors: { [key: string]: string }, organization: string }) {
-
     const limit = 12
     const genAPI = (page: number) => `https://api.github.com/users/${organization === 'stars' ? 'innev/starred' : `${organization}/repos`}?page=${page + 1}&per_page=${limit}`;
     

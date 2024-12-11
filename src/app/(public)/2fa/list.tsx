@@ -1,12 +1,12 @@
 'use client';
 
 import toast from "react-hot-toast";
-import InfiniteScroll from "react-infinite-scroll-component";
-import useSWRInfinite from 'swr/infinite';
-import { getAuthenticators } from '@/service/2fa';
 import { DAuth } from '@/components/iv-ui/typings/DAuth';
 import { Loading } from "@/components/Icons";
 import { useEffect, useState } from "react";
+import { AUTHENTICATORS_SERVICE } from "@/service";
+import http from "@/utils/http";
+import useSWR from "swr";
 
 const copyName = (text: string) => {
   navigator.clipboard.writeText(text)
@@ -42,31 +42,17 @@ const Card = ({ code, name, timeRemaining }: { code: string; name: string; timeR
 };
 
 export default () => {
-  const limit = 12;
-  const getKey = (pageIndex: number, previousPageData: Array<DAuth> | null): { pageIndex: string, pageSize: string } | null => {
-    if (previousPageData && !previousPageData.length) return null;
-    return { pageIndex: String(pageIndex), pageSize: String(limit) };
-  };
-
-  const { data = [], size, setSize } = useSWRInfinite<Array<DAuth>>(getKey, getAuthenticators);
-  const flatData = data.flat();
-  const dataLength = flatData.length;
-
+  const { data = [], error, isLoading } = useSWR<DAuth[]>(AUTHENTICATORS_SERVICE.OTPS, http.find_);
+  
   return (
-    <InfiniteScroll
-      className="container mx-auto p-4"
-      dataLength={dataLength}
-      next={() => console.debug('Load next')}
-      hasMore={false}
-      // next={() => setSize(size + 1)}
-      // hasMore={dataLength < limit * size}
-      loader={<div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>}
-    >
-      <div className="m-6 grid gap-6 grid-flow-row grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {flatData.map((item: DAuth) => (
-          <Card key={item.name} {...item} />
-        ))}
-      </div>
-    </InfiniteScroll>
+    <div className="m-6 grid gap-6 grid-flow-row grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {
+        isLoading
+          ? <div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>
+          : data.map((item: DAuth) => (
+            <Card key={item.name} {...item} />
+          ))
+      }
+    </div>
   );
 };

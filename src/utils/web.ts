@@ -1,13 +1,13 @@
 export const WebResponse = {
 
   success: (data: any) => ({
-    code: 0,
+    code: 200,
     message: 'success',
     data
   }),
 
   successList: (data: any, has_more: boolean, skip?: number, limit?: number, total?: number) => ({
-    code: 0,
+    code: 200,
     message: 'success',
     data: {
       data,
@@ -35,7 +35,7 @@ export const EdgeWebResponse = {
         data
       }),
       {
-        status: 200,
+        code: 200,
         headers: {
           'content-type': 'application/json',
         },
@@ -57,7 +57,7 @@ export const EdgeWebResponse = {
         }
       }),
       {
-        status: 200,
+        code: 200,
         headers: {
           'content-type': 'application/json',
         },

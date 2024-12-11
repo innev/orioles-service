@@ -24,7 +24,7 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
   if (!ErrMsg || ErrMsg == '') {
     return res.status(200).json({
       code: 200,
-      mas: '请求成功',
+      msg: '请求成功',
       data: {
         url: process.env.ALIYUN_NLS_URI,
         token: Token.Id,
