@@ -35,7 +35,7 @@ export const EdgeWebResponse = {
         data
       }),
       {
-        code: 200,
+        status: 200,
         headers: {
           'content-type': 'application/json',
         },
@@ -57,7 +57,7 @@ export const EdgeWebResponse = {
         }
       }),
       {
-        code: 200,
+        status: 200,
         headers: {
           'content-type': 'application/json',
         },
