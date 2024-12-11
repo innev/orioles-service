@@ -67,8 +67,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
  */
 export async function DELETE(_: NextRequest, { params }: RouteParams) {
   try {
-    console.debug("删除的Email:", params.email);
-    return NextResponse.json({ success: true }, { code: 200 })
+    return NextResponse.json({ success: true, code: 200 })
   } catch (error) {
     return NextResponse.json(
       handleApiError(error),
