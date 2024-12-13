@@ -130,6 +130,7 @@ enum VideoSource {
   qq
   youku
   bilibili
+  sohu
 }
 
 // Video
@@ -138,7 +139,7 @@ model Video {
   source   VideoSource @default(qq)
   name     String      @unique
   cover    String      @db.VarChar(500)
-  url      String      @db.VarChar(500)
+  url      String      @db.Text
   visiable Boolean     @default(true)
 
   @@index([id])

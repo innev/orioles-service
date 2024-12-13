@@ -19,6 +19,6 @@ export const getVideos = async (visiable: boolean = true): Promise<Array<TVideo>
             cover: true,
             url: true,
             visiable: true
-        },
+        }
     });
 };
