@@ -11,9 +11,9 @@ export const metadata = {
 export default () => {
     return (
         <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
-
+            
             <AppNav paths={[{ name: '股市' }]} />
-
+            
             <Indices />
 
             <div className="w-full flex flex-1 gap-4 md:gap-6">

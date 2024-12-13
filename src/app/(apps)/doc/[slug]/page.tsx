@@ -9,6 +9,7 @@ import { readFileSync } from 'fs'
 import path from "path"
 import { notFound } from 'next/navigation'
 import { Metadata } from "next"
+import { FullContent } from "@/components/layouts/OriolesLayout"
 
 const titles = {
   about: '关于作者',
@@ -18,8 +19,10 @@ const titles = {
 }
 type DOC = keyof typeof titles
 
-export const generateMetadata  = async ({ params: { slug } }: { params: { slug: DOC } }): Promise<Metadata>  =>{
-  return { title: titles[slug] }
+export const generateMetadata = async ({ params: { slug } }: { params: { slug: DOC } }): Promise<Metadata> => {
+  return {
+    title: titles[slug]
+  }
 }
 
 export default async ({ params: { slug } }: { params: { slug: DOC } }) => {
@@ -39,13 +42,8 @@ export default async ({ params: { slug } }: { params: { slug: DOC } }) => {
     .process(content);
 
   return (
-    <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6 '>
-      <AppHeader paths={[{ name: title }]} />
-
-      <FullContainer>
-        <article className="max-w-full prose text-base p-4 md:p-8" dangerouslySetInnerHTML={{ __html: file.value.toString() }} />
-      </FullContainer>
-      
-    </div>
+    <FullContent paths={[{ name: title }]}>
+      <article className="max-w-full prose text-base p-4 md:p-8" dangerouslySetInnerHTML={{ __html: file.value.toString() }} />
+    </FullContent>
   )
 }

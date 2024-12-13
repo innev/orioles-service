@@ -5,7 +5,7 @@ export type TApp = {
     name: string
     url: string
     icon: string
-    visiable: boolean,
+    visiable: boolean
     requiresAuth: boolean
 };
 

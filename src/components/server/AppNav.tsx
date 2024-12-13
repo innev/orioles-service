@@ -2,14 +2,12 @@ import Link from 'next/link'
 import { Fragment } from 'react'
 import { ChevronRightIcon } from '@/components/Icons'
 
-type TAppNav = {
-    paths: {
-        name: string
-        url?: string
-    }[]
-}
+export type TAppNav = Array<{
+    name: string
+    url?: string
+}>;
 
-export default function AppNav({ paths }: TAppNav) {
+export default ({ paths }: { paths: TAppNav }) => {
 
     return (
         <div className='bg-white rounded-lg shadow flex flex-row items-center justify-between space-x-2 p-4'>

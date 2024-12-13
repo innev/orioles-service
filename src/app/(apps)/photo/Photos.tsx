@@ -1,19 +1,17 @@
 'use client'
 
-import { Fragment, useState } from "react"
-import InfiniteScroll from "react-infinite-scroll-component"
-import useSWRInfinite from 'swr/infinite'
-import { Loading } from '@/components/Icons'
-import http from "@/utils/http"
-import { PageData } from "@/utils/types"
-import Photo from "./Photo"
-import PhotoModal from "./PhotoModal"
-import { TPhoto } from "./type"
+import { Fragment, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import useSWRInfinite from 'swr/infinite';
+import { Loading } from '@/components/Icons';
+import http from "@/utils/http";
+import { PageData } from "@/utils/types";
+import Photo from "./Photo";
+import PhotoModal from "./PhotoModal";
+import { TPhoto } from "./type";
 
 
-export default function Photos() {
-
-    const limit = 24
+export default ({ limit = 24 }) => {
     const genBody = (page: number) => ({
         database: 'cloud',
         collection: 'photos',
@@ -25,7 +23,7 @@ export default function Photos() {
         },
     })
     const getKey = (pageIndex: number, previousPageData: PageData<TPhoto>) => {
-        if (previousPageData && !previousPageData.data.length) return null
+        if (previousPageData && !previousPageData.data.length) return null;
         return [`/api/mongo/find`, genBody(pageIndex)]
     }
     const { data = [], size, setSize } = useSWRInfinite<PageData<TPhoto>>(getKey, http.post);

@@ -1,28 +1,14 @@
+'use client'
+
 import Link from 'next/link';
-import { Analytics } from "@vercel/analytics/react";
-import { AuthProvider } from '@/providers/AuthProvider';
-import LoginModal from '@/components/LoginModal';
 import { Logos } from '@/components/Icons';
 import Dock from '@/components/client/Dock';
 import { TDockItem } from '@/model/Skills';
-import Toaster from '@/components/client/Toaster';
-
-export const Layout = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <html lang='zh'>
-            <body className="bg-gray-100 min-h-screen w-full">
-                <AuthProvider>
-                    <div className='min-h-screen mx-auto flex w-full'>
-                        {children}
-                    </div>
-                    <LoginModal />
-                </AuthProvider>
-                <Toaster />
-                <Analytics />
-            </body>
-        </html>
-    )
-};
+import useSWR from 'swr';
+import { LAYOUT_SERVICE } from '@/service';
+import http from '@/utils/http';
+import AppNav, { TAppNav } from '@/components/server/AppNav';
+import FullContainer from '@/components/server/Containers';
 
 type UserBrand = {
     icon: keyof typeof Logos,
@@ -38,8 +24,9 @@ export type UserInfo = {
     UserBrand: Array<UserBrand>
 };
 
-export const Sider = ({ skills, user }: { skills: Record<string, TDockItem[]> | undefined, user: UserInfo }) => {
-    const { language = [], technical = [], software = [] } = skills||{};
+export const Sider = ({ user }: {  user: UserInfo }) => {
+    const { data: skills = { language: [], technical: [], software: [] }, error, isLoading } = useSWR<Record<string, TDockItem[]>>(LAYOUT_SERVICE.SKILLS, http.find_);
+
     return (
         <div className='flex flex-col gap-4 md:gap-6'>
             <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-col gap-4 items-center justify-center'>
@@ -62,7 +49,7 @@ export const Sider = ({ skills, user }: { skills: Record<string, TDockItem[]> | 
             </div>
 
             <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
-                {[language, technical, software].map((item, index) => <Dock key={index} children={item}></Dock>)}
+                {Object.values(skills).map((item, index) => <Dock key={index} children={item}></Dock>)}
             </div>
 
             <div className='md:flex hidden flex-col items-center space-y-2 text-gray-500 text-xs'>
@@ -89,4 +76,16 @@ export const Sider = ({ skills, user }: { skills: Record<string, TDockItem[]> | 
             </div>
         </div>
     );
+};
+
+
+export const FullContent = ({ paths, children }: {paths: TAppNav, children: React.ReactNode}) => {
+    return (
+        <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
+            <AppNav paths={paths} />
+            <FullContainer>
+                {children}
+            </FullContainer>
+        </div>
+    )
 };

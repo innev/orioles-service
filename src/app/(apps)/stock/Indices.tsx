@@ -5,7 +5,7 @@ import useSWR from 'swr'
 import http from '@/utils/http'
 import { TRealData } from './type'
 
-export default function Indices() {
+export default () => {
 
     const code = [
         '000001.SS',

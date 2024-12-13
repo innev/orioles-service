@@ -116,8 +116,30 @@ model GitMojis {
 
 // Github colors
 model GithubColor {
-  name        String  @unique
-  color       String
+  name  String @unique
+  color String
 
   @@index([name])
+}
+
+// 定义一个枚举类型
+enum VideoSource {
+  douyin
+  youtube
+  iqiyi
+  qq
+  youku
+  bilibili
+}
+
+// Video
+model Video {
+  id       Int         @id @default(autoincrement())
+  source   VideoSource @default(qq)
+  name     String      @unique
+  cover    String      @db.VarChar(500)
+  url      String      @db.VarChar(500)
+  visiable Boolean     @default(true)
+
+  @@index([id])
 }

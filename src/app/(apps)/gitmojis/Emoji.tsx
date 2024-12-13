@@ -3,7 +3,7 @@
 import toast from "react-hot-toast";
 import { EmojiProps } from '@/model/GitMojis';
 
-export default function Emoji({ emoji }: { emoji: EmojiProps }) {
+export default ({ emoji }: { emoji: EmojiProps }) => {
 
     const copyEmoji = (icon: string) => {
         navigator.clipboard.writeText(icon)

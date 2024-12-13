@@ -2,6 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 const apps = require('./data/json/apps.json');
 const { user, languages, skills, softwares } = require('./data/json/skills.json');
 const icons = require('./data/json/icons.json');
+const videos = require('./data/json/video.json');
 const gitmojis = require('./data/json/gitmojis.json');
 const githubColors = require('./data/json/github-colors.json');
 
@@ -91,6 +92,7 @@ const main = async () => {
     .then(() => console.log(`Software Skills import completed!`))
     .catch(error => console.error(`Failed to insert software skills.`, error));
 
+
   /*===================================ICONS==============================================*/
   await prisma.icon
     .createMany({
@@ -115,6 +117,16 @@ const main = async () => {
     })
     .then(() => console.log(`Github colors import completed!`))
     .catch(error => console.error(`Failed to insert github colors.`, error));
+
+
+  /*===================================Video==============================================*/
+  await prisma.video
+    .createMany({
+      data: videos,
+      skipDuplicates: true
+    })
+    .then(() => console.log(`Videos import completed!`))
+    .catch(error => console.error(`Failed to insert videos.`, error));
 
 
   console.log('JSON data import completed.');
