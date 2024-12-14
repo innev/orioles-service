@@ -4,18 +4,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { TDockItem } from '@/model/Skills';
 import CDN from '@/utils/cdn';
-
-
-export const DockItem = ({ name, url, icon }: TDockItem) => {
-    return (
-        <div className='flex flex-col items-center gap-2'>
-            <div onClick={() => window.open(url, '_blank')} className='w-16 h-16 rounded-2xl bg-gray-100 shadow cursor-pointer'>
-                <img src={CDN.icon(icon)} alt="" className="w-full h-full" />
-            </div>
-            <span className="text-sm text-gray-800">{name}</span>
-        </div>
-    )
-}
+import IconButton from './IconButton';
 
 export default ({ children = [] }: { children: Array<TDockItem>|undefined }) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -53,9 +42,13 @@ export default ({ children = [] }: { children: Array<TDockItem>|undefined }) => 
                             <div className='w-full md:h-full transition-all transform'>
                                 <p className='text-gray-500 text-lg mb-4 w-fit mx-auto'>{children[0]?.typeName}</p>
                                 <div className='bg-white w-full h-full p-6 md:p-8 shadow-xl rounded-2xl overflow-y-scroll'>
-                                    <div className=" flex flex-wrap justify-center gap-6 md:gap-10">
+                                    <div className="flex flex-wrap justify-center gap-6 md:gap-10">
                                         {
-                                            children.map((item: TDockItem, index: number) => <DockItem key={index} {...item} />)
+                                            children.map((item: TDockItem, index: number) =>
+                                                <div className='flex flex-row flex-wrap gap-2'>
+                                                    <IconButton key={index} item={item} isCDN={true} />
+                                                </div>
+                                            )
                                         }
                                     </div>
                                 </div>

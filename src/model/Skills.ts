@@ -2,11 +2,12 @@ import { PrismaClient, SkillsType } from '@prisma/client';
 import { groupBy } from 'lodash';
 
 export type TDockItem = {
-    name: string,
-    icon: string,
-    url: string,
-    type: SkillsType,
+    name: string
+    icon: string
+    url: string
+    type: SkillsType
     typeName: string
+    requiresAuth?: boolean
 };
 
 export const getSkills = async (): Promise<Record<string, Array<TDockItem>>> => {
