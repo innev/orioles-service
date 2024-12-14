@@ -12,13 +12,11 @@ i18n
   .init({
     fallbackLng: 'zh', // 默认语言
     supportedLngs: ['zh', 'en'], // 支持的语言
-    // debug: process.env.NODE_ENV === 'development',
     debug: false,
     interpolation: {
-      escapeValue: false, // React 已经默认转义
+      escapeValue: false
     },
     backend: {
-      // loadPath: '/locales/{{lng}}/{{ns}}.json', // 加载语言文件的路径
       loadPath: '/locales/{{lng}}/common.json', // 加载语言文件的路径
     },
     detection: {
