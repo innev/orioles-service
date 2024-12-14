@@ -40,11 +40,13 @@ export const middleware = async (request: NextRequest) => {
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
 
   if(pathname.startsWith('/api/')) {
-    response.headers.set('Cache-Control', 'no-store, max-age=0');
-    response.headers.set('CDN-Cache-Control', 'no-store, max-age=0');
-    response.headers.set('Vercel-CDN-Cache-Control', 'no-store, max-age=0');
+    // const cacheParams = 'no-store, max-age=0';
+    const cacheParams = 'private, no-store';
+    response.headers.set('Cache-Control', cacheParams);
+    response.headers.set('CDN-Cache-Control', cacheParams);
+    response.headers.set('Vercel-CDN-Cache-Control', cacheParams);
   }
-  
+
   return response;
 }
 
