@@ -35,9 +35,15 @@ export const middleware = async (request: NextRequest) => {
   const response = NextResponse.next();
   
   // 添加安全相关的响应头
-  response.headers.set('X-Frame-Options', 'DENY')
-  response.headers.set('X-Content-Type-Options', 'nosniff')
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+  if(pathname.startsWith('/api/')) {
+    response.headers.set('Cache-Control', 'no-store, max-age=0');
+    response.headers.set('CDN-Cache-Control', 'no-store, max-age=0');
+    response.headers.set('Vercel-CDN-Cache-Control', 'no-store, max-age=0');
+  }
   
   return response;
 }
