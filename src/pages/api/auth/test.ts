@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-// import { compare } from 'bcrypt';
 import prisma from '@/lib/prisma';
 
 export default NextAuth({

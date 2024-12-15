@@ -1,4 +1,5 @@
-import { PrismaClient, SkillsType } from '@prisma/client';
+import prisma from '@/lib/prisma';
+import { SkillsType } from '@prisma/client';
 import { groupBy } from 'lodash';
 
 export type TDockItem = {
@@ -11,8 +12,6 @@ export type TDockItem = {
 };
 
 export const getSkills = async (): Promise<Record<string, Array<TDockItem>>> => {
-    const prisma = new PrismaClient();
-
     return prisma.skills.findMany({
         select: {
             name: true,
@@ -26,8 +25,6 @@ export const getSkills = async (): Promise<Record<string, Array<TDockItem>>> => 
 };
 
 export const getSkillsByType = async (type: SkillsType): Promise<Array<TDockItem>> => {
-    const prisma = new PrismaClient();
-
     return prisma.skills.findMany({
         where: { type },
         select: {

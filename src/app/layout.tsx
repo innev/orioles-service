@@ -1,14 +1,16 @@
 import './globals.css';
 import './apps.css';
-import '../../i18n';
+import '@/lib/i18n-client';
+// import { useTranslation } from '@/lib/i18n-server';
+// import { languages } from '@/lib/i18n-options';
 import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from '@/providers/AuthProvider';
 import LoginModal from '@/components/LoginModal';
 import Toaster from '@/components/client/Toaster';
-import { getUserInfo } from '@/model/User';
+import { getUserInfo_ } from '@/model/User';
 
 export async function generateMetadata({ params, searchParams }: any) {
-  const userInfo = await getUserInfo();
+  const userInfo = await getUserInfo_();
   return {
     title: `${userInfo.name} - 轻量级云原生架构实验室`,
     referrer: 'no-referrer',
@@ -18,17 +20,18 @@ export async function generateMetadata({ params, searchParams }: any) {
   };
 }
 
+
 export default async ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang='zh'>
       <body className="bg-gray-100 min-h-screen w-full">
-        <AuthProvider>
-          <div className='min-h-screen mx-auto flex w-full'>
-            {children}
-          </div>
-          <LoginModal />
-        </AuthProvider>
-        <Toaster />
+          <AuthProvider>
+            <div className='min-h-screen mx-auto flex w-full'>
+              {children}
+            </div>
+            <LoginModal />
+          </AuthProvider>
+          <Toaster />
         <Analytics />
       </body>
     </html>

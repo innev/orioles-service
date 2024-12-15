@@ -1,5 +1,4 @@
-
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 
 export type TApp = {
     name: string
@@ -9,8 +8,7 @@ export type TApp = {
     requiresAuth: boolean
 };
 
-export const getApps = async (visiable: boolean = true): Promise<Array<TApp>> => {
-    const prisma = new PrismaClient();    
+export const getApps = async (visiable: boolean = true): Promise<Array<TApp>> => { 
     return prisma.app.findMany({
         where: { visiable },
         select: {

@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 
 export type EmojiProps = {
     name: string,
@@ -11,8 +11,6 @@ export type EmojiProps = {
 }
 
 export const getGitmojis = async (): Promise<Array<EmojiProps>> => {
-    const prisma = new PrismaClient();
-
     return prisma.gitMojis.findMany({
         select: {
             name: true,

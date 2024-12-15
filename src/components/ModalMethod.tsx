@@ -1,7 +1,7 @@
-import { Modal, ModalOptions } from "./iv-ui";
+import { ModalSample, ModalSampleOptions } from "./iv-ui";
 
-export const actionConfirmTips = ({ text, onOk, onCancel, ...props }: ModalOptions) => {
-  Modal.confirm({
+export const actionConfirmTips = ({ text, onOk, onCancel, ...props }: ModalSampleOptions) => {
+  ModalSample.confirm({
     icon: "",
     title: '',
     width: 340,
@@ -21,8 +21,8 @@ export const actionConfirmTips = ({ text, onOk, onCancel, ...props }: ModalOptio
   });
 }
 
-export const actionInfoTips = ({text, onOk, ...props}: ModalOptions) => {
-  Modal.info({
+export const actionInfoTips = ({text, onOk, ...props}: ModalSampleOptions) => {
+  ModalSample.info({
     icon: "",
     title: '',
     width: 340,

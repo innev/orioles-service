@@ -9,6 +9,7 @@ import { LAYOUT_SERVICE } from '@/service';
 import http from '@/utils/http';
 import AppNav, { TAppNav } from '@/components/server/AppNav';
 import FullContainer from '@/components/server/Containers';
+import { signOut, useSession } from 'next-auth/react';
 
 type UserBrand = {
     icon: keyof typeof Logos,
@@ -25,6 +26,7 @@ export type UserInfo = {
 };
 
 export const Sider = ({ user }: {  user: UserInfo }) => {
+    const { data: session, status } = useSession();
     const { data: skills = { language: [], technical: [], software: [] }, error, isLoading } = useSWR<Record<string, TDockItem[]>>(LAYOUT_SERVICE.SKILLS, http.find_);
 
     return (
@@ -51,6 +53,13 @@ export const Sider = ({ user }: {  user: UserInfo }) => {
             <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
                 {Object.values(skills).map((item, index) => <Dock key={index} children={item}></Dock>)}
             </div>
+            
+            {
+                status === 'authenticated' &&
+                <div onClick={() => signOut({ callbackUrl: '/' })} className="text-center cursor-pointer bg-red-600 hover:bg-red-800 px-6 py-2 text-white rounded-md">
+                    <span>退出登录</span>
+                </div>
+            }
 
             <div className='md:flex hidden flex-col items-center space-y-2 text-gray-500 text-xs'>
                 <div className='flex flex-row space-x-1'>
@@ -68,7 +77,7 @@ export const Sider = ({ user }: {  user: UserInfo }) => {
                     <span>·</span>
                     <Link href='/doc/terms'>
                         <span className="hover:text-blue-600 cursor-pointer">用户协议</span>
-                    </Link>
+                    </Link>    
                 </div>
                 <div className='text-center text-gray-400'>
                     <a href="https://github.com/innev" target="_blank">Innev</a> © 2023 All Rights Reserved

@@ -1,14 +1,16 @@
 'use client'
 
-import { Dispatch, ReactNode, SetStateAction, useCallback, useMemo, useState } from "react";
+import { ReactNode, useState } from "react";
 import { signIn } from 'next-auth/react';
 import Image from "next/image";
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/providers/AuthProvider';
 import LoadingDots from "@/components/iv-ui/LoadingDots";
 import { GithubIcon, GoogleIcon } from "@/components/Icons";
+import { Modal } from "./iv-ui";
+import Link from "next/link";
 
-const SignInOAuth2Button = ({ label = 'Sign In', provider = 'google', icon }: { label: string, provider: string, icon?: ReactNode }) => {
+const SignInOAuth2Button = ({ label = 'Sign In', provider, icon }: { label: string, provider: string, icon?: ReactNode }) => {
   const [signInClicked, setSignInClicked] = useState(false);
 
   return (
@@ -40,40 +42,33 @@ export default () => {
   const { t } = useTranslation('common');
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     const result = await signIn('credentials', {
       redirect: false,
       email,
-      password,
-    })
+      password
+    });
+
     if (result?.ok) {
-      setShowLoginModal(false)
+      setShowLoginModal(false);
     } else {
-      console.error('Login failed')
+      console.error('Login failed');
     }
   }
 
-  if (!showLoginModal) return null
+  if (!showLoginModal) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-40">
-      <div className="bg-black bg-opacity-50 absolute inset-0"></div>
-      <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200 z-50">
+    <Modal showModal={showLoginModal} setShowModal={setShowLoginModal}>
+      <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-300">
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
-            <a href="https://orioles.innev.cn">
-              <Image
-                src="/logo.svg"
-                alt="Logo"
-                className="h-10 w-10 rounded-full"
-                width={20}
-                height={20}
-              />
-            </a>
+          <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-300 bg-white px-4 py-6 pt-8 text-center md:px-16">
+            <Link href="https://orioles.innev.cn">
+              <Image src="/logo.svg" alt="Logo" className="h-10 w-10 rounded-full" width={20} height={20} />
+            </Link>
             <h3 className="font-display text-2xl font-bold">{t('sign_in')}</h3>
             <p className="text-sm text-gray-500">{t('sign_in_modal_title')}</p>
-
-            <input
+            {/* <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -88,7 +83,7 @@ export default () => {
               className="block w-full mb-4 p-2 border rounded"
             />
             <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">登录</button>
-            <button onClick={() => setShowLoginModal(false)} className="mt-4 w-full bg-gray-300 text-gray-800 p-2 rounded">关闭</button>
+            <button onClick={() => setShowLoginModal(false)} className="mt-4 w-full bg-gray-300 text-gray-800 p-2 rounded">关闭</button> */}
           </div>
         </form>
 
@@ -107,6 +102,6 @@ export default () => {
           />
         </div>
       </div>
-    </div>
+    </Modal>
   )
 };

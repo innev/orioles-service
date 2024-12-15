@@ -3,33 +3,25 @@
 import { useAuth } from '@/providers/AuthProvider';
 import { useRouter } from 'next/navigation';
 import { TDockItem } from '@/model/Skills';
-import { DevIconProps } from '@/model/Icon';
 import { TApp } from '@/model/App';
 import CDN from '@/utils/cdn';
+import { useSession } from 'next-auth/react';
 
 
-export default ({ item, onOpen, isCDN = false }: { item: TApp|TDockItem, onOpen?: Function, isCDN?: boolean }) => {
+export default ({ item, isCDN = false }: { item: TApp|TDockItem, isCDN?: boolean }) => {
     const router = useRouter();
+    const { data: session, status } = useSession();
     const { showLoginModal, setShowLoginModal } = useAuth();
 
     const openApp = (item: TApp|TDockItem) => {
-        if (item?.requiresAuth) {
-            // setShowLoginModal(true);
-            router.push(item.url);
+        if (item?.requiresAuth && status !== 'authenticated') {
+            setShowLoginModal(true);
         } else if (item.url.startsWith('http://') || item.url.startsWith('https://')) {
             window.open(item.url, '_blank');
         } else {
             router.push(item.url);
         }
     }
-
-    //   const handleLoginSuccess = () => {
-    //     setShowLoginModal(false)
-    //     if (pendingUrl) {
-    //       window.location.href = pendingUrl
-    //       setPendingUrl(null)
-    //     }
-    //   }
 
     return (
         <div className="icon-card" onClick={() => openApp(item)}>

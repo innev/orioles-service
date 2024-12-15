@@ -7,7 +7,6 @@ const gitmojis = require('./data/json/gitmojis.json');
 const githubColors = require('./data/json/github-colors.json');
 
 const prisma = new PrismaClient();
-
 const main = async () => {
   console.log('Importing data from JSON...');
 
@@ -32,7 +31,7 @@ const main = async () => {
       })
       .catch(error => console.error('Failed to insert user:', error));
   } else {
-    console.log(`User ${userInfo.id} already exists!`)
+    console.log(`User ${userInfo.id} already exists!`);
   }
   
 

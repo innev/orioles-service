@@ -45,8 +45,8 @@ export default ({ children = [] }: { children: Array<TDockItem>|undefined }) => 
                                     <div className="flex flex-wrap justify-center gap-2 md:gap-4">
                                         {
                                             children.map((item: TDockItem, index: number) =>
-                                                <div className='flex flex-row flex-wrap gap-1'>
-                                                    <IconButton key={index} item={item} isCDN={true} />
+                                                <div className='flex flex-row flex-wrap gap-1' key={index}>
+                                                    <IconButton item={item} isCDN={true} />
                                                 </div>
                                             )
                                         }

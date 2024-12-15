@@ -1,5 +1,4 @@
-
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 
 export type TVideo = {
     source: string
@@ -10,7 +9,6 @@ export type TVideo = {
 };
 
 export const getVideos = async (visiable: boolean = true): Promise<Array<TVideo>> => {
-    const prisma = new PrismaClient();    
     return prisma.video.findMany({
         where: { visiable },
         select: {

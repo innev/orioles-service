@@ -9,22 +9,21 @@ interface RateLimitConfig {
   window: number // 时间窗口（毫秒）
 }
 
-export function withRateLimit(
+export const withRateLimit = (
   request: NextRequest,
   config: RateLimitConfig = { limit: 100, window: 60 * 1000 }
-) {
+) => {
   // 获取客户端 IP
-  const ip = request.ip ?? request.headers.get('x-real-ip') ?? '127.0.0.1'
-  const now = Date.now()
+  const ip = request.ip ?? request.headers.get('x-real-ip') ?? '127.0.0.1';
+  const now = Date.now();
   
   // 清理过期记录
-  const windowStart = now - config.window
-  
-  const currentLimit = rateLimit.get(ip)
+  const windowStart = now - config.window;
+  const currentLimit = rateLimit.get(ip);
   
   if (!currentLimit || currentLimit.timestamp < windowStart) {
     rateLimit.set(ip, { count: 1, timestamp: now })
-    return NextResponse.next()
+    return NextResponse.next();
   }
   
   if (currentLimit.count >= config.limit) {
@@ -46,6 +45,5 @@ export function withRateLimit(
   currentLimit.count++
   rateLimit.set(ip, currentLimit)
   
-  return NextResponse.next()
+  return NextResponse.next();
 }
-

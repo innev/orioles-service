@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 
 export type DevIconProps = {
     name: string
@@ -6,8 +6,6 @@ export type DevIconProps = {
 }
 
 export const getIcons = async (): Promise<Array<DevIconProps>> => {
-    const prisma = new PrismaClient();
-    
     return prisma.icon.findMany({
         select: {
             name: true

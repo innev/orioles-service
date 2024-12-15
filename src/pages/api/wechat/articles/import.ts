@@ -1,4 +1,3 @@
-// import { prisma } from '@/server/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const _DATA_MOCK_ = [

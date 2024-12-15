@@ -1,5 +1,5 @@
+import prisma from '@/lib/prisma';
 import { Logos } from '@/components/Icons';
-import { PrismaClient } from '@prisma/client';
 
 type UserBrand = {
     icon: keyof typeof Logos,
@@ -15,9 +15,7 @@ export type UserInfo = {
     UserBrand: Array<UserBrand>
 };
 
-export const getUserInfo = async (email: string = 'zhaozhao200295@gmail.com'): Promise<any> => {
-    const prisma = new PrismaClient();
-    
+export const getUserInfo_ = async (email: string = 'zhaozhao200295@gmail.com'): Promise<any> => {
     return prisma.user.findUnique({
         where: { email },
         select: {

@@ -1,9 +1,9 @@
 'use client'
 
-import i18n from '../../i18n';
+import i18n from '@/lib/i18n-client';
 
 export default function LanguageSwitcher() {
-
+  
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   }

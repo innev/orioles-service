@@ -11,14 +11,12 @@ import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 export default () => {
-    const { showLoginModal, setShowLoginModal } = useAuth();
+    const { setShowLoginModal } = useAuth();
     const { data: apps = [], error, isLoading } = useSWR<TApp[]>(APP_SERVICE.APPS, http.find_);
 
     const pathname = usePathname();
     const searchParams = useSearchParams();
     useEffect(() => {
-        // Access the current path
-        console.log('Current path:', pathname);
         if(searchParams?.get('auth-redirect')) {
             setShowLoginModal(true);
         }
@@ -30,9 +28,7 @@ export default () => {
             {
                 isLoading
                     ? <div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>
-                    : apps.map((app: TApp, index: number) => app.visiable === true &&
-                        <IconButton item={app} key={index} />
-                    )
+                    : apps.map((app: TApp, index: number) => app.visiable === true && <IconButton item={app} key={index} />)
             }
         </div>
     );

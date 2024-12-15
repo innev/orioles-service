@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 import { assign } from 'lodash';
 
 export type TGithubColor = {
@@ -7,8 +7,6 @@ export type TGithubColor = {
 }
 
 export const getGithubColors = async (): Promise<{ [key: string]: string }> => {
-    const prisma = new PrismaClient();
-    
     return prisma.githubColor.findMany({
         select: {
             name: true,

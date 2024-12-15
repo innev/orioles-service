@@ -1,4 +1,4 @@
-import { Modal, Tabs } from '@/components/iv-ui';
+import { ModalSample, Tabs } from '@/components/iv-ui';
 import Upload from '@/components/iv-ui/Upload';
 import { Header, pluginMapping, Sider } from '@/components/layouts/EditorLayout';
 import useUpload, { DUpload } from '@/hooks/usePdfJsUpload';
@@ -197,7 +197,7 @@ export default () => {
         <title>{title}</title>
       </Head>
       
-      <Modal
+      <ModalSample
         title='title'
         content='Modal content goes here.'
         open={open}

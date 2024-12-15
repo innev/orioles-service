@@ -7,7 +7,8 @@ import Leaflet from "./Leaflet";
 import List from "./List";
 import ListPro from "./ListPro";
 import Logo from "./Logo";
-import Modal, { type ModalOptions } from "./Modal";
+import Modal from "./Modal";
+import ModalSample, { type ModalSampleOptions } from "./ModalSample";
 import Navbars from "./Navbars";
 import Pagination from "./Pagination";
 import Spin from "./Spin";
@@ -32,6 +33,7 @@ export {
     Tooltip,
     Tree,
     Tabs,
-    Modal, ModalOptions,
+    Modal,
+    ModalSample, ModalSampleOptions,
     Navbars
 };
