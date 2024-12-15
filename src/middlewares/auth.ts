@@ -4,7 +4,7 @@ import { getToken } from 'next-auth/jwt';
 import { NextRequestWithAuth, withAuth } from "next-auth/middleware";
 
 // 0. Specify protected and public routes
-const protectedRoutes = ['/dashboard', '/2fa', '/explorer'];
+const protectedRoutes = ['/dashboard', '/2fa', '/explorer', '/photo', '/video', '/stock', '/fund', '/etf', '/vip', '/ebook'];
 const publicRoutes = ['/', '/login', '/signup'];
 const SIGIN_IN = '/';
 
