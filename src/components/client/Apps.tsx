@@ -6,11 +6,27 @@ import http from "@/utils/http";
 import { Loading } from '@/components/Icons';
 import useSWR from 'swr';
 import IconButton from './IconButton';
+import { useAuth } from '@/providers/AuthProvider';
+import { useEffect } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export default () => {
+    const { showLoginModal, setShowLoginModal } = useAuth();
     const { data: apps = [], error, isLoading } = useSWR<TApp[]>(APP_SERVICE.APPS, http.find_);
+
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    useEffect(() => {
+        // Access the current path
+        console.log('Current path:', pathname);
+        if(searchParams?.get('auth-redirect')) {
+            setShowLoginModal(true);
+        }
+    }, [pathname, searchParams]);
+
+
     return (
-        <div className='flex flex-row flex-wrap p-6 gap-6'>
+        <div className='flex flex-row flex-wrap p-6 gap-2'>
             {
                 isLoading
                     ? <div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>

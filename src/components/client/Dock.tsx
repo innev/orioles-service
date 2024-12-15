@@ -41,11 +41,11 @@ export default ({ children = [] }: { children: Array<TDockItem>|undefined }) => 
                         >
                             <div className='w-full md:h-full transition-all transform'>
                                 <p className='text-gray-500 text-lg mb-4 w-fit mx-auto'>{children[0]?.typeName}</p>
-                                <div className='bg-white w-full h-full p-6 md:p-8 shadow-xl rounded-2xl overflow-y-scroll'>
-                                    <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+                                <div className='bg-white w-full h-full p-2 md:p-4 shadow-xl rounded-2xl overflow-y-scroll'>
+                                    <div className="flex flex-wrap justify-center gap-2 md:gap-4">
                                         {
                                             children.map((item: TDockItem, index: number) =>
-                                                <div className='flex flex-row flex-wrap gap-2'>
+                                                <div className='flex flex-row flex-wrap gap-1'>
                                                     <IconButton key={index} item={item} isCDN={true} />
                                                 </div>
                                             )

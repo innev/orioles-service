@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-// import { withAuth } from './middlewares/auth';
+import { withPageAuth } from './middlewares/auth';
 import { withI18n } from './middlewares/i18n';
 import { withRateLimit } from './middlewares/rate-limit';
 import { NextRequestWithAuth, withAuth } from "next-auth/middleware";
@@ -14,9 +14,11 @@ export const middleware = async (request: NextRequest) => {
   if (rateLimitResponse.status === 429) return rateLimitResponse
   
   // 2. 认证检查
-  // const authResponse = await withAuth(request)
-  // if (authResponse.status === 307) return authResponse // 307 是重定向状态码
+  // 2.1. 页面路由认证
+  const authResponse = await withPageAuth(request)
+  if (authResponse.status === 307) return authResponse // 307 是重定向状态码
   
+  // 2.2. API路由认证
   if (pathname.startsWith('/api/auth')) {
     return withAuth(request as NextRequestWithAuth, {
       callbacks: {

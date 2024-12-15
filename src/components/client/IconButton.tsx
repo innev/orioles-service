@@ -14,7 +14,8 @@ export default ({ item, onOpen, isCDN = false }: { item: TApp|TDockItem, onOpen?
 
     const openApp = (item: TApp|TDockItem) => {
         if (item?.requiresAuth) {
-            setShowLoginModal(true);
+            // setShowLoginModal(true);
+            router.push(item.url);
         } else if (item.url.startsWith('http://') || item.url.startsWith('https://')) {
             window.open(item.url, '_blank');
         } else {

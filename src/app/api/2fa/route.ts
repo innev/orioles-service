@@ -49,7 +49,10 @@ export async function GET(request: NextRequest) {
         }
         return NextResponse.json({
             code: 200,
-            data: data.slice(0, (pageIndex + 1) * pageSize),
+            data: {
+                data,
+                timeRemaining
+            },
             msg: '请求成功'
         });
 
