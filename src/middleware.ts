@@ -21,7 +21,6 @@ export const middleware = async (request: NextRequest) => {
   const authResponse = await withPageAuth(request)
   if (authResponse?.status === 307) return authResponse; // 307 是重定向状态码
   
-
   // 2. 速率限制检查
   const rateLimitResponse = withRateLimit(request);
   if (rateLimitResponse.status === 429) return rateLimitResponse;
