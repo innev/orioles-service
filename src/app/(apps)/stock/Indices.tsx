@@ -4,8 +4,10 @@ import Link from 'next/link'
 import useSWR from 'swr'
 import http from '@/utils/http'
 import { TRealData } from './type'
+import NumberFlow from '@number-flow/react'
+import { NumberFlowFormat, StockFormat } from '@/utils/format'
 
-export default () => {
+export default ({ refreshInterval = 5000 }) => {
 
     const code = [
         '000001.SS',
@@ -36,7 +38,7 @@ export default () => {
         'trade_status'
     ]
 
-    const { isLoading, data: realResp } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code.join(',')}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
+    const { isLoading, data: realResp } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code.join(',')}&fields=${fields.join(',')}`, http.getAll, { refreshInterval })
 
     if (isLoading || !realResp) {
         return (
@@ -54,11 +56,6 @@ export default () => {
         return 'text-green-600'
     }
 
-    const format = (num: number) => {
-        if (num > 0) return `+${num.toFixed(2)}`
-        return num.toFixed(2)
-    }
-
     return (
         <div className="grid grid-cols-8 gap-4 w-full text-white">
             {
@@ -69,11 +66,11 @@ export default () => {
                         return (
                             <Link href={`/stock/${item}`} key={stockObj['prod_code']}>
                                 <div className={`cursor-pointer rounded-lg w-full flex flex-col shadow gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>
-                                    <span className='text-sm text-gray-900'>{stockObj['prod_name']}</span>
-                                    <span className='text-3xl font-semibold'>{(stockObj['last_px'] as number).toFixed(2)}</span>
+                                    <span className='text-sm'>{stockObj['prod_name']}</span>
+                                    <NumberFlow className='text-3xl font-semibold' value={stockObj['last_px'] as number} format={NumberFlowFormat.value} />
                                     <div className='flex flex-row gap-2 text-sm'>
-                                        <span>{format(stockObj['px_change'] as number)}</span>
-                                        <span>{format(stockObj['px_change_rate'] as number)}%</span>
+                                        <span>{StockFormat.trend(stockObj['px_change'] as number)}</span>
+                                        <span>{StockFormat.rate(stockObj['px_change_rate'] as number / 100)}</span>
                                     </div>
                                 </div>
                             </Link>

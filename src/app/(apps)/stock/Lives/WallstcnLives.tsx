@@ -3,12 +3,12 @@
 import moment from "moment"
 import 'moment/locale/zh-cn'
 import Link from "next/link"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useSWR from "swr"
 import { Loading } from "@/components/Icons"
 import http from "@/utils/http"
-import { TLive, TLivesMap, TRealData, TSymbol } from "./type"
+import { TWallStcnLive, TLivesMap, TRealData, TSymbol } from "../type"
 
 function StocksTag({ symbols }: { symbols: TSymbol[] }) {
 
@@ -54,7 +54,7 @@ function StocksTag({ symbols }: { symbols: TSymbol[] }) {
 
 }
 
-function Live({ live }: { live: TLive }) {
+function Live({ live }: { live: TWallStcnLive }) {
 
     const contentStyle = (score: number) => score > 1 ? "text-red-600" : ''
 
@@ -75,11 +75,20 @@ function Live({ live }: { live: TLive }) {
 }
 
 
-export default function Lives() {
+export default ({ refreshInterval = 60000 }) => {
+    const [cursor, setCursor] = useState('');
+    const [lives, setLives] = useState<TWallStcnLive[]>([]);
+    const [livesMap, setLivesMap] = useState<TLivesMap>({});
+    // let timerRef = useRef<NodeJS.Timeout>(null);
+    let timerRef: NodeJS.Timeout;
 
-    const [cursor, setCursor] = useState('')
-    const [lives, setLives] = useState<TLive[]>([])
-    const [livesMap, setLivesMap] = useState<TLivesMap>({})
+    const fetchMore = () => {
+        http.getAll(`https://api-one.wallstcn.com/apiv1/content/lives?channel=global-channel&client=pc&limit=20&accept=live&first_page=false&cursor=${cursor}`).then(resp => {
+            const data = resp.data
+            setLives(pre => [...pre, ...(data.items)])
+            setCursor(data.next_cursor)
+        })
+    };
 
     const fetchLives = useCallback(async () => {
         const resp = await http.getAll(`https://api-one.wallstcn.com/apiv1/content/lives?channel=global-channel&client=pc&limit=20&accept=live&first_page=true`)
@@ -88,23 +97,23 @@ export default function Lives() {
         if (lives.length === 0) {
             setLives(data.items)
         } else {
-            const index = data.items.findIndex((item: TLive) => item.id === lives?.[0]?.id)
+            const index = data.items.findIndex((item: TWallStcnLive) => item.id === lives?.[0]?.id)
             index > 0 && setLives(pre => [...(data.items.subarray(0, index)), ...pre])
             index < 0 && setLives(pre => [...(data.items), ...pre])
         }
-    }, [])
-
-    const fetchMore = () => {
-        http.getAll(`https://api-one.wallstcn.com/apiv1/content/lives?channel=global-channel&client=pc&limit=20&accept=live&first_page=false&cursor=${cursor}`).then(resp => {
-            const data = resp.data
-            setLives(pre => [...pre, ...(data.items)])
-            setCursor(data.next_cursor)
-        })
-    }
+    }, []);
 
     useEffect(() => {
-        fetchLives()
-    }, [])
+        const startRefresh = () => {
+            fetchLives(); // 刷新第一页的数据
+            // timerRef.current = setTimeout(startRefresh, refreshInterval);
+            timerRef = setTimeout(startRefresh, refreshInterval);
+          };
+          startRefresh();
+          // 清除定时器以避免内存泄漏
+        //   return () => clearTimeout(timerRef.current);
+          return () => clearTimeout(timerRef);
+    }, [fetchLives]);
 
     useEffect(() => {
         if (lives.length > 0) {
@@ -119,7 +128,7 @@ export default function Lives() {
             })
             setLivesMap(tmp)
         }
-    }, [lives])
+    }, [lives]);
 
     return (
         <InfiniteScroll
@@ -138,7 +147,7 @@ export default function Lives() {
                                 <span className="absolute bg-gray-800 font-medium px-4 py-2 text-gray-100 rounded-r-full -left-8">{month}月{day}日</span>
                             </div>
                             {
-                                livesMap?.[date]?.map((liveIndex) => lives[liveIndex] != undefined && <Live key={liveIndex} live={lives[liveIndex] as TLive} />)
+                                livesMap?.[date]?.map((liveIndex) => lives[liveIndex] != undefined && <Live key={liveIndex} live={lives[liveIndex] as TWallStcnLive} />)
                             }
                         </div>
                     )

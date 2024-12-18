@@ -3,9 +3,9 @@
 import useSWR from 'swr'
 import Skeleton from '@/components/server/Skeleton'
 import http from '@/utils/http'
-import { StockPlatesProps, TPlate, TPlates } from './type'
+import { StockPlatesProps, TXuangubaoPlate, TXuangubaoPlates } from '../type'
 
-export default function Plates({ limit, is_acs }: StockPlatesProps) {
+export default ({ limit, is_acs }: StockPlatesProps) => {
 
     const data_fields = [
         'plate_id',
@@ -27,7 +27,7 @@ export default function Plates({ limit, is_acs }: StockPlatesProps) {
 
     const { data: rankResp } = useSWR(`https://flash-api.xuangubao.cn/api/plate/rank?field=${rank_field}&type=${rank_type}`, http.getAll, { refreshInterval: 10000 })
 
-    const { data = { data: [] } } = useSWR<TPlates>(rankResp ? `https://flash-api.xuangubao.cn/api/plate/data?plates=${(is_acs ? rankResp.data.slice(0, limit) : rankResp.data.slice(-limit)).join(',')}&fields=${data_fields.join(',')}` : null, http.getAll, { refreshInterval: 10000 })
+    const { data = { data: [] } } = useSWR<TXuangubaoPlates>(rankResp ? `https://flash-api.xuangubao.cn/api/plate/data?plates=${(is_acs ? rankResp.data.slice(0, limit) : rankResp.data.slice(-limit)).join(',')}&fields=${data_fields.join(',')}` : null, http.getAll, { refreshInterval: 10000 })
 
     const getColor = (num: number) => {
         if (num > 0) return 'bg-red-500 hover:bg-red-400'
@@ -40,7 +40,7 @@ export default function Plates({ limit, is_acs }: StockPlatesProps) {
         return num.toFixed(2)
     }
 
-    const sort = (a: TPlate, b: TPlate) => is_acs ? b.core_avg_pcp - a.core_avg_pcp : a.core_avg_pcp - b.core_avg_pcp
+    const sort = (a: TXuangubaoPlate, b: TXuangubaoPlate) => is_acs ? b.core_avg_pcp - a.core_avg_pcp : a.core_avg_pcp - b.core_avg_pcp
 
     return (
         <div className="grid grid-cols-3 gap-1 w-full text-white">
@@ -55,4 +55,4 @@ export default function Plates({ limit, is_acs }: StockPlatesProps) {
         </div>
     )
 
-}
+};
