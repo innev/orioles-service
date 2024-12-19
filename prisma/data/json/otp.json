@@ -1,0 +1,12 @@
+[
+    { "name": "dockerhub", "otp": "3XDBWUQG3TVOM63P4TXOCAOYBETXV6JJ", "email": "" },
+    { "name": "X", "otp": "6QNAAQWG35ORIPXD", "email": "" },
+    { "name": "npmjs", "otp": "2JUHPL3243U2GIP3Y3DXOLZBRCPEYPUH", "email": "aigrego" },
+    { "name": "gitea", "otp": "NCBU2FC4P3FDTSFQPNXOO5GQKTK62LXFXRS3EW55EVBCSTKWSJQFV23H6EQ5JS5N", "email": "" },
+    { "name": "github", "otp": "ESTCQPA2XDFF6ARR", "email": "" },
+    { "name": "mongodb", "otp": "ICCWSNNBR6K2IYET", "email": "393715354@qq.com" },
+    { "name": "ox-prod", "otp": "XYU22MFILWKFBFK3", "email": "jz.sun@gen-x.tech" },
+    { "name": "ox-prod", "otp": "TKVX5QVZJAYY2LHV", "email": "zhaozhao200295@gmail.com" },
+    { "name": "ox-dev", "otp": "W3GEGDNBJIMRNJUB", "email": "06d15e837299@drmail.in" },
+    { "name": "ox-dev", "otp": "TKVX5QVZJAYY2LHV", "email": "zhaozhao200295@gmail.com" }
+]

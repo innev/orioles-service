@@ -1,10 +1,8 @@
 import { DAuth } from '@/components/iv-ui/typings/DAuth';
+import { getOtps } from '@/model/OneTimePassword';
 import { handleApiError } from '@/utils/api-response'
-import { NextApiRequest, NextApiResponse } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
 import { authenticator } from 'otplib';
-
-const secrets: { [key: string]: string | { [key: string]: string } } = JSON.parse(process.env.SECRETS||'');
 
 /**
  * 这是pages/api中的方法，在app/api中用不上
@@ -40,19 +38,15 @@ export async function GET(request: NextRequest) {
 
     try {
         const timeRemaining = authenticator.timeRemaining();
-        const data: Array<DAuth> = [];
-        for (const name in secrets) {
-            data.push({
-                name, timeRemaining,
-                code: authenticator.generate(secrets[name] as string)
-            });
-        }
+        const data: Array<DAuth> = await getOtps().then(secrets => secrets.map(({ name, email, otp }) => ({
+            name,
+            email,
+            timeRemaining,
+            code: authenticator.generate(otp)
+        })));
         return NextResponse.json({
             code: 200,
-            data: {
-                data,
-                timeRemaining
-            },
+            data: { data, timeRemaining },
             msg: '请求成功'
         });
 

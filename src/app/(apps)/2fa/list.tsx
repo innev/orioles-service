@@ -13,11 +13,11 @@ const copyName = (text: string) => {
   toast(`已复制！`, { position: 'top-right', icon: <code className="px-2 py-1 text-xs bg-gray-100 text-red-500 rounded-md">{text}</code> })
 }
 
-const Card = ({ code, name, timeRemaining, countdown }: { code: string; name: string; timeRemaining: number, countdown: number }) => {
+const Card = ({ code, name, email, countdown }: { code: string; name: string; email: string, countdown: number }) => {
   return (
     <div className="bg-white hover:shadow hover:bg-slate-100 rounded-lg shadow-md p-6 cursor-pointer" onClick={() => copyName(code)}>
       <div className="flex justify-between items-center mb-2">
-        <h2 className="text-xl font-semibold truncate flex-grow">{name}</h2>
+        <h2 className="text-xl font-semibold truncate flex-grow">{email ? name + "("+ email +")" : name}</h2>
         <span className="text-sm font-medium text-gray-500 ml-2" aria-live="polite">{countdown === -1 ? 30 : countdown}秒</span>
       </div>
     </div>

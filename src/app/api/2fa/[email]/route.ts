@@ -1,4 +1,5 @@
 import { DAuth } from '@/components/iv-ui/typings/DAuth';
+import { getOtpByEmail } from '@/model/OneTimePassword';
 import { handleApiError } from '@/utils/api-response'
 import { NextRequest, NextResponse } from 'next/server';
 import { authenticator } from 'otplib';
@@ -21,16 +22,23 @@ interface RouteParams {
 export async function GET(_: NextRequest, { params }: RouteParams) {
     try {
         const timeRemaining = authenticator.timeRemaining();
-        let data: DAuth = { name: '', timeRemaining: 0, code: ''};
-        for (const name in secrets) {
-            if(name.includes(params.email)) {
-                data = {
-                    name, timeRemaining,
-                    code: authenticator.generate(secrets[name] as string)
-                };
-                break;
+        const data: DAuth = await getOtpByEmail(params.email).then(secret => {
+          if(secret && secret?.email === params.email) {
+            return {
+                name: secret.name,
+                email: secret.email,
+                timeRemaining,
+                code: authenticator.generate(secret.otp)
+            };
+          } else {
+            return {
+                name: '',
+                email: '',
+                timeRemaining,
+                code: ''
             }
-        }
+          }
+        });
         return NextResponse.json({ code: 200, data, msg: '请求成功'});
 
     } catch (error) {

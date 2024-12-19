@@ -21,25 +21,36 @@
         "name": "股市",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/e1/38/69/e1386957-0bcc-7314-6746-23b96a2c05bb/AppIcon-0-0-1x_U007emarketing-0-0-0-8-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp",
         "url": "/stock",
+        "requiresAuth": true,
         "visiable": true
     },
     {
         "name": "基金",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e8/b6/f1/e8b6f1ba-b9c2-8463-cfed-37f4868e05e7/AppIcon-0-0-1x_U007emarketing-0-10-0-0-85-220.jpeg/230x0w.webp",
         "url": "/fund",
+        "requiresAuth": true,
         "visiable": true
     },
     {
         "name": "ETF",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/64/fe/e3/64fee350-f578-85ed-7ce1-1ad75e8721f1/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/460x0w.webp",
         "url": "/etf",
+        "requiresAuth": true,
         "visiable": true
     },
     {
         "name": "短视频",
         "icon": "https://d.innev.cn/icons/1.0.0/Tiktok.svg",
         "url": "/video",
+        "requiresAuth": true,
         "visiable": false
+    },
+    {
+        "name": "VIP视频",
+        "icon": "https://d.innev.cn/icons/1.0.0/Tiktok.svg",
+        "url": "/vip",
+        "requiresAuth": true,
+        "visiable": true
     },
     {
         "name": "Rainbow",
@@ -69,6 +80,7 @@
         "name": "相册",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/9c/be/25/9cbe25e9-4fc6-2c25-d4b3-b06aefe9f96f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp",
         "url": "/photo",
+        "requiresAuth": true,
         "visiable": false
     },
     {
@@ -118,6 +130,7 @@
         "name": "电子课本",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/59/00/a0/5900a0ef-5f34-feee-820e-8518866403f0/AppIcon-0-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp",
         "url": "/ebook",
+        "requiresAuth": true,
         "visiable": true
     },
     {
@@ -305,6 +318,60 @@
         "name": "Whats app",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b9/a4/2a/b9a42ad1-74b5-9c7c-20eb-939897afb5f7/AppIconCatalystRelease-0-0-2x_U007euniversal-0-0-0-4-0-0-0-85-220.png/460x0w.webp",
         "url": "https://web.whatsapp.com",
+        "visiable": true
+    },
+    {
+        "name": "AICNN",
+        "icon": "https://aicnn.cn/img/aicnnicon.97b8a821.png",
+        "url": "https://aicnn.cn",
+        "visiable": true
+    },
+    {
+        "name": "泰尼旺",
+        "icon": "https://tinywow.com/v3/img/favicon-tinywow.svg",
+        "url": "https://tinywow.com",
+        "visiable": true
+    },
+    {
+        "name": "磁力熊",
+        "icon": "https://www.cilixiong.com/skin/cili/logo.png",
+        "url": "https://www.cilixiong.com",
+        "visiable": true
+    },
+    {
+        "name": "Magic Eraser",
+        "icon": "https://meta.magicstudio.com/assets/studio-logo.svg",
+        "url": "https://magicstudio.com/zh",
+        "visiable": true
+    },
+    {
+        "name": "Hugging Face",
+        "icon": "https://huggingface.co/front/assets/huggingface_logo-noborder.svg",
+        "url": "https://huggingface.co",
+        "visiable": true
+    },
+    {
+        "name": "Replicate",
+        "icon": "https://huggingface.co/front/assets/huggingface_logo-noborder.svg",
+        "url": "https://replicate.com",
+        "visiable": true
+    },
+    {
+        "name": "CodeFormer",
+        "icon": "https://github.com/sczhou.png",
+        "url": "https://replicate.com/sczhou/codeformer",
+        "visiable": true
+    },
+    {
+        "name": "周尚辰",
+        "icon": "https://github.com/sczhou.png",
+        "url": "https://shangchenzhou.com",
+        "visiable": true
+    },
+    {
+        "name": "混合盘",
+        "icon": "https://github.com/sczhou.png",
+        "url": "https://hunhepan.com",
         "visiable": true
     }
 ]

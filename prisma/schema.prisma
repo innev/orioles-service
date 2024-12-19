@@ -52,17 +52,17 @@ model UserBrand {
 }
 
 model App {
-  id           Int      @id @default(autoincrement())
-  name         String   @unique
-  icon         String   @db.VarChar(500)
-  url          String   @db.VarChar(200)
-  hint         BigInt?  @default(0)
-  visiable     Boolean  @default(false)
-  requiresAuth Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  user         String
-  User         User     @relation(fields: [user], references: [id], onDelete: Cascade)
+  id           Int       @id @default(autoincrement())
+  name         String    @unique
+  icon         String    @db.VarChar(500)
+  url          String    @db.VarChar(200)
+  hint         BigInt?   @default(0)
+  visiable     Boolean   @default(false)
+  requiresAuth Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+  user         String?
+  User         User?     @relation(fields: [user], references: [id], onDelete: Cascade)
 
   @@index([user])
 }
@@ -141,6 +141,55 @@ model Video {
   cover    String      @db.VarChar(500)
   url      String      @db.Text
   visiable Boolean     @default(true)
+
+  @@index([id])
+}
+
+model OneTimePassword {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(50)
+  email     String
+  otp       String    @db.VarChar(50)
+  expires   DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([id])
+}
+
+enum StockSource {
+  SS // 上证
+  SZ // 深证
+}
+
+enum StockType {
+  ZS // 指数
+  AG // A股
+}
+
+// Stock
+model Stock {
+  id     Int         @id @default(autoincrement())
+  code   String      @unique @db.VarChar(50)
+  source StockSource
+  type   StockType
+
+  @@index([id])
+}
+
+// 暂时未用上
+model StockData {
+  id        Int      @id @default(autoincrement())
+  stock     Int
+  date      DateTime
+  open      Float
+  close     Float
+  high      Float
+  low       Float
+  volume    Float
+  amount    Float
+  change    Float
+  percent   Float
+  amplitude Float
 
   @@index([id])
 }

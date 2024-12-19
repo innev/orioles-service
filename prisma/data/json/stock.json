@@ -1,0 +1,17 @@
+[
+    { "code": "000001", "source": "SS", "type": "ZS" },
+    { "code": "399001", "source": "SZ", "type": "ZS" },
+    { "code": "399006", "source": "SZ", "type": "ZS" },
+    { "code": "000688", "source": "SS", "type": "ZS" },
+    { "code": "399330", "source": "SZ", "type": "ZS" },
+    { "code": "000300", "source": "SS", "type": "ZS" },
+    { "code": "000905", "source": "SS", "type": "ZS" },
+    { "code": "000852", "source": "SS", "type": "ZS" },
+
+    { "code": "603617", "source": "SS", "type": "AG" },
+    { "code": "603679", "source": "SS", "type": "AG" },
+    { "code": "603687", "source": "SS", "type": "AG" },
+    { "code": "300940", "source": "SZ", "type": "AG" },
+    { "code": "002515", "source": "SZ", "type": "AG" },
+    { "code": "002006", "source": "SZ", "type": "AG" }
+]

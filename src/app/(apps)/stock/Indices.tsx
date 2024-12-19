@@ -1,31 +1,15 @@
 'use client'
 
-import Link from 'next/link'
-import useSWR from 'swr'
-import http from '@/utils/http'
-import { TRealData } from './type'
-import NumberFlow from '@number-flow/react'
-import { NumberFlowFormat, StockFormat } from '@/utils/format'
+import Link from 'next/link';
+import useSWR from 'swr';
+import http from '@/utils/http';
+import { TRealData } from './type';
+import NumberFlow from '@number-flow/react';
+import { NumberFlowFormat, StockFormat } from '@/utils/format';
+import { STOCK_SERVICE } from '@/service';
+import { TStock } from '@/model/Stock';
 
 export default ({ refreshInterval = 5000 }) => {
-
-    const code = [
-        '000001.SS',
-        '399001.SZ',
-        '399006.SZ',
-        '000688.SS',
-        '399330.SZ',
-        '000300.SS',
-        '000905.SS',
-        '000852.SS',
-
-        '603617.SS',
-        '603679.SS',
-        '603687.SS',
-        '300940.SZ',
-        '002515.SZ',
-        '002006.SZ'
-    ]
 
     const fields = [
         'prod_code',
@@ -38,8 +22,13 @@ export default ({ refreshInterval = 5000 }) => {
         'trade_status'
     ]
 
-    const { isLoading, data: realResp } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code.join(',')}&fields=${fields.join(',')}`, http.getAll, { refreshInterval })
-
+    const { data: stocks = [], error, isLoading: staockLoading } = useSWR<TStock[]>(STOCK_SERVICE.STOCKS, http.find_);
+    const { isLoading, data: realResp } = useSWR<TRealData>(
+        staockLoading ? null : [`https://api-ddc.wallstcn.com/market/real?prod_code=${stocks.map(stock => `${stock.code}.${stock.source}`).join(',')}&fields=${fields.join(',')}`, stocks],
+        http.getAll,
+        { refreshInterval }
+    );
+    
     if (isLoading || !realResp) {
         return (
             <div className="grid grid-cols-6 gap-4 w-full">
@@ -59,12 +48,13 @@ export default ({ refreshInterval = 5000 }) => {
     return (
         <div className="grid grid-cols-8 gap-4 w-full text-white">
             {
-                code.map((item) => {
+                stocks.map(stock => {
                     if (Object.keys(realResp.data.snapshot).length > 0) {
-                        const stock = realResp.data.snapshot[item]
-                        const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stock?.[i]]))
+                        const stockFullCode = `${stock.code}.${stock.source}`;
+                        const stockInfo = realResp.data.snapshot[stockFullCode]
+                        const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stockInfo?.[i]]))
                         return (
-                            <Link href={`/stock/${item}`} key={stockObj['prod_code']}>
+                            <Link href={`/stock/${stockFullCode}`} key={stockObj['prod_code']}>
                                 <div className={`cursor-pointer rounded-lg w-full flex flex-col shadow gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>
                                     <span className='text-sm'>{stockObj['prod_name']}</span>
                                     <NumberFlow className='text-3xl font-semibold' value={stockObj['last_px'] as number} format={NumberFlowFormat.value} />

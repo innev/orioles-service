@@ -21,7 +21,14 @@ export const AUTHENTICATORS_SERVICE = {
     OTPS: '/api/2fa'
 };
 
-
 export const VIDEO_SERVICE = {
     VIDEOS: '/api/videos'
+};
+
+export const STOCK_SERVICE = {
+    STOCKS: '/api/stocks'
+};
+
+export const ONE_TIME_PASSWORD_SERVICE = {
+    STOCKS: '/api/2fa'
 };

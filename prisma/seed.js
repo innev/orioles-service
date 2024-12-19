@@ -5,6 +5,8 @@ const icons = require('./data/json/icons.json');
 const videos = require('./data/json/video.json');
 const gitmojis = require('./data/json/gitmojis.json');
 const githubColors = require('./data/json/github-colors.json');
+const otps = require('./data/json/otp.json');
+const stocks = require('./data/json/stock.json');
 
 const prisma = new PrismaClient();
 const main = async () => {
@@ -126,6 +128,24 @@ const main = async () => {
     })
     .then(() => console.log(`Videos import completed!`))
     .catch(error => console.error(`Failed to insert videos.`, error));
+
+  /*===================================One Time Password==============================================*/
+  await prisma.oneTimePassword
+    .createMany({
+      data: otps,
+      skipDuplicates: true
+    })
+    .then(() => console.log(`OneTimePassword import completed!`))
+    .catch(error => console.error(`Failed to insert oneTimePassword.`, error));
+
+  /*===================================Stock==============================================*/
+  await prisma.stock
+    .createMany({
+      data: stocks,
+      skipDuplicates: true
+    })
+    .then(() => console.log(`Stock import completed!`))
+    .catch(error => console.error(`Failed to insert stock.`, error));
 
 
   console.log('JSON data import completed.');
