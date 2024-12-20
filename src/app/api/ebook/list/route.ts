@@ -25,12 +25,8 @@ export const GET = async (_: NextRequest) => {
         const prefix: string = alioss.getOSSFolder({ platform: 'orioles', resource: 'ebook' });
         const data: Array<DBook> = await client.list({ delimiter: '/', prefix, "max-keys": 1000 }, {})
             .then(bookListParse)
-            .then((data: Array<DBook>) => data.map(({ cover, path, type, ...other }: DBook) => {
-                if (type != "demo") {
-                    return { cover: `${path}/${cover}`, type, path, ...other };
-                }
-                return false;
-            }).filter(_item => _item !== false));
+            .then(data => data.filter(({ type }) => type !== "demo"))
+            .then(data => data.map(({ cover, path, type, ...other }) => ({ cover: `${path}/${cover}`, type, path, ...other })));
 
         return NextResponse.json({
             code: 200,
