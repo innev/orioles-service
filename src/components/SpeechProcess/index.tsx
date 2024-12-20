@@ -19,6 +19,7 @@ export default ({ src, data }: { src?: string; data?: IModuleNode }) => {
 
   useEffect(() => {
     if(src) {
+      src = src.startsWith('https://') ? src.replace('https://', 'http://') : src;
       request({ url: isAbsolutePath(src) ? src : `/${src}`, success: (data: IModuleNode) => {
         setNodeData(data);
         setEvalList(data);

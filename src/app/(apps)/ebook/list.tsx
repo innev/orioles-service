@@ -17,7 +17,7 @@ export default () => {
       {ebooks?.map((ebook: DBook) => (
         <div key={ebook.id} className="group relative">
           <div className="overflow-hidden rounded-md group-hover:opacity-75 shadow-lg">
-            <img src={ebook.cover} alt={ebook.name} className="object-cover object-center"/>
+            <img src={ebook.cover.startsWith('https://') ? ebook.cover.replace('https://', 'http://') : ebook.cover} alt={ebook.name} className="object-cover object-center"/>
           </div>
           <div className="mt-4 flex justify-between">
             <div>

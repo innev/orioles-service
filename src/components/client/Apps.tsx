@@ -8,20 +8,26 @@ import useSWR from 'swr';
 import IconButton from './IconButton';
 import { useAuth } from '@/providers/AuthProvider';
 import { useEffect } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default () => {
+    const router = useRouter();
+    const { data: session, status } = useSession();
     const { setShowLoginModal } = useAuth();
     const { data: apps = [], error, isLoading } = useSWR<TApp[]>(APP_SERVICE.APPS, http.find_);
 
-    const pathname = usePathname();
     const searchParams = useSearchParams();
     useEffect(() => {
-        if(searchParams?.get('auth-redirect')) {
-            setShowLoginModal(true);
+        const url = searchParams?.get('auth-redirect');
+        if(url) {
+            if(status === 'authenticated') {
+                router.push(url);
+            } else if (status === 'unauthenticated') {
+                setShowLoginModal(true);
+            }
         }
-    }, [pathname, searchParams]);
-
+    }, [status, searchParams]);
 
     return (
         <div className='flex flex-row flex-wrap p-6 gap-2'>

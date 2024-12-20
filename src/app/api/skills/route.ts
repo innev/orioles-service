@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { handleApiError } from '@/utils/api-response'
+import { handleApiError } from '@/utils/api-response';
 import { getSkills, TDockItem } from '@/model/Skills';
 
 /**

@@ -33,7 +33,7 @@ export default ({ pages, origin = 'cloud', goBack }: TParams) => {
         </div>
         <Link href={`/ebook/${id}/module`}>
           <div className="shadow-xl absolute h-4/5 left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
-            <img src={thumb} alt={title} className="h-full w-full object-cover object-center"/>
+            <img src={thumb.startsWith('https://') ? thumb.replace('https://', 'http://') : thumb} alt={title} className="h-full w-full object-cover object-center"/>
           </div>
         </Link>
       </div>

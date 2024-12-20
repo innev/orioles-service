@@ -1,0 +1,47 @@
+import { DBook } from '@/templates/interfaces/IBook';
+import alioss, { DListObjectResult } from '@/utils/alioss';
+import OSS from 'ali-oss';
+import { NextRequest, NextResponse } from 'next/server';
+import { handleApiError } from '@/utils/api-response';
+
+const CDN_HOST: string = process.env.CDN_HOST || '';
+
+const bookListParse = (result: DListObjectResult): Promise<Array<DBook>> => {
+  const tasks: Array<Promise<DBook>> = result?.prefixes?.map(async (name: string) => {
+    return fetch(`${CDN_HOST}/${name}index.json`).then(data => data.json()).catch(err => console.error(`${CDN_HOST}/${name}index.json`, err));
+  }) || [];
+  return Promise.all(tasks);
+};
+
+export const GET = async (_: NextRequest) => {
+    try {
+        const client = new OSS({
+            accessKeyId: process.env.ALIYUN_ACCESS_KEY_ID as string,
+            accessKeySecret: process.env.ALIYUN_ACCESS_KEY_SECRET as string,
+            region: process.env.ALIYUN_REGION,
+            bucket: process.env.ALIYUN_BUCKET,
+        });
+
+        const prefix: string = alioss.getOSSFolder({ platform: 'orioles', resource: 'ebook' });
+        const data: Array<DBook> = await client.list({ delimiter: '/', prefix, "max-keys": 1000 }, {})
+            .then(bookListParse)
+            .then((data: Array<DBook>) => data.map(({ cover, path, type, ...other }: DBook) => {
+                if (type != "demo") {
+                    return { cover: `${path}/${cover}`, type, path, ...other };
+                }
+                return false;
+            }).filter(_item => _item !== false));
+
+        return NextResponse.json({
+            code: 200,
+            data,
+            msg: '请求成功'
+        });
+
+    } catch (error) {
+        return NextResponse.json(
+            handleApiError(error),
+            { status: error instanceof Error ? 404 : 200 }
+        );
+    }
+};
