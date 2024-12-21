@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (request: NextRequest) => {
+export const GET = async (_: NextRequest) => {
     const resp = await fetch(`${process.env.PROXY_API}/api/etf`, {
         method: 'GET',
         headers: {

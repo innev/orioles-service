@@ -32,3 +32,9 @@ export const STOCK_SERVICE = {
 export const ONE_TIME_PASSWORD_SERVICE = {
     STOCKS: '/api/2fa'
 };
+
+export const EBOOK_SERVICE = {
+    BOOKS: '/api/ebook',
+    DETAIL: '/api/ebook/detail',
+    MODULE: '/api/ebook/module'
+};

@@ -1,29 +1,19 @@
 'use client'
 
-import { getBookDetail } from '@/service/ebook';
 import ModuleCarousel from '@/components/ModuleCarousel';
 import ToolBar from '@/components/ToolBar';
 import { Spin } from '@/components/iv-ui';
-import { DBook, DModule } from '@/components/iv-ui/typings/DBook';
+import { DBook } from '@/components/iv-ui/typings/DBook';
 import { useEffect, useState } from 'react';
 import { TParams } from './type';
+import useSWR from 'swr';
+import { EBOOK_SERVICE } from '@/service';
+import http from '@/utils/http';
 
 export default ({ pages, origin = 'cloud', goBack }: TParams) => {
-  const [ id ] = pages;
+  const [id] = pages;
   const [height, setHeight] = useState<Number>(0);
-  const [loading, setLoading] = useState<Boolean>(false);
-  const [modules, setModules] = useState<Array<DModule>>([]);
-
-  useEffect(() => {
-    if(!id) return;
-
-    getBookDetail(id as string, origin as string).then(bookData => {
-      const { modules } = bookData as DBook;
-      if(modules) setModules(modules);
-      setLoading(true);
-    });
-  }, [id]);
-
+  const { data, error, isLoading } = useSWR<DBook>(`${EBOOK_SERVICE.DETAIL}?id=${id}&origin=${origin}`, http.findOne_);
 
   useEffect(() => {
     const updateHeight = () => {
@@ -44,13 +34,13 @@ export default ({ pages, origin = 'cloud', goBack }: TParams) => {
   }, []);
 
   return (
-    <Spin spinning={loading}>
+    <Spin spinning={!isLoading}>
       <div className="h-screen w-full overflow-hidden bg-white">
         <div className="absolute bottom-4 left-4">
           <ToolBar type='cd' goBack={goBack} />
         </div>
         <div className="h-full w-full flex flex-1 skew-x-10" style={{ marginLeft: 90 }}>
-          <ModuleCarousel modules={modules} route={`/ebook/${id}/speech`} />
+          <ModuleCarousel modules={data?.modules || []} route={`/ebook/${id}/speech`} />
         </div>
       </div>
     </Spin>

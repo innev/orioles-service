@@ -3,14 +3,20 @@ import alioss, { DListObjectResult } from '@/utils/alioss';
 import OSS from 'ali-oss';
 import { NextRequest, NextResponse } from 'next/server';
 import { handleApiError } from '@/utils/api-response';
+import path from 'path';
 
 const CDN_HOST: string = process.env.CDN_HOST || '';
 
-const bookListParse = (result: DListObjectResult): Promise<Array<DBook>> => {
-  const tasks: Array<Promise<DBook>> = result?.prefixes?.map(async (name: string) => {
-    return fetch(`${CDN_HOST}/${name}index.json`).then(data => data.json()).catch(err => console.error(`${CDN_HOST}/${name}index.json`, err));
-  }) || [];
-  return Promise.all(tasks);
+const bookListParse = async (result: DListObjectResult): Promise<Array<DBook>> => {
+    return Promise.all(result?.prefixes?.map(async (name: string) => {
+        const _path = path.join(CDN_HOST, name);
+        return fetch(path.join(_path, 'index.json'))
+            .then(data => data.json())
+            .then(item => item ? { ...item, path: _path, cover: path.join(_path, item.cover) } : {});
+    })).catch(err => {
+        console.error("bookListParse:", err);
+        return [];
+    });
 };
 
 export const GET = async (_: NextRequest) => {
@@ -25,9 +31,12 @@ export const GET = async (_: NextRequest) => {
         const prefix: string = alioss.getOSSFolder({ platform: 'orioles', resource: 'ebook' });
         const data: Array<DBook> = await client.list({ delimiter: '/', prefix, "max-keys": 1000 }, {})
             .then(bookListParse)
-            .then(data => data.filter(({ type }) => type !== "demo"))
-            .then(data => data.map(({ cover, path, type, ...other }) => ({ cover: `${path}/${cover}`, type, path, ...other })));
-
+            // .then(data => data.filter(({ type }) => type !== "demo"))
+            .catch(err => {
+                console.error(err);
+                return [];
+            });
+            
         return NextResponse.json({
             code: 200,
             data,

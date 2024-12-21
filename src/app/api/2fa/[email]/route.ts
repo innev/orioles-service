@@ -4,8 +4,6 @@ import { handleApiError } from '@/utils/api-response'
 import { NextRequest, NextResponse } from 'next/server';
 import { authenticator } from 'otplib';
 
-const secrets: { [key: string]: string | { [key: string]: string } } = JSON.parse(process.env.SECRETS||'');
-
 /**
  * app/api 中的GET方法
  */
@@ -19,7 +17,7 @@ interface RouteParams {
  * @param {Object} payload
  * @property {RouteParams} [payload.param]
  */
-export async function GET(_: NextRequest, { params }: RouteParams) {
+export const GET = async (_: NextRequest, { params }: RouteParams) => {
     try {
         const timeRemaining = authenticator.timeRemaining();
         const data: DAuth = await getOtpByEmail(params.email).then(secret => {
@@ -55,7 +53,7 @@ export async function GET(_: NextRequest, { params }: RouteParams) {
  * @param {Object} payload
  * @property {RouteParams} [payload.param]
  */
-export async function PATCH(request: NextRequest, { params }: RouteParams) {
+export const PATCH = async (request: NextRequest, { params }: RouteParams) => {
   try {
     const body = await request.json()
     return NextResponse.json({ success: true, data: body })
@@ -73,7 +71,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
  * @param {Object} payload
  * @property {RouteParams} [payload.param]
  */
-export async function DELETE(_: NextRequest, { params }: RouteParams) {
+export const DELETE = async (_: NextRequest, { params }: RouteParams) => {
   try {
     return NextResponse.json({ success: true, code: 200 })
   } catch (error) {
