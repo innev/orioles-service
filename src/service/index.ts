@@ -34,7 +34,7 @@ export const ONE_TIME_PASSWORD_SERVICE = {
 };
 
 export const EBOOK_SERVICE = {
-    BOOKS: '/api/ebook',
+    BOOKS: '/api/ebook/qiniu',
     DETAIL: '/api/ebook/detail',
     MODULE: '/api/ebook/module'
 };

@@ -8,7 +8,7 @@ import { authenticator } from 'otplib';
  * app/api 中的GET方法
  */
 interface RouteParams {
-    params: { email: string }
+  params: { email: string }
 };
 
 /**
@@ -18,33 +18,33 @@ interface RouteParams {
  * @property {RouteParams} [payload.param]
  */
 export const GET = async (_: NextRequest, { params }: RouteParams) => {
-    try {
-        const timeRemaining = authenticator.timeRemaining();
-        const data: DAuth = await getOtpByEmail(params.email).then(secret => {
-          if(secret && secret?.email === params.email) {
-            return {
-                name: secret.name,
-                email: secret.email,
-                timeRemaining,
-                code: authenticator.generate(secret.otp)
-            };
-          } else {
-            return {
-                name: '',
-                email: '',
-                timeRemaining,
-                code: ''
-            }
-          }
-        });
-        return NextResponse.json({ code: 200, data, msg: '请求成功'});
+  try {
+    const timeRemaining = authenticator.timeRemaining();
+    const data: DAuth = await getOtpByEmail(params.email).then(secret => {
+      if (secret && secret?.email === params.email) {
+        return {
+          name: secret.name,
+          email: secret.email,
+          timeRemaining,
+          code: authenticator.generate(secret.otp)
+        };
+      } else {
+        return {
+          name: '',
+          email: '',
+          timeRemaining,
+          code: ''
+        }
+      }
+    });
+    return NextResponse.json({ code: 200, data, msg: '请求成功' });
 
-    } catch (error) {
-        return NextResponse.json(
-            handleApiError(error),
-            { status: error instanceof Error ? 404 : 200 }
-        )
-    }
+  } catch (error) {
+    return NextResponse.json(
+      handleApiError(error),
+      { status: error instanceof Error ? 404 : 200 }
+    )
+  }
 }
 
 /**
