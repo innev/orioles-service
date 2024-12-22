@@ -531,6 +531,11 @@ export interface DBook {
     version: string,
 
     /**
+     * 课本地址
+     */
+    path: string,
+
+    /**
      * 课本封面
      */
     cover: string,

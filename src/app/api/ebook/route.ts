@@ -12,7 +12,7 @@ const bookListParse = async (result: DListObjectResult): Promise<Array<DBook>> =
         const _path = path.join(CDN_HOST, name);
         return fetch(path.join(_path, 'index.json'))
             .then(data => data.json())
-            .then(item => item ? { ...item, path: _path, cover: path.join(_path, item.cover) } : {});
+            // .then(item => item ? { ...item, path: _path, cover: path.join(_path, item.cover) } : {});
     })).catch(err => {
         console.error("bookListParse:", err);
         return [];
@@ -31,7 +31,7 @@ export const GET = async (_: NextRequest) => {
         const prefix: string = alioss.getOSSFolder({ platform: 'orioles', resource: 'ebook' });
         const data: Array<DBook> = await client.list({ delimiter: '/', prefix, "max-keys": 1000 }, {})
             .then(bookListParse)
-            // .then(data => data.filter(({ type }) => type !== "demo"))
+            .then(data => data.filter(({ type }) => type !== "demo"))
             .catch(err => {
                 console.error(err);
                 return [];
