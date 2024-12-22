@@ -17,7 +17,10 @@ import '@/utils/extensions/string';
 import mimeType from '@/utils/mimeType';
 import { request } from '@/utils/request';
 import Head from 'next/head';
+import path from 'path';
 import { useEffect, useMemo, useState } from 'react';
+
+const CDN_HOST: string = process.env.CDN_HOST + '/';
 
 /**
  * 自定义上传请求，根据不同场景进行定制
@@ -40,10 +43,9 @@ const uploadRequest = (file: File | Blob, { md5, filename, textContent }: DUploa
   }
 };
 
-const CDN_HOST: string = "https://o.innev.cn";
 const bookListParse = (result: DListObjectResult): Promise<Array<DBook | { id: string, name: string, version: string }>> => {
   const tasks: Array<Promise<DBook | { id: string, name: string, version: string }>> = result?.prefixes?.map((name: string) => {
-    const url: string = `${CDN_HOST}/${name}index.json`;
+    const url: string = path.join(CDN_HOST, name, 'index.json');
     const names: Array<string> = name.split("/");
     const id: string = names[names.length - 2] || '';
     return new Promise(resolve => request({

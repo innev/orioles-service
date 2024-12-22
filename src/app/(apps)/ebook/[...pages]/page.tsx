@@ -4,11 +4,14 @@ import Cover from "./cover";
 import Module from "./module";
 import Speech from "./speech";
 import { ROTER_MAPPING, TParams } from "./type";
+import path from 'path';
+
+const CDN_HOST: string = process.env.CDN_HOST + '/';
 
 export const generateMetadata = async ({ params: { pages } }: { params: TParams }): Promise<Metadata> => {
     const [ id, page ] = pages;
     const prefix: string = alioss.getOSSFolder({ platform: 'orioles', resource: 'ebook' });
-    const basePath: string = `${process.env.CDN_HOST}/${prefix}${id}`;
+    const basePath: string = path.join(CDN_HOST, `${prefix}${id}`);
     const { name } = await fetch(`${basePath}/index.json`).then(data => data.json());
     
     return {

@@ -1,34 +1,21 @@
 import { actionInfoTips } from '@/components/ModalMethod';
 import { Spin } from '@/components/iv-ui';
-import { isAbsolutePath } from '@/utils';
-import { request } from '@/utils/request';
 import { typeItem } from '@/utils/voiceType';
 import { useEffect, useMemo, useState } from 'react';
 import { IModuleNode, ISpeechDialogue, ISpeechText, ISpeechWord } from '../iv-ui/typings/DBook';
 import EvaluationOption from './EvaluationOption';
 import Word from './Word';
+import useSWR from 'swr';
+import http from '@/utils/http';
 
 export default ({ src, data }: { src?: string; data?: IModuleNode }) => {
-  const [loading, setLoading] = useState<Boolean>(false);
   const [evalUpdate, setEvalUpdate] = useState<Boolean>(false);
-  const [nodeData, setNodeData] = useState<IModuleNode>();
   const [evalList, setEvalList] = useState<IModuleNode>();
   const [evalType, setEvalType] = useState<string>();
-  const [wordIdex, setWordIdex] = useState(0)
-  const [recordType, setRecordType] = useState('')
+  const [wordIdex, setWordIdex] = useState(0);
+  const [recordType, setRecordType] = useState('');
 
-  useEffect(() => {
-    if(src) {
-      src = src.startsWith('https://') ? src.replace('https://', 'http://') : src;
-      request({ url: isAbsolutePath(src) ? src : `/${src}`, success: (data: IModuleNode) => {
-        setNodeData(data);
-        setEvalList(data);
-        setLoading(true);
-      }});
-    } else {
-      setLoading(true);
-    }
-  }, [src]);
+  const { data: nodeData, error, isLoading } = useSWR(src, http.loadFile_);
 
   const reset = (type?: string) => {
     let newType: string = data ? typeItem(data, type) : type ? type : '';
@@ -116,7 +103,7 @@ export default ({ src, data }: { src?: string; data?: IModuleNode }) => {
   
   const speechRander = useMemo(() => {
     if(!nodeData) return null;
-    
+
     return Object.keys(nodeData).map((key: string, idx: number) => {
       const speechs: Array<ISpeechWord | ISpeechDialogue | ISpeechText> = nodeData[key as keyof typeof nodeData] as Array<ISpeechWord | ISpeechDialogue | ISpeechText>;
       
@@ -131,7 +118,7 @@ export default ({ src, data }: { src?: string; data?: IModuleNode }) => {
 
 
   return (
-    <Spin spinning={loading}>
+    <Spin spinning={!isLoading}>
       <div className="h-full w-full" >
         {/* <div className="tc p24 catalogTabs">
           {
@@ -150,8 +137,6 @@ export default ({ src, data }: { src?: string; data?: IModuleNode }) => {
             })}
         </div> */}
         {speechRander}
-
-
 
         <div className="absolute bottom-0 translate-x-1/2 left-1/2 hidden">
           {/* /* 底部播放音频和录音部分 */}

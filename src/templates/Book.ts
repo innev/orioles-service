@@ -1,7 +1,8 @@
+import path from "path";
 import IBook, { DBook, DBookInfo } from "./interfaces/IBook";
 import { DBookPage } from "./interfaces/IBookPage";
 
-const CDN_HOST: string = "https://o.innev.cn";
+const CDN_HOST: string = process.env.CDN_HOST + '/';
 
 export default class Book implements IBook {
     private version: string = "5.0.0";
@@ -22,7 +23,7 @@ export default class Book implements IBook {
             version: this.version,
             id: this.info.id,
             type: "pc",
-            path: `${CDN_HOST}/${this.path}`,
+            path: path.join(CDN_HOST, this.path),
             name: this.info.name,
             desc: this.info.name,
             cover: `${this.info.url.replace(this.path, "")}`,

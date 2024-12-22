@@ -1,7 +1,7 @@
 import { isArray, randomID } from "@/utils";
 import IBookPage, { DBookPage, DPageInfo } from "./interfaces/IBookPage";
 
-const CDN_HOST: string = "https://o.innev.cn";
+const CDN_HOST: string = process.env.CDN_HOST + '/';
 
 export default class BookPage implements IBookPage {
     private idx: number;

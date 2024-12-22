@@ -19,6 +19,14 @@ const http = {
       throw new Error('请求失败')
     }
   },
+  loadFile_: async (url: string, init?: RequestInit) => {
+    const resp = await fetch(url, init);
+    if (resp.status == 200) {
+      return resp.json();
+    } else {
+      throw new Error('请求失败')
+    }
+  },
 
   get: async (url: string, init?: RequestInit) => {
     const resp = await fetch(url, init)

@@ -19,7 +19,7 @@ export default () => {
           : data.map(ebook => (
             <div key={ebook.id} className="group relative">
               <div className="overflow-hidden rounded-md group-hover:opacity-75 shadow-lg">
-                <img src={ebook.path + '/' + ebook.cover||FALLBACK_IMAGE} alt={ebook.name} className="object-cover object-center" />
+                <img src={ebook.cover||FALLBACK_IMAGE} alt={ebook.name} className="object-cover object-center" />
               </div>
               <div className="mt-4 flex justify-between">
                 <div>

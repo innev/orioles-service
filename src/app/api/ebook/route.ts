@@ -3,16 +3,15 @@ import alioss, { DListObjectResult } from '@/utils/alioss';
 import OSS from 'ali-oss';
 import { NextRequest, NextResponse } from 'next/server';
 import { handleApiError } from '@/utils/api-response';
-import path from 'path';
+import { join } from 'node:path';
 
-const CDN_HOST: string = process.env.CDN_HOST || '';
+const CDN_HOST: string = process.env.CDN_HOST + '/';
 
 const bookListParse = async (result: DListObjectResult): Promise<Array<DBook>> => {
-    return Promise.all(result?.prefixes?.map(async (name: string) => {
-        const _path = path.join(CDN_HOST, name);
-        return fetch(path.join(_path, 'index.json'))
+    return Promise.all(result?.prefixes?.map(async (_path: string) => {
+        return fetch(CDN_HOST + join(_path, 'index.json'))
             .then(data => data.json())
-            // .then(item => item ? { ...item, path: _path, cover: path.join(_path, item.cover) } : {});
+            .then(item => item ? { ...item, path: CDN_HOST + _path, cover: CDN_HOST + join(_path, item.cover) } : {});
     })).catch(err => {
         console.error("bookListParse:", err);
         return [];
