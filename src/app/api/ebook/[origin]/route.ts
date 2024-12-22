@@ -10,10 +10,10 @@ import { GetObjectsResult } from 'qiniu/StorageResponseInterface';
 const CDN_HOST: string = process.env.CDN_HOST + '/';
 
 // 定义枚举类型
-export enum OSSOrigin {
+enum OSSOrigin {
     ALIYUN = "aliyun",
     QUNIU = "qiniu"
-  }
+}
 
 interface RouteParams {
     params: { origin: OSSOrigin }
@@ -47,7 +47,7 @@ const ossListParse = async (result: DListObjectResult): Promise<Array<DBook>> =>
 };
 
 const qiniuListParse = async ({ data, resp }: httpc.ResponseWrapper<GetObjectsResult>): Promise<Array<DBook>> => {
-    if(resp.statusCode !== 200 || !data?.commonPrefixes) return [];
+    if (resp.statusCode !== 200 || !data?.commonPrefixes) return [];
 
     return Promise.all(data?.commonPrefixes?.map(async (_path: string) => {
         return fetch(CDN_HOST + join(_path, 'index.json'))
@@ -66,7 +66,7 @@ export const GET = async (_: NextRequest, { params }: RouteParams) => {
 
         let data: Array<DBook> = [];
         if (params.origin === OSSOrigin.QUNIU) {
-            data = await (client as qiniu.rs.BucketManager).listPrefix(process.env.QINIU_BUCKET||'', { delimiter: '/', prefix, marker: '', limit: 1000 })
+            data = await (client as qiniu.rs.BucketManager).listPrefix(process.env.QINIU_BUCKET || '', { delimiter: '/', prefix, marker: '', limit: 1000 })
                 .then(qiniuListParse)
                 .catch(err => {
                     console.error(err);
