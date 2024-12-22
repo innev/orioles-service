@@ -1,10 +1,10 @@
 'use client'
 
-import moment from "moment"
-import 'moment/locale/zh-cn'
-import { Location } from '@/components/Icons'
-import ImageSkeleton from "@/components/client/ImageSkeleton"
-import { TVideo } from "./type"
+import moment from "moment";
+import 'moment/locale/zh-cn';
+import { Location } from '@/components/Icons';
+import { ImageSkeleton } from "@/components/iv-ui";
+import { TVideo } from "./type";
 
 type VideoProps = {
     video: TVideo

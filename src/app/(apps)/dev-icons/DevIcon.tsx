@@ -1,7 +1,7 @@
 'use client';
 
 import toast from "react-hot-toast";
-import ImageSkeleton from "@/components/client/ImageSkeleton";
+import { ImageSkeleton } from "@/components/iv-ui";
 import { DevIconProps } from '@/model/Icon';
 import useSWR from 'swr';
 import { ICON_SERVICE } from '@/service';
@@ -20,7 +20,7 @@ export const DevIcon =  ({ icon }: { icon: DevIconProps }) => {
             className="icon-card"
             onClick={() => copyName(icon.name.toLowerCase())}
         >
-            <ImageSkeleton src={CDN.icon(icon.name)} className='icon-image' />
+            <ImageSkeleton src={CDN.icon(icon.name)} />
             <p className="text-sm">{icon.name}</p>
         </div>
     )

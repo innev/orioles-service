@@ -16,6 +16,7 @@ import Stack from "./Stack";
 import Tabs from "./Tabs";
 import Tooltip from "./Tooltip";
 import Tree from "./Tree";
+import ImageSkeleton from "./ImageSkeleton";
 
 export {
     Breadcrumb,
@@ -35,5 +36,6 @@ export {
     Tabs,
     Modal,
     ModalSample, ModalSampleOptions,
-    Navbars
+    Navbars,
+    ImageSkeleton
 };

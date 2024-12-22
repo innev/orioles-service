@@ -6,12 +6,13 @@ import { TDockItem } from '@/model/Skills';
 import { TApp } from '@/model/App';
 import CDN from '@/utils/cdn';
 import { useSession } from 'next-auth/react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { ImageSkeleton } from '@/components/iv-ui';
 
 export default ({ item, isCDN = false }: { item: TApp|TDockItem, isCDN?: boolean }) => {
     const router = useRouter();
-    const { data: session, status } = useSession();
-    const { showLoginModal, setShowLoginModal } = useAuth();
+    const { status } = useSession();
+    const { setShowLoginModal } = useAuth();
     const searchParams = useSearchParams();
 
     const openApp = (item: TApp|TDockItem) => {
@@ -26,7 +27,7 @@ export default ({ item, isCDN = false }: { item: TApp|TDockItem, isCDN?: boolean
 
     return (
         <div className="icon-card" onClick={() => openApp(item)}>
-            <img src={isCDN ? CDN.icon(item.icon) : item.icon} className="icon-image" alt="" />
+            <ImageSkeleton src={isCDN ? CDN.icon(item.icon) : item.icon} />
             <span className='text-sm text-gray-800'>{item.name}</span>
         </div>
     )

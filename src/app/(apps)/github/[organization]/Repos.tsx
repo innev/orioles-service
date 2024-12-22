@@ -3,7 +3,7 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import useSWRInfinite from 'swr/infinite';
 import { ForkIcon, IssueIcon, LicenseIcon, Loading, StarIcon } from "@/components/Icons";
-import ImageSkeleton from "@/components/client/ImageSkeleton";
+import { ImageSkeleton } from "@/components/iv-ui";
 import http from "@/utils/http";
 import { TRepo } from "./type";
 

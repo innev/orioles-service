@@ -1,10 +1,10 @@
 'use client'
 
-import moment from "moment"
-import 'moment/locale/zh-cn'
-import ImageSkeleton from "@/components/client/ImageSkeleton"
-import { Location } from "@/components/Icons"
-import { TPhoto } from "./type"
+import moment from "moment";
+import 'moment/locale/zh-cn';
+import { ImageSkeleton } from "@/components/iv-ui";
+import { Location } from "@/components/Icons";
+import { TPhoto } from "./type";
 
 export type PhotoProps = {
     photo: TPhoto
