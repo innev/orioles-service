@@ -2,6 +2,9 @@ import genSignatureUrl from "@/utils/fyunSignature";
 import { handleApiError } from '@/utils/api-response';
 import { NextRequest, NextResponse } from 'next/server';
 
+// 声明为动态路由，这样可以使用 searchParams
+export const dynamic = 'force-dynamic';
+
 export const GET = async (_: NextRequest) => {
   try {
     const { type = 'ise' } = Object.fromEntries(_.nextUrl.searchParams.entries());

@@ -7,6 +7,9 @@ import { join } from 'path';
 
 const CDN_HOST: string = process.env.CDN_HOST + '/';
 
+// 声明为动态路由，这样可以使用 searchParams
+export const dynamic = 'force-dynamic';
+
 export const GET = async (_: NextRequest) => {
     try {
         const { id = '', module, origin = 'cloud' } = Object.fromEntries(_.nextUrl.searchParams.entries());

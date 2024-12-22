@@ -9,6 +9,9 @@ interface RouteParams {
   params: { id: string, origin: string };
 };
 
+// 声明为动态路由，这样可以使用 searchParams
+export const dynamic = 'force-dynamic';
+
 export const GET = async (_: NextRequest, { params }: RouteParams) => {
   try {
     const { id = '' } = Object.fromEntries(_.nextUrl.searchParams.entries());

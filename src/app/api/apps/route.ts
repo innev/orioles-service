@@ -2,6 +2,9 @@ import { handleApiError } from '@/utils/api-response'
 import { NextRequest, NextResponse } from 'next/server';
 import { getApps } from '@/model/App';
 
+// 声明为动态路由，因为使用了外部 API 调用
+export const dynamic = 'force-dynamic';
+
 export const GET = async (_: NextRequest) => {
     try {
         return NextResponse.json({

@@ -4,6 +4,9 @@ import { handleApiError } from '@/utils/api-response'
 import { NextRequest, NextResponse } from 'next/server';
 import { authenticator } from 'otplib';
 
+// 声明为动态路由，这样可以使用 searchParams
+export const dynamic = 'force-dynamic';
+
 /**
  * app/api 中的GET方法
  */
