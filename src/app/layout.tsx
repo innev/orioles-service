@@ -1,8 +1,6 @@
 import './globals.css';
 import './apps.css';
 import '@/lib/i18n-client';
-// import { useTranslation } from '@/lib/i18n-server';
-// import { languages } from '@/lib/i18n-options';
 import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from '@/providers/AuthProvider';
 import LoginModal from '@/components/LoginModal';
