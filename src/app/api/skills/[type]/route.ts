@@ -10,6 +10,9 @@ interface RouteParams {
   params: { type: SkillsType }
 };
 
+// 声明为动态路由，这样可以使用 searchParams
+export const dynamic = 'force-dynamic';
+
 /**
  * 获取详情
  * @param {NextRequest} _ - 暂时用不上

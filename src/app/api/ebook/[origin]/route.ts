@@ -15,6 +15,9 @@ enum OSSOrigin {
     QUNIU = "qiniu"
 }
 
+// 声明为动态路由，这样可以使用 searchParams
+export const dynamic = 'force-dynamic';
+
 interface RouteParams {
     params: { origin: OSSOrigin }
 };
