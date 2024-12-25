@@ -2,7 +2,8 @@ import { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import DiscordProvider from "next-auth/providers/discord";
-import { getUserInfo_ } from "@/model/User";
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { getUserInfo_, userLogin } from "@/model/User";
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -17,6 +18,16 @@ export const authOptions: NextAuthOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+        }),
+        CredentialsProvider({
+            name: 'Credentials',
+            credentials: {
+                email: { label: "Email", type: "email" },
+                password: { label: "Password", type: "password" }
+            },
+            async authorize(credentials) {
+                return userLogin(credentials||{ email: '', password: ''});
+            }
         })
     ],
     session: { strategy: "jwt" },
@@ -30,10 +41,11 @@ export const authOptions: NextAuthOptions = {
     debug: process.env.NODE_ENV !== 'production',
     callbacks: {
         async signIn({ user, account, profile }) {
-            const userInfo = await getUserInfo_(user?.email||'');
-            if(!userInfo) {
+            const userInfo = await getUserInfo_(user?.email || '');
+            if (!userInfo) {
                 return false;
             }
+            user.id = userInfo.id;
             return true;
         },
         jwt({ token, user, account, profile, isNewUser, trigger, session }) {

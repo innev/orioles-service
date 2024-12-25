@@ -1,20 +1,23 @@
+import { hashPassword, saltRandom } from '@/lib/hashPassword';
 import { handleApiError } from '@/utils/api-response'
 import { NextRequest, NextResponse } from 'next/server';
-import { getApps } from '@/model/App';
-import { getToken } from 'next-auth/jwt';
 
-// 声明为动态路由，因为使用了外部 API 调用
+// 声明为动态路由，这样可以使用 searchParams
 export const dynamic = 'force-dynamic';
 
 export const GET = async (_: NextRequest) => {
-    const session = await getToken({ req: _ });
-    
+    const { pass = '' } = Object.fromEntries(_.nextUrl.searchParams.entries());
+
     try {
+        const passwordSalt: number = saltRandom();
+        const password: string = hashPassword(pass, passwordSalt.toString());
+
         return NextResponse.json({
             code: 200,
-            data: await getApps(session?.id as string),
-            message: '请求成功'
+            data: { password, passwordSalt },
+            msg: '请求成功'
         });
+
     } catch (error) {
         return NextResponse.json(
             handleApiError(error),

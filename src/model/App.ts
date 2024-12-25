@@ -8,9 +8,17 @@ export type TApp = {
     requiresAuth: boolean
 };
 
-export const getApps = async (visiable: boolean = true): Promise<Array<TApp>> => { 
+export const getApps = async (user: string, visiable: boolean = true): Promise<Array<TApp>> => { 
     return prisma.app.findMany({
-        where: { visiable },
+        where: {
+            visiable,
+            ...(user ? {
+                OR: [
+                    { user },
+                    { user: null }
+                ]
+            } : { user: null })
+        },
         select: {
             id: true,
             name: true,

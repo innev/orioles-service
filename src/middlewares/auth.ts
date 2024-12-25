@@ -8,12 +8,12 @@ const protectedRoutes = ['/dashboard', '/2fa', '/explorer', '/photo', '/video', 
 const publicRoutes = ['/', '/login', '/signup'];
 const SIGIN_IN = '/';
 
-export const withPageAuth = async (request: NextRequest) => {
-  const pathname = request.nextUrl.pathname;
+export const withPageAuth = async (req: NextRequest) => {
+  const pathname = req.nextUrl.pathname;
 
   // 1. Auth回调
   if (pathname.startsWith('/api/auth/callback')) {
-    return withAuth(request as NextRequestWithAuth, {
+    return withAuth(req as NextRequestWithAuth, {
       callbacks: {
         authorized: ({ token }) => !!token
       },
@@ -27,9 +27,9 @@ export const withPageAuth = async (request: NextRequest) => {
   const isProtectedRoute = protectedRoutes.filter(route => route.startsWith(pathname)).length !== 0;
   // 3. Decrypt the session from the cookie
   if (isProtectedRoute) {
-    const session = await getToken({ req: request });
+    const session = await getToken({ req });
     if (!session) { // 重定向到登录页面
-      const loginUrl = new URL(SIGIN_IN, request.url);
+      const loginUrl = new URL(SIGIN_IN, req.url);
       loginUrl.searchParams.set('auth-redirect', pathname);
       return NextResponse.redirect(loginUrl);
     }
