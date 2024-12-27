@@ -1,4 +1,4 @@
-import { handleApiError } from '@/utils/api-response'
+import { handleApiError } from '@/utils/api-response';
 import { NextRequest, NextResponse } from 'next/server';
 import { getVideos } from '@/model/Video';
 
