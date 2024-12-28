@@ -79,7 +79,7 @@ export const playBlobUrl = (audioBlobUrl: string, onMessage: Function, target?: 
  * @param {String} base64Data
  */
 export const transcriptions = async (base64Data: string) => {
-    const api: string = process.env.WHISPER_API_PATH || "https://abidlabs-whisper.hf.space/run/predict";
+    const api: string = process.env.WHISPER_API_PATH || "https://abidlabs-whisper.hf.space";
     if(base64Data.indexOf("data:audio/wav;base64,") === 0) {
         base64Data = base64Data.replace("data:audio/wav;base64,", "");
     }
@@ -97,6 +97,27 @@ export const transcriptions = async (base64Data: string) => {
     const { duration, data: [ data ] } = await response.json();
     console.debug(duration, data);
     return { duration, data };
+};
+
+/**
+ * 本地的WhisperAPI
+ * @param {Blob | FileList | null} data 
+ */
+export const localWhisper = async (data: Blob | FileList | null) => {
+    const response = await fetch('/api/whisper', {
+        method: 'POST',
+        body: data instanceof Blob ? data : data?.[0],
+        headers: {
+            ...( data instanceof Blob ? { 'Content-Type': data.type } : {})
+        }
+    });
+
+    if (response.ok) {
+        console.log('音频文件识别成功。');
+        return await response.json();
+    } else {
+        console.error('识别音频文件失败！');
+    }
 };
 
 /**
@@ -118,24 +139,6 @@ export function audioReader(audioBlob: Blob): Promise<string> {
 
         reader.readAsDataURL(audioBlob);
     });
-};
-
-/**
- * 本地的WhisperAPI
- * @param {FileList} files 
- */
-export const localWhisper = async (files: FileList | null) => {
-    const response = await fetch('/api/whisper', {
-        method: 'POST',
-        body: files?.[0]
-    });
-
-    if (response.ok) {
-        console.log('音频文件识别成功。');
-        return await response.json();
-    } else {
-        console.error('识别音频文件失败！');
-    }
 };
 
 /**

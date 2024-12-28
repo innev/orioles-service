@@ -31,7 +31,7 @@ export const Sider = ({ user }: {  user: UserInfo }) => {
 
     return (
         <div className='flex flex-col gap-4 md:gap-6'>
-            <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-col gap-4 items-center justify-center'>
+            <div className='content-opacity rounded-lg w-full md:w-72 flex flex-col gap-4 items-center justify-center'>
                 <div className='flex flex-col items-center justify-center gap-2 pt-6 pb-2'>
                     <img className="w-28 h-28 rounded-full" src={user.avatar} alt="" />
                     <div className="text-xl font-medium">{user.nickname}</div>
@@ -50,7 +50,7 @@ export const Sider = ({ user }: {  user: UserInfo }) => {
                 </div>
             </div>
 
-            <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
+            <div className='content-opacity rounded-lg w-full md:w-72 flex flex-row space-x-6 items-center justify-center py-4'>
                 {Object.values(skills).map((item, index) => <Dock key={index} children={item}></Dock>)}
             </div>
             

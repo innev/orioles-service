@@ -22,7 +22,7 @@ export async function generateMetadata({ params, searchParams }: any) {
 export default async ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang='zh'>
-      <body className="bg-gray-100 min-h-screen w-full">
+      <body className="min-h-screen w-full bg-svg">
           <AuthProvider>
             <div className='min-h-screen mx-auto flex w-full'>
               {children}

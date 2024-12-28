@@ -1,3 +1,16 @@
+.bg-gradient {
+    @apply bg-gradient-to-bl from-purple-300 via-white to-blue-300;
+}
+.bg-svg {
+    background-image: url(/assets/images/login_bg.svg);
+    background-size: cover; /* 可选：根据需要调整背景图的大小 */
+    background-position: center; /* 可选：根据需要调整背景图的位置 */
+    background-repeat: no-repeat; /* 可选：防止背景图重复 */
+}
+.content-opacity {
+    @apply bg-white shadow bg-opacity-80;
+}
+
 .flex-1-col {
     @apply flex flex-1 flex-col;
 }

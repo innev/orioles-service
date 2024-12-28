@@ -22,14 +22,19 @@ export const GET = async (_: NextRequest) => {
 
     const { ErrMsg, Token } = await response.json() as TokenResponse;
     if (!ErrMsg || ErrMsg == '') {
+      // return NextResponse.json({
+      //   code: 200,
+      //   msg: '请求成功',
+      //   data: {
+      //     url: process.env.ALIYUN_NLS_URI,
+      //     token: Token.Id,
+      //     appkey: process.env.ALIYUN_NLS_APPKEY
+      //   }
+      // });
       return NextResponse.json({
-        code: 200,
-        msg: '请求成功',
-        data: {
-          url: process.env.ALIYUN_NLS_URI,
-          token: Token.Id,
-          appkey: process.env.ALIYUN_NLS_APPKEY
-        }
+        url: process.env.ALIYUN_NLS_URI,
+        token: Token.Id,
+        appkey: process.env.ALIYUN_NLS_APPKEY
       });
     } else {
       return NextResponse.json(ErrMsg, { status: 400 });

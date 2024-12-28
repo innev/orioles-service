@@ -1,25 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { transcriptions } from '@/utils';
-import { handleApiError } from '@/utils/api-response';
+import { Client } from "@gradio/client";
+const space: string = process.env.WHISPER_API_PATH || "https://abidlabs-whisper.hf.space";
 
-// export const config = {
-//   api: {
-//     bodyParser: false, // 禁用内置的 bodyParser
-//   },
-// }
-
-export const POST = async (req: NextRequest) => {
-  const buffers = await req.arrayBuffer();
-  const base64Data = Buffer.from(buffers).toString('base64');
+export const POST = async (request: NextRequest) => {
+  if (!request.body) {
+    return NextResponse.json({ error: '没有提供音频数据' }, { status: 400 });
+  }
 
   try {
-    const { duration, data } = await transcriptions(base64Data);
-    return NextResponse.json({ duration, data });
+    const contentType = request.headers.get('content-type');
+    if (!contentType || !contentType.includes('audio/')) {
+      return NextResponse.json({ error: '无效的内容类型' }, { status: 400 });
+    }
+
+    // 获取音频数据
+    const audioData = await request.arrayBuffer();
+    const buffer = Buffer.from(audioData);
+
+    const client = await Client.connect(space);
+    const { type, time, data, endpoint, fn_index } = await client.predict("/predict", { audio: buffer });
+
+    // 返回模拟的识别结果
+    return NextResponse.json({
+      data: Array.isArray(data) ? data.map(val => val.replace("AutomaticSpeechRecognitionOutput(text='", "").replace("', chunks=None)", "")).join(",") : data,
+      duration: buffer.length / 16000
+    });
+
   } catch (error) {
-    console.error('Transcription error:', error);
-    return NextResponse.json(
-      handleApiError(error),
-      { status: error instanceof Error ? 404 : 200 }
-    )
+    console.error('处理音频时出错:', error);
+    return NextResponse.json({ error: '音频处理失败' }, { status: 500 });
   }
 }

@@ -10,7 +10,7 @@ export type TAppNav = Array<{
 export default ({ paths }: { paths: TAppNav }) => {
 
     return (
-        <div className='bg-white rounded-lg shadow flex flex-row items-center justify-between space-x-2 p-4'>
+        <div className='content-opacity rounded-lg flex flex-row items-center justify-between space-x-2 p-4'>
             <div className='flex flex-row items-center space-x-1'>
                 <Link href='/'>
                     <img src='https://d.innev.cn/icons/1.0.0/home.svg' alt="" className='w-6 h-6 cursor-pointer' />

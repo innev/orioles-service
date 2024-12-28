@@ -38,3 +38,8 @@ export const EBOOK_SERVICE = {
     DETAIL: '/api/ebook/detail',
     MODULE: '/api/ebook/module'
 };
+
+export const NLS_SERVICE = {
+    ALI_TOKEN: '/api/nls/ali-token',
+    TTS: '/api/wechat/articles'
+};
