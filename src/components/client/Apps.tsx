@@ -16,15 +16,14 @@ export default () => {
     const { data: session, status } = useSession();
     const { setShowLoginModal } = useAuth();
     const { data: apps = [], error, isLoading } = useSWR<TApp[]>(APP_SERVICE.APPS, http.find_);
-    const [searchParams, setSearchParams] = useState<ReadonlyURLSearchParams | null>(null);
+    // const [searchParams, setSearchParams] = useState<ReadonlyURLSearchParams | null>(null);
 
-    // const searchParams = useSearchParams();
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            // This ensures the code runs only on the client side
-            setSearchParams(useSearchParams());
-        }
-    }, []);
+    const searchParams = useSearchParams();
+    // useEffect(() => {
+    //     if (typeof window !== 'undefined') {
+    //         setSearchParams(useSearchParams());
+    //     }
+    // }, []);
 
     useEffect(() => {
         const url = searchParams?.get('auth-redirect');

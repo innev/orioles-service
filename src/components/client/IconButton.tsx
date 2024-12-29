@@ -14,15 +14,14 @@ export default ({ item, isCDN = false }: { item: TApp|TDockItem, isCDN?: boolean
     const router = useRouter();
     const { status } = useSession();
     const { setShowLoginModal } = useAuth();
-    const [searchParams, setSearchParams] = useState<ReadonlyURLSearchParams | null>(null);
-    
-    // const searchParams = useSearchParams();
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            // This ensures the code runs only on the client side
-            setSearchParams(useSearchParams());
-        }
-    }, []);
+    // const [searchParams, setSearchParams] = useState<ReadonlyURLSearchParams | null>(null);
+
+    const searchParams = useSearchParams();
+    // useEffect(() => {
+    //     if (typeof window !== 'undefined') {
+    //         setSearchParams(useSearchParams());
+    //     }
+    // }, []);
 
     const openApp = (item: TApp|TDockItem) => {
         if (status !== 'authenticated' && (item?.requiresAuth || searchParams?.get('auth-redirect'))) {
