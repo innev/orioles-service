@@ -14,6 +14,8 @@ export const GET = async (_: NextRequest, { params }: RouteParams) => {
     const { method = 'getUpdates' } = params;
     try {
         const data = await fetch(`${process.env.TELEGRAM_BOT_API}${process.env.TELEGRAM_BOT_TOKEN}/${method}`).then(response => {
+            return response.json();
+        }).then(response => {
             console.debug(method, response);
             return response;
         });

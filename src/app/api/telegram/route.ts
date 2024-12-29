@@ -7,7 +7,9 @@ export const dynamic = 'force-dynamic';
 export const GET = async (_: NextRequest) => {
     try {
         const data = await fetch(`${process.env.TELEGRAM_BOT_API}${process.env.TELEGRAM_BOT_TOKEN}/getUpdates`).then(response => {
-            console.debug("getUpdates:", response);
+            return response.json();
+        }).then(response => {
+            console.debug("getUpdates:", response.json());
             // const updates = response.data.result;
             // if (updates.length > 0) {
             //     const chatId = updates[0].message.chat.id;
