@@ -9,7 +9,7 @@ export const GET = async (_: NextRequest) => {
         const data = await fetch(`${process.env.TELEGRAM_BOT_API}${process.env.TELEGRAM_BOT_TOKEN}/getUpdates`).then(response => {
             return response.json();
         }).then(response => {
-            console.debug("getUpdates:", response.json());
+            console.debug("getUpdates:", response);
             // const updates = response.data.result;
             // if (updates.length > 0) {
             //     const chatId = updates[0].message.chat.id;
