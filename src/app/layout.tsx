@@ -18,7 +18,6 @@ export async function generateMetadata({ params, searchParams }: any) {
   };
 }
 
-
 export default async ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang='zh'>

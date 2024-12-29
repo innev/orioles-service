@@ -44,3 +44,8 @@ export const NLS_SERVICE = {
     ALI_TOKEN: '/api/nls/ali-token',
     TTS: '/api/wechat/articles'
 };
+
+export const EXPLORER_SERVICE = {
+    QINIU: '/api/explorer/qiniu',
+    ALIYUN: '/api/explorer/aliyun'
+};
