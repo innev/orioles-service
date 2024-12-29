@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import LoadingDots from '@/components/iv-ui/LoadingDots';
 import { NLS_SERVICE } from '@/service';
@@ -57,9 +57,8 @@ export default () => {
   return (
     <div className="mx-auto flex max-w-3xl flex-col items-center justify-center py-2">
       <main className="mt-12 flex w-full flex-1 flex-col items-center justify-center px-4 text-center sm:mt-20">
-        <h1 className="max-w-[708px] text-4xl font-bold text-slate-900 sm:text-6xl">
-          {t('page_tts_title')}
-        </h1>
+        <h1 className="max-w-[708px] text-4xl font-bold text-slate-900 sm:text-6xl">{t('page_tts_title')}</h1>
+        <div>{t('page_tts_description')}</div>
         <div className="w-full max-w-xl">
           <textarea
             onChange={e => setText(e.target.value)}

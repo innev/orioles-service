@@ -44,8 +44,9 @@ module.exports = withLess({
     ];
   },
   // 如果你需要启用实验性功能，可以取消注释并配置
-  // experimental: {
-  //   appDir: true,
-  //   serverComponentsExternalPackages: ["react-hot-toast"]
-  // }
+  experimental: {
+    // appDir: true,
+    // serverComponentsExternalPackages: ["react-hot-toast"]
+    missingSuspenseWithCSRBailout: false
+  }
 });

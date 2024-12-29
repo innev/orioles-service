@@ -7,23 +7,16 @@ import { Loading } from '@/components/Icons';
 import useSWR from 'swr';
 import IconButton from './IconButton';
 import { useAuth } from '@/providers/AuthProvider';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import { ReadonlyURLSearchParams, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default () => {
     const router = useRouter();
     const { data: session, status } = useSession();
     const { setShowLoginModal } = useAuth();
     const { data: apps = [], error, isLoading } = useSWR<TApp[]>(APP_SERVICE.APPS, http.find_);
-    // const [searchParams, setSearchParams] = useState<ReadonlyURLSearchParams | null>(null);
-
     const searchParams = useSearchParams();
-    // useEffect(() => {
-    //     if (typeof window !== 'undefined') {
-    //         setSearchParams(useSearchParams());
-    //     }
-    // }, []);
 
     useEffect(() => {
         const url = searchParams?.get('auth-redirect');

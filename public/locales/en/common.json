@@ -79,10 +79,13 @@
   "buy": "Buy",
   "click_here_if_paid": "Click here if you have already purchased",
   "page_asr_title": "Speech Recognition",
+  "page_asr_description": "Hold the button to start recording, and release the button to stop recording and begin recognition.",
   "page_asr_start_record": "Start Record",
+  "page_asr_recording": "Record...",
   "page_asr_stop_record": "Stop Record",
   "page_asr_input_placeholder": "Waiting for voice recognition",
   "page_tts_title": "Speech Synthesis",
+  "page_tts_description": "After entering the characters, click 'OK' to confirm.",
   "page_tts_input_placeholder": "Enter the text version that needs to be synthesized",
   "page_tts_run": "Start Compositing"
 }

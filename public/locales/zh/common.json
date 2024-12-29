@@ -78,10 +78,13 @@
   "buy": "购买",
   "click_here_if_paid": "已经购买点这里",
   "page_asr_title": "语音识别",
-  "page_asr_start_record": "开始录制",
-  "page_asr_stop_record": "停止录制",
+  "page_asr_description": "长按按钮进行录音，松开按钮停止录音并开始识别。",
+  "page_asr_start_record": "开始录音",
+  "page_asr_recording": "正在录音...",
+  "page_asr_stop_record": "停止录音",
   "page_asr_input_placeholder": "等待语音识别",
   "page_tts_title": "语音合成",
+  "page_tts_description": "输入字符后，点击确定即可。",
   "page_tts_input_placeholder": "输入需要合成的文版",
   "page_tts_run": "开始合成"
 }

@@ -1,27 +1,19 @@
 'use client';
 
 import { useAuth } from '@/providers/AuthProvider';
-import { ReadonlyURLSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { TDockItem } from '@/model/Skills';
 import { TApp } from '@/model/App';
 import CDN from '@/utils/cdn';
 import { useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { ImageSkeleton } from '@/components/iv-ui';
-import { useEffect, useState } from 'react';
 
 export default ({ item, isCDN = false }: { item: TApp|TDockItem, isCDN?: boolean }) => {
     const router = useRouter();
     const { status } = useSession();
     const { setShowLoginModal } = useAuth();
-    // const [searchParams, setSearchParams] = useState<ReadonlyURLSearchParams | null>(null);
-
     const searchParams = useSearchParams();
-    // useEffect(() => {
-    //     if (typeof window !== 'undefined') {
-    //         setSearchParams(useSearchParams());
-    //     }
-    // }, []);
 
     const openApp = (item: TApp|TDockItem) => {
         if (status !== 'authenticated' && (item?.requiresAuth || searchParams?.get('auth-redirect'))) {

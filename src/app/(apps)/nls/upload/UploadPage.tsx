@@ -1,17 +1,13 @@
-import HomeLayout from '@/components/layouts/HomeLayout';
-import { localWhisper } from '@/utils';
-import Head from 'next/head';
-import { ReactNode, useState } from 'react';
+'use client';
 
-const UploadPage = () => {
+import { localWhisper } from '@/utils';
+import { useState } from 'react';
+
+export default () => {
   const [message, setMessage] = useState<string>('');
 
   return (
     <div className="border border-solid border-gray-300 rounded-lg">
-      <Head>
-        <title>Upload</title>
-      </Head>
-
       <div className="border-b border-gray-300 pb-5">
         <input type="file" onChange={event => localWhisper(event.target.files).then(({ data }) => setMessage(data))} />
       </div>
@@ -21,6 +17,3 @@ const UploadPage = () => {
     </div>
   )
 };
-
-UploadPage.getLayout = (page: ReactNode) => <HomeLayout>{page}</HomeLayout>;
-export default UploadPage;

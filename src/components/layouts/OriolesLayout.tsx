@@ -88,13 +88,21 @@ export const Sider = ({ user }: {  user: UserInfo }) => {
 };
 
 
-export const FullContent = ({ paths, children }: {paths: TAppNav, children: React.ReactNode}) => {
+export const FullContent = ({ paths, children, Sider }: {paths: TAppNav, children?: React.ReactNode, Sider?: React.ReactNode }) => {
     return (
         <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
             <AppNav paths={paths} />
-            <FullContainer>
+        
+            <div className='flex flex-col md:flex-row flex-1 gap-4 md:gap-6'>
+                {Sider}
+                <FullContainer>
+                    {children}
+                </FullContainer>
+            </div>
+
+            {/* <FullContainer>
                 {children}
-            </FullContainer>
+            </FullContainer> */}
         </div>
     )
 };
