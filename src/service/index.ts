@@ -10,7 +10,8 @@ export const LAYOUT_SERVICE = {
  * App 服务列表
  */
 export const APP_SERVICE = {
-    APPS: '/api/apps'
+    APPS: '/api/apps',
+    GROUP_APPS: 'api/apps'
 };
 
 export const ICON_SERVICE = {

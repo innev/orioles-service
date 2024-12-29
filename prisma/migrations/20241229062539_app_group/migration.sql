@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE `App` ADD COLUMN `group` VARCHAR(100) NULL;
+
+-- AlterTable
+ALTER TABLE `Stock` MODIFY `code` VARCHAR(50) NOT NULL;

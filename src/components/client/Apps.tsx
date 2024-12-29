@@ -15,7 +15,7 @@ export default () => {
     const router = useRouter();
     const { data: session, status } = useSession();
     const { setShowLoginModal } = useAuth();
-    const { data: apps = [], error, isLoading } = useSWR<TApp[]>(APP_SERVICE.APPS, http.find_);
+    const { data: apps = [], error, isLoading } = useSWR<TApp[]>(`${APP_SERVICE.APPS}?status=${status}`, http.find_);
     const searchParams = useSearchParams();
 
     useEffect(() => {

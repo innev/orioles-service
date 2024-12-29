@@ -56,6 +56,7 @@ model App {
   name         String    @unique
   icon         String    @db.VarChar(500)
   url          String    @db.VarChar(200)
+  group        String?   @db.VarChar(100)
   hint         BigInt?   @default(0)
   visiable     Boolean   @default(false)
   requiresAuth Boolean   @default(false)
