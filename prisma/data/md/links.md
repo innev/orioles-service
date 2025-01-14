@@ -1,6 +1,10 @@
-<!-- ### 友情链接 -->
+### 友情链接
 <!-- - [程序员DD](https://blog.didispace.com/)
 - [芋道源码](https://www.iocoder.cn/) -->
+
+- [周尚辰](https://shangchenzhou.com/)
+- [当我有服务器时我做了什么 - 山月行](https://shanyue.tech/op)
+
 
 ### 申请友链
 
