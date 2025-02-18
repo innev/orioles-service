@@ -34,6 +34,7 @@
     "crypto-js": "^4.2.0",
     "encoding": "^0.1.13",
     "eslint": "^8.57.1",
+    "exceljs": "^4.4.0",
     "fast-xml-parser": "3.17.4",
     "focus-trap-react": "^11.0.1",
     "framer-motion": "^10.16.4",
@@ -74,7 +75,8 @@
     "tailwindcss-animate": "^1.0.7",
     "unified": "^11.0.4",
     "unstorage": "^1.13.1",
-    "vercel-kv": "link:unstorage/drivers/vercel-kv"
+    "vercel-kv": "link:unstorage/drivers/vercel-kv",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@gradio/client": "^1.8.0",
