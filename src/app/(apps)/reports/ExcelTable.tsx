@@ -75,32 +75,38 @@ const _verify = (jsonDatas: any[]) => {
         });
     }
 
+    const rowColors = ['FFFFFF00', 'FFFF00FF', 'FFFFFFFF'];
     const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Sheet1');
-    worksheet.addRow(originData.header);
-    // originData.list.forEach((row: any[]) => worksheet.addRow(row));
-    const rowColors = ['FF00FF00', 'FFFF0000', 'FF0000FF', 'FFFFFF00'];
-    originData.list.forEach((row: any[], index: number) => {
-        const fill: ExcelJS.Fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: rowColors[row[originNameIndex].includes('✅') ? 0 : row[originNameIndex].includes('⚠️') ? 1 : 2] }
-        };
+    for( const jsonData of jsonDatas) {
+        const worksheet = workbook.addWorksheet(`${jsonData.name} ${jsonData.sheet}`);
+        worksheet.addRow(jsonData.header);
+        jsonData.list.forEach((row: any[]) => {
+            const colorIndex = jsonData.type === 'origin'
+                ? row[originNameIndex].includes('✅') ? 0 : row[originNameIndex].includes('⚠️') ? 1 : 2
+                : row[cloudTitleIndex].includes('✅') ? 0 : row[cloudTitleIndex].includes('⚠️') ? 1 : 2;
+            const fill: ExcelJS.Fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: rowColors[colorIndex] }
+            };
 
-        const dataRow: ExcelJS.Row = worksheet.addRow(row);
-        dataRow.eachCell((cell: ExcelJS.Cell) => {
-            cell.fill = fill;
+            const dataRow: ExcelJS.Row = worksheet.addRow(row);
+            dataRow.eachCell((cell: ExcelJS.Cell, colNumber: number) => {
+                if(jsonData.type === 'origin' && [originNameIndex+1, originPriceIndex-1].includes(colNumber)) {
+                    cell.fill = fill;
+                } else if(jsonData.type === 'cloud' && [cloudTitleIndex+1, cloudPriceIndex+1].includes(colNumber)) {
+                    cell.fill = fill;
+                }
+                
+            });
         });
-    });
-
-
-
+    }
     workbook.xlsx.writeBuffer().then(buffer => {
         const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'report.xlsx';
+        a.download = `【核对后】${originData.name}.xlsx`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -118,14 +124,16 @@ const FileUploadForm = ({ onFileUpload }: { onFileUpload: Function }) => {
                 reader.onload = e => {
                     const workbook = new ExcelJS.Workbook();
                     workbook.xlsx.load(e.target?.result as ArrayBuffer).then(() => {
-                        const excelData: { type: string, header: String[], list: any[] } = { type: 'null', header: [], list: [] };
+                        const excelData: { name: string, sheet: string, type: string, header: String[], list: any[] } = { name: file.name.replace('.xlsx', ''), sheet: '', type: '', header: [], list: [] };
                         const cloudSheet: ExcelJS.Worksheet | undefined = workbook.worksheets.find(item => item.name === '财务云');
                         if (cloudSheet) {
                             excelData.type = 'cloud';
+                            excelData.sheet = cloudSheet.name;
                             cloudSheet && cloudSheet.eachRow((rowData: ExcelJS.Row, rowNumber: number) => _cloudExcel(rowData, rowNumber, excelData));
                         } else {
-                            excelData.type = 'origin';
                             const originSheet: ExcelJS.Worksheet | undefined = workbook.worksheets[0];
+                            excelData.type = 'origin';
+                            excelData.sheet = originSheet?.name||'';
                             originSheet && originSheet.eachRow((rowData: ExcelJS.Row, rowNumber: number) => _originExcel(rowData, rowNumber, excelData));
                         }
                         resolve(excelData);
