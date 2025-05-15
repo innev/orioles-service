@@ -53,15 +53,17 @@ export async function POST(request: NextRequest) {
     };
 
     const rawBody = await request.text();
-    console.log("rawBody:", rawBody);
-    const signature = getSignature(token, params.timestamp||0, params.nonce||'', rawBody);
-    console.log("signature:", signature);
-    if(signature != params.msg_signature) throw new Error('Missing required environment variables for WXBizMsgCrypt');
+    // console.log("rawBody:", rawBody);
 
-    // const { message: xmlContent, id } = decrypt(encodingAESKey, rawBody);
-    // const parsedMsg = await parseXML(xmlContent);
+    const { ToUserName: [ toUserName ], Encrypt: [ encrypt ] } = await parseXML(rawBody);
+    // console.log('Received ToUserName:', toUserName);
+    // console.log('Received encrypt:', encrypt);
 
-    console.log('Received message:', rawBody);
+    const { id, message: xmlContent } = decrypt(encodingAESKey, encrypt);
+    // console.log('Received xmlContent:', xmlContent);
+
+    const message = await parseXML(xmlContent);
+    console.log('Received message:', message);
 
     return new NextResponse('success', {
       headers: { 'Content-Type': 'text/plain' },
@@ -80,5 +82,5 @@ async function parseXML(xml: string) {
   const parser = new Parser({
     attrNameProcessors: [(name: string) => `@${name}`]
   });
-  return await parser.parseStringPromise(xml); // 推荐使用 promise 风格方法
+  return parser.parseStringPromise(xml).then(data => data.xml); // 推荐使用 promise 风格方法
 }
