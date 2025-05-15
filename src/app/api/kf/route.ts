@@ -53,14 +53,8 @@ export async function POST(request: NextRequest) {
     };
 
     const rawBody = await request.text();
-    // console.log("rawBody:", rawBody);
-
     const { ToUserName: [ toUserName ], Encrypt: [ encrypt ] } = await parseXML(rawBody);
-    // console.log('Received ToUserName:', toUserName);
-    // console.log('Received encrypt:', encrypt);
-
     const { id, message: xmlContent } = decrypt(encodingAESKey, encrypt);
-    // console.log('Received xmlContent:', xmlContent);
 
     const message = await parseXML(xmlContent);
     console.log('Received message:', message);
