@@ -41,6 +41,9 @@ importers:
       '@vercel/analytics':
         specifier: ^1.4.1
         version: 1.4.1(next@14.2.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+      '@wecom/crypto':
+        specifier: ^1.0.1
+        version: 1.0.1
       ali-oss:
         specifier: ^6.22.0
         version: 6.22.0(proxy-agent@5.0.0)
@@ -197,9 +200,6 @@ importers:
       vercel-kv:
         specifier: link:unstorage/drivers/vercel-kv
         version: link:unstorage/drivers/vercel-kv
-      wechat-crypto:
-        specifier: ^0.0.2
-        version: 0.0.2
       xlsx:
         specifier: ^0.18.5
         version: 0.18.5
@@ -1015,6 +1015,9 @@ packages:
 
   '@webassemblyjs/wast-printer@1.14.1':
     resolution: {integrity: sha512-kPSSXE6De1XOR820C90RIo2ogvZG+c3KiHzqUoO/F34Y2shGzesfqv7o57xrxovZJH/MetF5UjroJ/R/3isoiw==}
+
+  '@wecom/crypto@1.0.1':
+    resolution: {integrity: sha512-K4Ilkl1l64ceJDbj/kflx8ND/J88pcl8tKx4Ivp7IiCrshRJU+Uo5uWCjAa+PjUiLIdcQSZ4m4d0t1npMPCX5A==}
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -4253,9 +4256,6 @@ packages:
       webpack-cli:
         optional: true
 
-  wechat-crypto@0.0.2:
-    resolution: {integrity: sha512-VGCWUmg+4klU+auFBhhiVRBvBsMYnfgQ4ZhW9XQDrMXSYJDCuBvsc8BCwAdAFr9JY9EluYQCbSA9tMUpdd5cPg==}
-
   whatwg-url@5.0.0:
     resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
 
@@ -5156,6 +5156,8 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
 
+  '@wecom/crypto@1.0.1': {}
+
   '@xtuc/ieee754@1.2.0': {}
 
   '@xtuc/long@4.2.2': {}
@@ -6014,7 +6016,7 @@ snapshots:
       debug: 4.3.4
       enhanced-resolve: 5.15.0
       eslint: 8.57.1
-      eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.9.1(eslint@8.57.1)(typescript@5.0.4))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.9.1(eslint@8.57.1)(typescript@5.0.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
+      eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.9.1(eslint@8.57.1)(typescript@5.0.4))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1)
       eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.9.1(eslint@8.57.1)(typescript@5.0.4))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1)
       fast-glob: 3.3.1
       get-tsconfig: 4.7.2
@@ -6026,7 +6028,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-module-utils@2.8.0(@typescript-eslint/parser@6.9.1(eslint@8.57.1)(typescript@5.0.4))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.9.1(eslint@8.57.1)(typescript@5.0.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1):
+  eslint-module-utils@2.8.0(@typescript-eslint/parser@6.9.1(eslint@8.57.1)(typescript@5.0.4))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -6047,7 +6049,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.9.1(eslint@8.57.1)(typescript@5.0.4))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.9.1(eslint@8.57.1)(typescript@5.0.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
+      eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.9.1(eslint@8.57.1)(typescript@5.0.4))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1)
       hasown: 2.0.0
       is-core-module: 2.13.1
       is-glob: 4.0.3
@@ -8937,8 +8939,6 @@ snapshots:
       - '@swc/core'
       - esbuild
       - uglify-js
-
-  wechat-crypto@0.0.2: {}
 
   whatwg-url@5.0.0:
     dependencies:
