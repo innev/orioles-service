@@ -1,0 +1,15 @@
+import AppNav from "@/components/server/AppNav";
+import CameraLive from "./CameraLive";
+
+export const metadata = {
+  title: 'Camera'
+}
+
+export default () => {
+    return (
+        <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
+            <AppNav paths={[{ name: 'Camera' }]} />
+            <CameraLive />
+        </div>
+    )
+}
