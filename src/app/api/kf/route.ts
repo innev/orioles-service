@@ -51,12 +51,17 @@ export async function POST(request: NextRequest) {
       timestamp: url.searchParams.get('timestamp'),
       nonce: url.searchParams.get('nonce')
     };
-    
-    const rawBody = await request.text();
-    const { message: xmlContent, id } = decrypt(encodingAESKey, rawBody);
-    const parsedMsg = await parseXML(xmlContent);
 
-    console.log('Received message:', parsedMsg);
+    const rawBody = await request.text();
+    console.log("rawBody:", rawBody);
+    const signature = getSignature(token, params.timestamp||0, params.nonce||'', rawBody);
+    console.log("signature:", signature);
+    if(signature != params.msg_signature) throw new Error('Missing required environment variables for WXBizMsgCrypt');
+
+    // const { message: xmlContent, id } = decrypt(encodingAESKey, rawBody);
+    // const parsedMsg = await parseXML(xmlContent);
+
+    console.log('Received message:', rawBody);
 
     return new NextResponse('success', {
       headers: { 'Content-Type': 'text/plain' },
