@@ -54,6 +54,10 @@ export async function POST(request: NextRequest) {
 
     const rawBody = await request.text();
     const { ToUserName: [ toUserName ], Encrypt: [ encrypt ] } = await parseXML(rawBody);
+
+    const signature = getSignature(token, params.timestamp||0, params.nonce||'', encrypt||'');
+    if(signature != params.msg_signature) throw new Error('Missing required environment variables for WXBizMsgCrypt');
+    
     const { id, message: xmlContent } = decrypt(encodingAESKey, encrypt);
 
     const message = await parseXML(xmlContent);

@@ -5,13 +5,14 @@
     "build": "next build",
     "start": "next start",
     "seed": "node prisma/seed.js",
-    "postinstall": "prisma generate",
     "db:gen": "prisma generate",
-    "db:migrate": "prisma migrate dev --create-only",
-    "db:deploy": "prisma migrate deploy",
+    "db:migrate:model": "prisma migrate dev --name add_new_model",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:migrate:create": "prisma migrate dev --create-only",
     "db:pull": "prisma db pull",
     "db:push": "prisma db push",
-    "db:view": "prisma studio"
+    "db:view": "prisma studio",
+    "postinstall": "pnpm db:gen"
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
@@ -26,6 +27,7 @@
     "@types/xml2js": "^0.4.14",
     "@vercel/analytics": "^1.4.1",
     "@wecom/crypto": "^1.0.1",
+    "@wecom/jssdk": "^2.3.1",
     "ali-oss": "^6.22.0",
     "antd": "^5.22.6",
     "autoprefixer": "^10.4.16",

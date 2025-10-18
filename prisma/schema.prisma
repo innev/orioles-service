@@ -150,7 +150,7 @@ model OneTimePassword {
   id        Int       @id @default(autoincrement())
   name      String    @db.VarChar(50)
   email     String
-  otp       String    @db.VarChar(50)
+  otp       String    @db.VarChar(100)
   expires   DateTime?
   createdAt DateTime  @default(now())
 
@@ -191,6 +191,28 @@ model StockData {
   change    Float
   percent   Float
   amplitude Float
+
+  @@index([id])
+}
+
+// Device
+model DeviceService {
+  id        Int     @id @default(autoincrement())
+  uuid      String  @default(uuid())
+  isPrimary Boolean
+  device    Int
+  Device    Device  @relation(fields: [device], references: [id], onDelete: Cascade)
+
+  @@index([id])
+  @@index([device])
+}
+
+model Device {
+  id        Int             @id @default(autoincrement())
+  code      String          @unique @db.VarChar(50)
+  name      String
+  isDeleted Boolean         @default(false)
+  services  DeviceService[]
 
   @@index([id])
 }
