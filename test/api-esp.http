@@ -1,5 +1,5 @@
-@base = http://localhost:3000
-# @base = https://orioles.innev.cn
+# @base = http://localhost:3000
+@base = https://orioles.innev.cn
 
 ### Get devices
 GET {{base}}/api/esp/devices HTTP/1.1

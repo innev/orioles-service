@@ -1,9 +1,9 @@
 import AppNav from "@/components/server/AppNav";
+import * as ww from '@wecom/jssdk';
 import VideoPlayer from "./VideoPlayer";
-import * as ww from '@wecom/jssdk'
 
 export const metadata = {
-  title: '企业微信'
+    title: '企业微信'
 }
 
 export default () => {
@@ -13,10 +13,10 @@ export default () => {
         getConfigSignature                 // 必填，根据url生成企业签名的回调函数
     })
 
-    async function getConfigSignature(url) {
+    async function getConfigSignature(url: string | URL) {
         // 根据 url 生成企业签名
         // 生成方法参考 https://developer.work.weixin.qq.com/document/14924
-        return { timestamp, nonceStr, signature }
+        return { timestamp: '', nonceStr: '', signature: '' }
     }
 
     return (
