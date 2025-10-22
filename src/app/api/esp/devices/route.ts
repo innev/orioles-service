@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
  */
 export const GET = async (_: NextRequest) => {
   try {
-    const data: Record<string, TDevice[]> = await getDevices();
+    const data: TDevice[] = await getDevices();
     return NextResponse.json({
       code: 200,
       data,
