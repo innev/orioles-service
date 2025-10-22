@@ -10,6 +10,9 @@ export type TDevice = {
 
 export const getDevices = async (): Promise<Array<TDevice>> => {
     return prisma.device.findMany({
+        where: {
+            isDeleted: false,
+        },
         select: {
             code: true,
             name: true,
