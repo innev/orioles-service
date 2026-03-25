@@ -1,0 +1,31 @@
+# Export Manifest
+# Date: 2026-03-25T14:21:45.132Z
+# Exported Tables: 7/16
+# Skipped Tables: 3
+# Failed Tables: 6
+# Mode: data-only (Prisma Client)
+#
+# All SQL Files (23):
+App.sql
+App_2024-12-29_142129.sql
+Device.sql
+DeviceService.sql
+GitMojis.sql
+GitMojis_2024-12-29_142201.sql
+GithubColor.sql
+GithubColor_2024-12-29_142211.sql
+Icon.sql
+Icon_2024-12-29_142247.sql
+OneTimePassword.sql
+OneTimePassword_2024-12-29_142257.sql
+Skills.sql
+Skills_2024-12-29_142308.sql
+Stock.sql
+StockData.sql
+Stock_2024-12-29_142321.sql
+User.sql
+UserBrand.sql
+UserBrand_2024-12-29_142340.sql
+User_2024-12-29_142333.sql
+Video.sql
+Video_2024-12-29_142350.sql

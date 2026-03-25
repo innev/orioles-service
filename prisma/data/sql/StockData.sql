@@ -1,0 +1,1 @@
+-- Table `StockData` is empty
