@@ -5,6 +5,8 @@
     "build": "next build",
     "start": "next start",
     "seed": "node prisma/seed.js",
+    "db:export": "node prisma/export-data.js",
+    "db:import": "node prisma/import-data.js",
     "db:gen": "prisma generate",
     "db:migrate:model": "prisma migrate dev --name add_new_model",
     "db:migrate:deploy": "prisma migrate deploy",
@@ -103,6 +105,7 @@
     "prisma": "^6.0.1",
     "tailwindcss": "^3.3.5",
     "ts-node": "^10.9.2",
+    "mysql2": "^3.9.0",
     "typescript": "~5.0.4"
   }
 }
