@@ -75,8 +75,8 @@ export function StockChart({ code, market, name }: StockChartProps) {
       const klineData: KLineData[] = result.data;
       
       if (klineData.length > 0) {
-        const latest = klineData[klineData.length - 1];
-        const prev = klineData.length > 1 ? klineData[klineData.length - 2] : latest;
+        const latest = klineData[klineData.length - 1]!;
+        const prev = klineData.length > 1 ? klineData[klineData.length - 2]! : latest;
         setCurrentPrice({
           close: latest.close,
           changePct: ((latest.close - prev.close) / prev.close * 100)

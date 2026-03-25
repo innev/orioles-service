@@ -8,6 +8,12 @@ export interface Stock {
   alerts: StockAlerts;
   created_at?: string;
   updated_at?: string;
+  // 实时数据字段（可选）
+  current?: number;
+  change?: number;
+  changePct?: number;
+  pnlPct?: number;
+  pnlAmount?: number;
 }
 
 export interface StockAlerts {

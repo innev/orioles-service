@@ -108,7 +108,7 @@ export default function StockPoolPage() {
     return {
       ...stock,
       current: realtime.current,
-      change: realtime.current - (stock.close || 0),
+      change: realtime.current - (realtime.close || 0),
       changePct: realtime.changePct,
       pnlPct: realtime.pnlPct,
       pnlAmount: realtime.pnlAmount

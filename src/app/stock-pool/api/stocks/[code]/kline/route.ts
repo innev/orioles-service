@@ -38,7 +38,7 @@ async function fetchSinaDailyKLine(code: string, market: string): Promise<KLineD
     const match = text.match(/var\s+day_data\s*=\s*(\[[\s\S]*?\]);/);
     if (!match) throw new Error('Invalid response format');
     
-    const data = JSON.parse(match[1]);
+    const data = JSON.parse(match[1]!);
     
     return data.map((item: any[]) => ({
       date: item[0],
@@ -90,13 +90,13 @@ async function fetchEastMoneyKLine(code: string, market: string, period: string 
     return json.data.klines.map((line: string) => {
       const parts = line.split(',');
       return {
-        date: parts[0],
-        open: parseFloat(parts[1]),
-        close: parseFloat(parts[2]),
-        low: parseFloat(parts[3]),
-        high: parseFloat(parts[4]),
-        volume: parseInt(parts[5]),
-        amount: parseFloat(parts[6])
+        date: parts[0]!,
+        open: parseFloat(parts[1]!),
+        close: parseFloat(parts[2]!),
+        low: parseFloat(parts[3]!),
+        high: parseFloat(parts[4]!),
+        volume: parseInt(parts[5]!),
+        amount: parseFloat(parts[6]!)
       };
     });
     

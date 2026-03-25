@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { query } from '@/lib/db';
+import { prisma } from '@/lib/db';
 
 // 新浪财经 API 数据接口
 interface StockData {
@@ -43,7 +43,7 @@ function toEastMoneyCode(code: string, market: string): string {
 
 // 数据源 1: 新浪财经
 async function fetchFromSina(codes: string[], markets: string[]): Promise<Record<string, StockData>> {
-  const sinaCodes = codes.map((code, i) => toSinaCode(code, markets[i]));
+  const sinaCodes = codes.map((code, i) => toSinaCode(code, markets[i] || 'sh'));
   const url = `https://hq.sinajs.cn/list=${sinaCodes.join(',')}`;
 
   const response = await fetch(url, {
@@ -63,8 +63,10 @@ async function fetchFromSina(codes: string[], markets: string[]): Promise<Record
   for (const line of text.split('\n')) {
     if (!line.includes('=')) continue;
     
-    const [keyPart, valuePart] = line.split('=');
-    const codeKey = keyPart.split('_').pop()?.replace(/^(sh|sz|hk|bj|rt_hk|gb_)/, '');
+    const lineParts = line.split('=');
+    const keyPart = lineParts[0];
+    const valuePart = lineParts[1];
+    const codeKey = keyPart?.split('_').pop()?.replace(/^(sh|sz|hk|bj|rt_hk|gb_)/, '');
     const dataStr = valuePart?.trim().replace(/[";]/g, '');
     
     if (!codeKey || !dataStr) continue;
@@ -72,18 +74,18 @@ async function fetchFromSina(codes: string[], markets: string[]): Promise<Record
     if (parts.length < 33) continue;
 
     const code = codeKey.toUpperCase();
-    const current = parseFloat(parts[3]);
-    const close = parseFloat(parts[2]);
+    const current = parseFloat(parts[3]!);
+    const close = parseFloat(parts[2]!);
     
     result[code] = {
-      name: parts[0],
-      open: parseFloat(parts[1]),
+      name: parts[0]!,
+      open: parseFloat(parts[1]!),
       close,
       current,
-      high: parseFloat(parts[4]),
-      low: parseFloat(parts[5]),
-      volume: parseInt(parts[8]),
-      amount: parseFloat(parts[9]),
+      high: parseFloat(parts[4]!),
+      low: parseFloat(parts[5]!),
+      volume: parseInt(parts[8]!),
+      amount: parseFloat(parts[9]!),
       changePct: close > 0 ? Math.round((current - close) / close * 10000) / 100 : 0,
       source: 'sina'
     };
@@ -94,7 +96,7 @@ async function fetchFromSina(codes: string[], markets: string[]): Promise<Record
 
 // 数据源 2: 腾讯财经
 async function fetchFromTencent(codes: string[], markets: string[]): Promise<Record<string, StockData>> {
-  const tencentCodes = codes.map((code, i) => toTencentCode(code, markets[i]));
+  const tencentCodes = codes.map((code, i) => toTencentCode(code, markets[i] || 'sh'));
   const url = `https://qt.gtimg.cn/q=${tencentCodes.join(',')}`;
 
   const response = await fetch(url, {
@@ -114,8 +116,10 @@ async function fetchFromTencent(codes: string[], markets: string[]): Promise<Rec
   for (const line of text.split(';')) {
     if (!line.includes('=')) continue;
     
-    const [keyPart, valuePart] = line.split('=');
-    const codeKey = keyPart.split('_').pop()?.replace(/^(sh|sz|hk|us)/, '');
+    const lineParts = line.split('=');
+    const keyPart = lineParts[0];
+    const valuePart = lineParts[1];
+    const codeKey = keyPart?.split('_').pop()?.replace(/^(sh|sz|hk|us)/, '');
     const dataStr = valuePart?.trim().replace(/["]/g, '');
     
     if (!codeKey || !dataStr) continue;
@@ -124,19 +128,19 @@ async function fetchFromTencent(codes: string[], markets: string[]): Promise<Rec
 
     const code = codeKey.toUpperCase();
     // 腾讯格式: name~code~close~open~current...changePct
-    const current = parseFloat(parts[3]);
-    const close = parseFloat(parts[2]);
+    const current = parseFloat(parts[3]!);
+    const close = parseFloat(parts[2]!);
     
     result[code] = {
-      name: parts[1] || parts[0],
-      open: parseFloat(parts[5]),
+      name: parts[1] || parts[0]!,
+      open: parseFloat(parts[5]!),
       close,
       current,
-      high: parseFloat(parts[33]),
-      low: parseFloat(parts[34]),
-      volume: parseInt(parts[36]),
-      amount: parseFloat(parts[37]),
-      changePct: parseFloat(parts[32]) || (close > 0 ? Math.round((current - close) / close * 10000) / 100 : 0),
+      high: parseFloat(parts[33]!),
+      low: parseFloat(parts[34]!),
+      volume: parseInt(parts[36]!),
+      amount: parseFloat(parts[37]!),
+      changePct: parseFloat(parts[32]!) || (close > 0 ? Math.round((current - close) / close * 10000) / 100 : 0),
       source: 'tencent'
     };
   }
@@ -146,7 +150,7 @@ async function fetchFromTencent(codes: string[], markets: string[]): Promise<Rec
 
 // 数据源 3: 东方财富
 async function fetchFromEastMoney(codes: string[], markets: string[]): Promise<Record<string, StockData>> {
-  const emCodes = codes.map((code, i) => toEastMoneyCode(code, markets[i]));
+  const emCodes = codes.map((code, i) => toEastMoneyCode(code, markets[i] || 'sh'));
   const url = `https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&fields=f12,f13,f14,f2,f3,f4,f5,f6,f17,f18,f15,f16&secids=${emCodes.join(',')}`;
 
   const response = await fetch(url, {
@@ -225,9 +229,9 @@ async function fetchRealtimeData(codes: string[], markets: string[]): Promise<Re
 export async function GET() {
   try {
     // 获取所有股票代码
-    const stocks = await query<{ code: string; market: string; cost: number }>(
-      'SELECT code, market, cost FROM watchlist'
-    );
+    const stocks = await prisma.watchlist.findMany({
+      select: { code: true, market: true, cost: true }
+    });
 
     if (stocks.length === 0) {
       return NextResponse.json({ success: true, data: {} });
@@ -256,12 +260,13 @@ export async function GET() {
       const sourceData = realtimeData[stock.code];
       
       if (sourceData) {
-        const pnlPct = stock.cost > 0 && sourceData.current > 0
-          ? Math.round((sourceData.current - stock.cost) / stock.cost * 10000) / 100
+        const cost = Number(stock.cost);
+        const pnlPct = cost > 0 && sourceData.current > 0
+          ? Math.round((sourceData.current - cost) / cost * 10000) / 100
           : 0;
         
-        const pnlAmount = stock.cost > 0 
-          ? Math.round((sourceData.current - stock.cost) * 100) / 100
+        const pnlAmount = cost > 0 
+          ? Math.round((sourceData.current - cost) * 100) / 100
           : 0;
 
         enrichedData[stock.code] = {
@@ -269,7 +274,7 @@ export async function GET() {
           code: stock.code,
           pnlPct,
           pnlAmount,
-          cost: stock.cost
+          cost
         };
       }
     }
