@@ -2,6 +2,7 @@ import FullContainer from '@/components/server/Containers';
 import Apps from '@/components/client/Apps';
 import { Sider } from '@/components/layouts/OriolesLayout';
 import { getUserInfo_ } from '@/model/User';
+import { Suspense } from 'react';
 
 export default async () => {
     const userInfo = await getUserInfo_();
@@ -11,7 +12,9 @@ export default async () => {
             <div className='flex flex-col md:flex-row flex-1 gap-4 md:gap-6'>
                 <Sider user={userInfo} />
                 <FullContainer>
-                    <Apps />
+                    <Suspense fallback={<div className="p-6">加载中...</div>}>
+                        <Apps />
+                    </Suspense>
                 </FullContainer>
             </div>
         </div>
