@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma, initDb } from '@/lib/db';
 
-
-}
-
 // GET /api/stats - 获取统计数据
 export async function GET() {
   try {
