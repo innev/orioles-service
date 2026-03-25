@@ -65,13 +65,13 @@ export default function StockPoolPage() {
 
   // 请求通知权限
   useEffect(() => {
-    if ('Notification' in window && Notification.permission === 'granted') {
+    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
       setNotificationsEnabled(true);
     }
   }, []);
 
   const requestNotification = async () => {
-    if ('Notification' in window) {
+    if (typeof window !== 'undefined' && 'Notification' in window) {
       const permission = await Notification.requestPermission();
       setNotificationsEnabled(permission === 'granted');
     }
@@ -273,7 +273,7 @@ export default function StockPoolPage() {
             )}
 
             {/* 通知权限 */}
-            {'Notification' in window && (
+            {typeof window !== 'undefined' && 'Notification' in window && (
               <Button
                 variant="ghost"
                 size="icon"
