@@ -4,9 +4,6 @@ import { checkStockAlerts } from '@/lib/alerts';
 import { pushAlertsToFeishu } from '@/lib/feishu';
 import { fetchRealtimeQuotes } from '@/lib/realtime';
 
-
-}
-
 // GET /api/alerts/check - 检查预警
 export async function GET(request: Request) {
   try {

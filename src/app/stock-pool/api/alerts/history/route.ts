@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma, initDb } from '@/lib/db';
 
-
-}
-
 // GET /api/alerts/history - 获取预警历史
 export async function GET(request: Request) {
   try {

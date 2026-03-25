@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma, initDb } from '@/lib/db';
 
-
-}
-
 // GET /api/stocks/[code] - 获取单个股票
 export async function GET(
   request: Request,
