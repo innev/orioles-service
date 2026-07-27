@@ -10,7 +10,7 @@ import { EBOOK_SERVICE } from '@/service';
 import http from '@/utils/http';
 import { DBook } from '@/templates/interfaces/IBook';
 
-export default ({ pages, origin = 'cloud', goBack }: TParams) => {
+const Cover = ({ pages, origin = 'cloud', goBack }: TParams) => {
   const [ id ] = pages;
   const { data, error, isLoading } = useSWR<DBook>(`${EBOOK_SERVICE.DETAIL}?id=${id}&origin=${origin}`, http.findOne_);
 
@@ -29,3 +29,5 @@ export default ({ pages, origin = 'cloud', goBack }: TParams) => {
     </Spin>
   );
 };
+
+export default Cover;

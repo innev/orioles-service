@@ -1,8 +1,14 @@
 import genSignatureUrl, { TokenResponse } from "@/utils/aliSignature";
 import { handleApiError } from '@/utils/api-response';
 import { NextRequest, NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
 export const GET = async (_: NextRequest) => {
+  const session = await getToken({ req: _ });
+  if (!session) {
+    return NextResponse.json({ code: 401, data: null, msg: '请先登录后再使用语音功能' }, { status: 401 });
+  }
+
   try {
     const tokenUrl = genSignatureUrl({
       accessKeyId: process.env.ALIYUN_ACCESS_KEY_ID || '',

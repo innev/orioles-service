@@ -5,7 +5,7 @@ export const metadata = {
   title: 'VIP Video'
 }
 
-export default () => {
+export default function VipPage() {
     return (
         <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
             <AppNav paths={[{ name: 'VIP Video' }]} />

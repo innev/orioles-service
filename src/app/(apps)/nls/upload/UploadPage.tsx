@@ -3,7 +3,7 @@
 import { localWhisper } from '@/utils';
 import { useState } from 'react';
 
-export default () => {
+const UploadPage = () => {
   const [message, setMessage] = useState<string>('');
 
   return (
@@ -17,3 +17,5 @@ export default () => {
     </div>
   )
 };
+
+export default UploadPage;

@@ -22,7 +22,7 @@ const genSignatureUrl = ({ accessKeyId, accessKeySecret, endpoint = '' }: ISigna
         Format: 'JSON',
         RegionId: 'cn-shenzhen',
         SignatureMethod: 'HMAC-SHA1',
-        SignatureNonce: Math.random().toString(36).substr(2, 15),
+        SignatureNonce: crypto.randomUUID().replace(/-/g, ''),
         SignatureVersion: '1.0',
         Timestamp: new Date().toISOString(),
         Version: '2019-02-28'

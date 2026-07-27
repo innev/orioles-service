@@ -5,10 +5,12 @@ export const metadata = {
     title: 'Authenticator',
 }
 
-export default () => {
+const AuthenticatorPage = () => {
     return (
         <FullContent paths={[{ name: 'Authenticator' }]}>
             <List />
         </FullContent>
     )
 };
+
+export default AuthenticatorPage;

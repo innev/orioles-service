@@ -8,7 +8,7 @@ import http from '@/utils/http';
 import { FALLBACK_IMAGE } from '@/utils';
 import { Loading } from '@/components/Icons';
 
-export default () => {
+const List = () => {
   const { data = [], error, isLoading } = useSWR<DBook[]>(EBOOK_SERVICE.BOOKS, http.find_);
 
   return (
@@ -38,3 +38,5 @@ export default () => {
     </div>
   );
 };
+
+export default List;

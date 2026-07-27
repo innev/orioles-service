@@ -11,7 +11,7 @@ import PhotoModal from "./PhotoModal";
 import { TPhoto } from "./type";
 
 
-export default ({ limit = 24 }) => {
+const Photos = ({ limit = 24 }) => {
     const genBody = (page: number) => ({
         database: 'cloud',
         collection: 'photos',
@@ -53,3 +53,5 @@ export default ({ limit = 24 }) => {
         </Fragment>
     )
 }
+
+export default Photos;

@@ -1,6 +1,6 @@
 import { SVGContainerProps } from '../typings/Interfaces';
 
-export default ({ className, ...props }: SVGContainerProps) => {
+export default function ChevronRight({ className, ...props }: SVGContainerProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -14,4 +14,4 @@ export default ({ className, ...props }: SVGContainerProps) => {
             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
     );
-};
+}

@@ -42,7 +42,7 @@ const EnRender = ({ data, voice }: { data: ISpeechWord; voice: SpeakerVoiceUs | 
   );
 };
 
-export default ({ speechs = [] }: { speechs: Array<ISpeechWord> }) => {
+const Word = ({ speechs = [] }: { speechs: Array<ISpeechWord> }) => {
   return (
     <div className="h-full w-full">
       <div className="px-6 py-5 m-auto bg-white">
@@ -64,3 +64,5 @@ export default ({ speechs = [] }: { speechs: Array<ISpeechWord> }) => {
     </div>
   )
 };
+
+export default Word;

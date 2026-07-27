@@ -13,6 +13,11 @@ export const dynamic = 'force-dynamic';
 export const GET = async (_: NextRequest) => {
     try {
         const { id = '', module, origin = 'cloud' } = Object.fromEntries(_.nextUrl.searchParams.entries());
+        // 校验 id，防止路径穿越
+        if (!/^[a-zA-Z0-9_-]+$/.test(id)) {
+            return NextResponse.json({ code: 400, data: null, msg: '非法的 id 参数' }, { status: 400 });
+        }
+
         const prefix: string = alioss.getOSSFolder({ platform: 'orioles', resource: 'ebook' });
         const _path: string = join(prefix, id);
         const bookData: DBook = await fetch(CDN_HOST + join(_path, 'index.json')).then(data => data.json());

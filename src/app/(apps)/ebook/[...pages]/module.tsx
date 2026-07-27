@@ -10,7 +10,7 @@ import useSWR from 'swr';
 import { EBOOK_SERVICE } from '@/service';
 import http from '@/utils/http';
 
-export default ({ pages, origin = 'cloud', goBack }: TParams) => {
+const Module = ({ pages, origin = 'cloud', goBack }: TParams) => {
   const [id] = pages;
   const [height, setHeight] = useState<Number>(0);
   const { data, error, isLoading } = useSWR<DBook>(`${EBOOK_SERVICE.DETAIL}?id=${id}&origin=${origin}`, http.findOne_);
@@ -46,3 +46,5 @@ export default ({ pages, origin = 'cloud', goBack }: TParams) => {
     </Spin>
   )
 };
+
+export default Module;

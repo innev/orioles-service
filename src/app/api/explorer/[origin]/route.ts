@@ -3,6 +3,7 @@ import OSS from 'ali-oss';
 import qiniu, { httpc } from 'qiniu';
 import { NextRequest, NextResponse } from 'next/server';
 import { handleApiError } from '@/utils/api-response';
+import { getToken } from 'next-auth/jwt';
 import { join, basename } from 'node:path';
 import { GetObjectsResult } from 'qiniu/StorageResponseInterface';
 import { TExplorerItem } from '@/model/Explorer';
@@ -82,6 +83,16 @@ const qiniuListParse = async ({ data, resp }: httpc.ResponseWrapper<GetObjectsRe
 };
 
 export const GET = async (_: NextRequest, { params }: RouteParams) => {
+    const session = await getToken({ req: _ });
+    if (!session) {
+        return NextResponse.json({ code: 401, data: null, msg: '请先登录' }, { status: 401 });
+    }
+
+    // origin 仅允许枚举内的取值
+    if (!Object.values(OSSOrigin).includes(params.origin)) {
+        return NextResponse.json({ code: 400, data: null, msg: '非法的 origin 参数' }, { status: 400 });
+    }
+
     try {
         const client = getClient(params.origin);
         const prefix: string = alioss.getOSSFolder({ platform: 'data', resource: 'User/sunjunzhao/home' });

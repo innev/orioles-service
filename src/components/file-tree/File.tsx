@@ -8,7 +8,7 @@ import { MdDelete } from "react-icons/md";
 import { iconsData } from "./constants/fileIcons";
 import { TExplorerItem } from "@/model/Explorer";
 
-export default ({ name, deep, treeId }: TExplorerItem) => {
+const File = ({ name, deep, treeId }: TExplorerItem) => {
   // const dispatch = useAppDispatch();
 
   // const handleRemove = () => {
@@ -58,3 +58,4 @@ export default ({ name, deep, treeId }: TExplorerItem) => {
     </div>
   );
 };
+export default File;

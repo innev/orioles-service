@@ -1,5 +1,11 @@
 import { NextResponse } from 'next/server';
-import { prisma, initDb } from '@/lib/db';
+import { getToken } from 'next-auth/jwt';
+import prisma from '@/lib/prisma';
+
+// 支持的市场枚举
+const VALID_MARKETS = ['sh', 'sz', 'bj', 'hk', 'us'];
+// 股票代码格式（会被拼进外部行情 URL，必须严格校验）
+const CODE_PATTERN = /^[0-9A-Za-z.]{1,12}$/;
 
 // GET /api/stocks/[code] - 获取单个股票
 export async function GET(
@@ -43,31 +49,54 @@ export async function PUT(
   { params }: { params: Promise<{ code: string }> }
 ) {
   try {
+    const session = await getToken({ req: request as any });
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: '未登录' },
+        { status: 401 }
+      );
+    }
+
     const { code } = await params;
     const body = await request.json();
-    
+
     const { name, market, type, cost, alerts } = body;
-    
-    const stock = await prisma.watchlist.update({
-      where: { code },
-      data: {
-        ...(name && { name }),
-        ...(market && { market }),
-        ...(type && { type }),
-        ...(cost !== undefined && { cost }),
-        ...(alerts && { alertsJson: JSON.stringify(alerts) })
-      }
-    });
-    
-    // 记录日志
-    await prisma.auditLog.create({
-      data: {
-        action: 'UPDATE',
-        code,
-        details: `Updated stock: ${stock.name}`,
-        agentId: 'web-ui'
-      }
-    });
+
+    if (!CODE_PATTERN.test(code)) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid stock code' },
+        { status: 400 }
+      );
+    }
+
+    if (market && !VALID_MARKETS.includes(market)) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid market' },
+        { status: 400 }
+      );
+    }
+
+    // 写操作与审计日志包在同一事务中
+    const [stock] = await prisma.$transaction([
+      prisma.watchlist.update({
+        where: { code },
+        data: {
+          ...(name && { name }),
+          ...(market && { market }),
+          ...(type && { type }),
+          ...(cost !== undefined && { cost }),
+          ...(alerts && { alertsJson: JSON.stringify(alerts) })
+        }
+      }),
+      prisma.auditLog.create({
+        data: {
+          action: 'UPDATE',
+          code,
+          details: `Updated stock: ${name || code}`,
+          agentId: session.email || session.name || 'web-ui'
+        }
+      })
+    ]);
     
     return NextResponse.json({
       success: true,
@@ -98,21 +127,37 @@ export async function DELETE(
   { params }: { params: Promise<{ code: string }> }
 ) {
   try {
+    const session = await getToken({ req: request as any });
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: '未登录' },
+        { status: 401 }
+      );
+    }
+
     const { code } = await params;
-    
-    const stock = await prisma.watchlist.delete({
-      where: { code }
-    });
-    
-    // 记录日志
-    await prisma.auditLog.create({
-      data: {
-        action: 'DELETE',
-        code,
-        details: `Deleted stock: ${stock.name}`,
-        agentId: 'web-ui'
-      }
-    });
+
+    if (!CODE_PATTERN.test(code)) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid stock code' },
+        { status: 400 }
+      );
+    }
+
+    // 写操作与审计日志包在同一事务中
+    await prisma.$transaction([
+      prisma.watchlist.delete({
+        where: { code }
+      }),
+      prisma.auditLog.create({
+        data: {
+          action: 'DELETE',
+          code,
+          details: `Deleted stock: ${code}`,
+          agentId: session.email || session.name || 'web-ui'
+        }
+      })
+    ]);
     
     return NextResponse.json({
       success: true,

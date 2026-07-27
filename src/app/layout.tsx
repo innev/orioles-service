@@ -10,7 +10,8 @@ import { getUserInfo_ } from '@/model/User';
 export async function generateMetadata({ params, searchParams }: any) {
   const userInfo = await getUserInfo_();
   return {
-    title: `${userInfo.name} - 轻量级云原生架构实验室`,
+    // getUserInfo_ 可能返回 null（用户不存在或库异常），判空兜底避免全站 500
+    title: `${userInfo?.name ?? 'Innev'} - 轻量级云原生架构实验室`,
     referrer: 'no-referrer',
     icons: {
       shortcut: 'https://d.innev.cn/favicon/orioles.ico'

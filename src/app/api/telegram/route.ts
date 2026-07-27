@@ -1,10 +1,16 @@
 import { handleApiError } from '@/utils/api-response';
 import { NextRequest, NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
 // 声明为动态路由，因为使用了外部 API 调用
 export const dynamic = 'force-dynamic';
 
 export const GET = async (_: NextRequest) => {
+    const session = await getToken({ req: _ });
+    if (!session) {
+        return NextResponse.json({ code: 401, data: null, message: '请先登录' }, { status: 401 });
+    }
+
     try {
         const data = await fetch(`${process.env.TELEGRAM_BOT_API}${process.env.TELEGRAM_BOT_TOKEN}/getUpdates`).then(response => {
             return response.json();

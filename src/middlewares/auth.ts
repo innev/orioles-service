@@ -11,6 +11,15 @@ const SIGIN_IN = '/';
 export const withPageAuth = async (req: NextRequest) => {
   const pathname = req.nextUrl.pathname;
 
+  // 0. /api/mongo/* 会被 next.config.js rewrite 代理到外部 PROXY_API，必须登录后才可访问
+  if (pathname === '/api/mongo' || pathname.startsWith('/api/mongo/')) {
+    const session = await getToken({ req });
+    if (!session) {
+      return NextResponse.json({ code: 401, data: null, message: 'Unauthorized' }, { status: 401 });
+    }
+    return NextResponse.next();
+  }
+
   // 1. Auth回调
   if (pathname.startsWith('/api/auth/callback')) {
     return withAuth(req as NextRequestWithAuth, {
@@ -21,10 +30,13 @@ export const withPageAuth = async (req: NextRequest) => {
   }
 
   // 2. Check if the current route is protected or public
-  const isPublicRoute = publicRoutes.filter(route => route.startsWith(pathname)).length !== 0;
+  // 注意匹配方向：pathname 是否以路由前缀开头（'/' 只精确匹配，否则会吞掉所有路径）
+  const matchRoute = (route: string) =>
+    route === '/' ? pathname === '/' : pathname === route || pathname.startsWith(route + '/');
+  const isPublicRoute = publicRoutes.some(matchRoute);
   if (isPublicRoute) return NextResponse.next();
 
-  const isProtectedRoute = protectedRoutes.filter(route => route.startsWith(pathname)).length !== 0;
+  const isProtectedRoute = protectedRoutes.some(matchRoute);
   // 3. Decrypt the session from the cookie
   if (isProtectedRoute) {
     const session = await getToken({ req });

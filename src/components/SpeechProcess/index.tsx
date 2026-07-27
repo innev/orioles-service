@@ -8,7 +8,7 @@ import Word from './Word';
 import useSWR from 'swr';
 import http from '@/utils/http';
 
-export default ({ src, data }: { src?: string; data?: IModuleNode }) => {
+const SpeechProcess = ({ src, data }: { src?: string; data?: IModuleNode }) => {
   const [evalUpdate, setEvalUpdate] = useState<Boolean>(false);
   const [evalList, setEvalList] = useState<IModuleNode>();
   const [evalType, setEvalType] = useState<string>();
@@ -156,3 +156,5 @@ export default ({ src, data }: { src?: string; data?: IModuleNode }) => {
     </Spin>
   )
 };
+
+export default SpeechProcess;

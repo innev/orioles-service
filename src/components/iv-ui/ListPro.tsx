@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Pagination from "./Pagination";
 
-export default ({ data = [], pagination = false }: { data: Array<any>, pagination: Boolean | ReactNode }) => {
+export default function ListPro({ data = [], pagination = false }: { data: Array<any>, pagination: Boolean | ReactNode }) {
   return (
     // <div className="overflow-hidden bg-white shadow sm:rounded-lg">
     <div className="overflow-hidden border border-solid border-gray-300 shadow rounded-lg p-6">
@@ -37,4 +37,4 @@ export default ({ data = [], pagination = false }: { data: Array<any>, paginatio
       {pagination === true ? <Pagination /> : null}
     </div>
   );
-};
+}

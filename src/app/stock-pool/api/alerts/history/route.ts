@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { prisma, initDb } from '@/lib/db';
+import { getToken } from 'next-auth/jwt';
+import prisma from '@/lib/prisma';
 
 // GET /api/alerts/history - 获取预警历史
 export async function GET(request: Request) {
@@ -39,7 +40,14 @@ export async function GET(request: Request) {
 // DELETE /api/alerts/history - 清理旧预警历史
 export async function DELETE(request: Request) {
   try {
-    
+    const session = await getToken({ req: request as any });
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: '未登录' },
+        { status: 401 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const days = parseInt(searchParams.get('days') || '7');
     

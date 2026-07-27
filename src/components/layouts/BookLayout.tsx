@@ -11,7 +11,7 @@ export const Sider = ({ className }: ContainerProps) => {
     );
 };
 
-export default ({ children }: ContainerProps) => {
+const BookLayout = ({ children }: ContainerProps) => {
     return (
         <div className="min-h-screen flex flex-col items-center px-2">
             <Head>
@@ -26,3 +26,4 @@ export default ({ children }: ContainerProps) => {
         </div>
     );
 };
+export default BookLayout;

@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import prisma from '@/lib/prisma';
 import { Logos } from '@/components/Icons';
 import { compare, hashPassword } from '@/lib/hashPassword';
@@ -16,7 +17,8 @@ export type UserInfo = {
     UserBrand: Array<UserBrand>
 };
 
-export const getUserInfo_ = async (email: string = 'zhaozhao200295@gmail.com'): Promise<any> => {
+// 用 React cache 包装，消除同一请求内 layout 与 page 的重复查询
+export const getUserInfo_ = cache(async (email: string = process.env.DEFAULT_USER_EMAIL || 'zhaozhao200295@gmail.com'): Promise<any> => {
     return prisma.user.findUnique({
         where: { email },
         select: {
@@ -34,11 +36,12 @@ export const getUserInfo_ = async (email: string = 'zhaozhao200295@gmail.com'): 
             },
         },
     });
-};
+});
 
 export const userLogin = async ({ email, password }: { email: string, password: string }): Promise<any> => {
     if (!email || !password) return null;
 
+    // 注意：name 无唯一约束，findFirst + OR 可能匹配到非预期用户（保留原有逻辑避免破坏登录）
     const userInfo = await prisma.user.findFirst({
         where: {
             OR: [

@@ -1,6 +1,6 @@
 import { SVGContainerProps } from './typings/Interfaces';
 
-export default ({ className, ...props }: SVGContainerProps) => {
+export default function Logo({ className, ...props }: SVGContainerProps) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       width="130"
@@ -20,4 +20,4 @@ export default ({ className, ...props }: SVGContainerProps) => {
       <text x="45" y="28" fill="#000000" fontSize="20">AI</text>
     </svg>
   )
-};
+}

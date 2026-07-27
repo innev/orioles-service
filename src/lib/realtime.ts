@@ -44,6 +44,7 @@ async function fetchFromSina(codes: string[], markets: string[]): Promise<Record
   const url = `https://hq.sinajs.cn/list=${sinaCodes.join(',')}`;
 
   const response = await fetch(url, {
+    signal: AbortSignal.timeout(3000),
     headers: {
       'Referer': 'https://finance.sina.com.cn',
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
@@ -99,6 +100,7 @@ async function fetchFromTencent(codes: string[], markets: string[]): Promise<Rec
   const url = `https://qt.gtimg.cn/q=${tencentCodes.join(',')}`;
 
   const response = await fetch(url, {
+    signal: AbortSignal.timeout(3000),
     headers: {
       'Referer': 'https://stock.qq.com',
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
@@ -153,6 +155,7 @@ async function fetchFromEastMoney(codes: string[], markets: string[]): Promise<R
   const url = `https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&fields=f12,f13,f14,f2,f3,f4,f5,f6,f17,f18,f15,f16&secids=${emCodes.join(',')}`;
 
   const response = await fetch(url, {
+    signal: AbortSignal.timeout(3000),
     headers: {
       'Referer': 'https://quote.eastmoney.com',
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
@@ -192,18 +195,24 @@ async function fetchFromEastMoney(codes: string[], markets: string[]): Promise<R
   return result;
 }
 
+// 从代码前缀推断市场（无 DB market 提示时的兜底逻辑）
+function inferMarket(code: string): string {
+  if (code.startsWith('6')) return 'sh';
+  if (code.startsWith('0') || code.startsWith('3')) return 'sz';
+  if (code.startsWith('8') || code.startsWith('4')) return 'bj';
+  if (/^\d{5}$/.test(code)) return 'hk';
+  return 'us';
+}
+
 // 主数据获取函数 - 带失败重试和多源切换
-export async function fetchRealtimeQuotes(codes: string[]): Promise<RealtimeQuote[]> {
+// marketHints 可选：调用方（如 stock-pool）已知的 DB market 字段，优先于代码前缀推断
+export async function fetchRealtimeQuotes(codes: string[], marketHints?: string[]): Promise<RealtimeQuote[]> {
   if (codes.length === 0) return [];
-  
-  // 获取市场信息（从代码推断）
-  const markets = codes.map(code => {
-    if (code.startsWith('6')) return 'sh';
-    if (code.startsWith('0') || code.startsWith('3')) return 'sz';
-    if (code.startsWith('8') || code.startsWith('4')) return 'bj';
-    if (/^\d{5}$/.test(code)) return 'hk';
-    return 'us';
-  });
+
+  // 获取市场信息（优先使用调用方提示，否则从代码推断）
+  const markets = marketHints && marketHints.length === codes.length
+    ? marketHints
+    : codes.map(inferMarket);
 
   const sources = [
     { name: 'sina', fetch: fetchFromSina },

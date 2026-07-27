@@ -8,7 +8,7 @@ export const metadata = {
   referrer: 'no-referrer'
 }
 
-export default ({ children }: { children: React.ReactNode}) => {
+const AdminLayout = ({ children }: { children: React.ReactNode}) => {
   return (
     <html lang='zh'>
       <body className="bg-gray-100 min-h-screen w-full">
@@ -24,3 +24,5 @@ export default ({ children }: { children: React.ReactNode}) => {
     </html>
   )
 }
+
+export default AdminLayout

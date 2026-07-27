@@ -1,7 +1,7 @@
 import { classNames } from '@/utils/classNames';
 import { RightScore } from './Score';
 
-export default ({ data, evalType, wordIdex, updateState }: { data: any, evalType: any, wordIdex: any, updateState: any }) => {
+const Dialogue = ({ data, evalType, wordIdex, updateState }: { data: any, evalType: any, wordIdex: any, updateState: any }) => {
   return (
     <>
       {
@@ -61,3 +61,5 @@ export default ({ data, evalType, wordIdex, updateState }: { data: any, evalType
     </>
   )
 };
+
+export default Dialogue;

@@ -11,7 +11,7 @@ export interface IUploadProps {
     beforeUpload?: Function
 };
 
-export default ({ title = "upload", uploading = false, children, ...props }: IUploadProps) => {
+export default function Upload({ title = "upload", uploading = false, children, ...props }: IUploadProps) {
     const { accept = '.jpg,.jpeg,.png,.gif,.pdf', multiple = false, beforeUpload } = props;
     const fileInputRef = useRef<HTMLInputElement>(null);
     
@@ -36,4 +36,4 @@ export default ({ title = "upload", uploading = false, children, ...props }: IUp
             {children ? cloneElement(children, { onClick: onUploadButtonClick }) : <IconButton icon={<ArrowUpTrayIcon/>} size={6} title={title} type="text" direction="horizontal" loading={uploading} onClick={onUploadButtonClick} />}
         </>
     );
-};
+}

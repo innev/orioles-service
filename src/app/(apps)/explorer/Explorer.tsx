@@ -3,7 +3,7 @@
 import { Spin } from '@/components/iv-ui';
 import { useState } from 'react';
 
-export default () => {
+const Explorer = () => {
   const [loading, setLoading] = useState<Boolean>(true);
 
   return (
@@ -14,3 +14,5 @@ export default () => {
     </Spin>
   );
 };
+
+export default Explorer;

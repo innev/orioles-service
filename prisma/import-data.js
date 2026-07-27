@@ -26,8 +26,6 @@
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
-const { promisify } = require('util');
-const execAsync = promisify(require('child_process').exec);
 
 // 默认配置
 const DEFAULT_MANIFEST = path.join(__dirname, 'data/sql/_manifest.seed');
@@ -115,8 +113,7 @@ function getSqlFilePath(sqlFile, manifestPath, sqlDir) {
 /**
  * 使用 Prisma db execute 执行 SQL 文件
  */
-async function executeSqlFile(sqlFilePath, dryRun = false) {
-  if (dryRun) {
+async function executeSqlFile(sqlFilePath, dryRun = false) {  if (dryRun) {
     console.log(`   [DRY RUN] 将执行: ${path.basename(sqlFilePath)}`);
     return { success: true, rows: 0 };
   }
@@ -152,6 +149,39 @@ async function executeSqlFile(sqlFilePath, dryRun = false) {
     proc.on('error', (err) => {
       reject(new Error(`执行失败: ${err.message}`));
     });
+  });
+}
+
+/**
+ * 清空指定表（--truncate 时导入前调用）
+ */
+async function truncateTable(tableName, dryRun = false) {
+  // 表名来自文件名，做白名单校验防注入
+  if (!/^\w+$/.test(tableName)) {
+    throw new Error(`非法表名: ${tableName}`);
+  }
+  if (dryRun) {
+    console.log(`   [DRY RUN] 将清空表: ${tableName}`);
+    return;
+  }
+  return new Promise((resolve, reject) => {
+    const proc = spawn('npx', ['prisma', 'db', 'execute', '--stdin'], {
+      stdio: ['pipe', 'pipe', 'pipe'],
+      shell: true
+    });
+    let stderr = '';
+    proc.stderr.on('data', (data) => { stderr += data.toString(); });
+    proc.on('exit', (code) => {
+      if (code !== 0) {
+        reject(new Error(stderr || `Exit code: ${code}`));
+      } else {
+        resolve();
+      }
+    });
+    proc.on('error', (err) => reject(new Error(`清空表失败: ${err.message}`)));
+    // TiDB/MySQL 兼容，外键约束由 relationMode="prisma" 保证不建外键，直接 TRUNCATE 即可
+    proc.stdin.write(`TRUNCATE TABLE \`${tableName}\`;`);
+    proc.stdin.end();
   });
 }
 
@@ -262,6 +292,10 @@ async function main() {
 
     try {
       const startTime = Date.now();
+      // --truncate：导入前先清空目标表
+      if (options.truncate) {
+        await truncateTable(item.table, options.dryRun);
+      }
       const result = await executeSqlFile(item.path, options.dryRun);
       const duration = ((Date.now() - startTime) / 1000).toFixed(2);
 

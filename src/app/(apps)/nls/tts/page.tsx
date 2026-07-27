@@ -6,7 +6,7 @@ export const metadata = {
     title: '语音合成',
 }
 
-export default () => {
+const TTSPage = () => {
     return (
         <FullContent paths={[
                 { name: '自然语言处理', url: '/nls' },
@@ -18,3 +18,5 @@ export default () => {
         </FullContent>
     )
 };
+
+export default TTSPage;

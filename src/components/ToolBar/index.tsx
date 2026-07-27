@@ -13,7 +13,7 @@ const closewin = () => {
   window.close();
 };
 
-export default ({ type, code, origin = 'cloud', goBack = '' }: { type?: string; code?: string; origin?: string; goBack?: string; }) => {
+export default function ToolBar({ type, code, origin = 'cloud', goBack = '' }: { type?: string; code?: string; origin?: string; goBack?: string; }) {
   // const router = useRouter();
   const [volumePrecent, setVolumePrecent] = useState(0);
   const [volumeShow, setVolumeShow] = useState<Boolean>(false);
@@ -43,4 +43,4 @@ export default ({ type, code, origin = 'cloud', goBack = '' }: { type?: string; 
       <Tooltip text="退出" iconType="tuichu" onClick={closewin} />
     </div>
   )
-};
+}

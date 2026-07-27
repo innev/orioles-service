@@ -31,7 +31,11 @@ const main = async () => {
         console.log(`User completed!`);
         return prisma.user.findUnique({ where: { email }, select: { id: true } });
       })
-      .catch(error => console.error('Failed to insert user:', error));
+      .catch(error => {
+        console.error('Failed to insert user:', error);
+        // 用户创建失败时直接终止，避免后续 userInfo.id 级联报错且误导排查
+        throw new Error('User creation failed, abort seed.');
+      });
   } else {
     console.log(`User ${userInfo.id} already exists!`);
   }

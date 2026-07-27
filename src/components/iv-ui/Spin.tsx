@@ -8,7 +8,7 @@ interface SpinProps {
   children?: ReactNode
 }
 
-export default ({ tips = '', body = null, spinning = true, children }: SpinProps) => {
+export default function Spin({ tips = '', body = null, spinning = true, children }: SpinProps) {
   return (
     <div className={`w-full h-full top-0 left-0 ${spinning ? '' : 'bg-black bg-opacity-70'}`}>
       {spinning ? children : body ? body : (
@@ -19,4 +19,4 @@ export default ({ tips = '', body = null, spinning = true, children }: SpinProps
       )}
     </div>
   );
-};
+}

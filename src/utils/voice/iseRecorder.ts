@@ -7,7 +7,7 @@
 // 6. 实时接收websocket返回的数据并进行处理
 
 //语音测评
-import parser from 'fast-xml-parser';
+import { XMLParser } from 'fast-xml-parser';
 // import { Base64 } from './base64js.js'
 // import './base64js.js';
 import IRecorder from './IRecorder';
@@ -343,10 +343,11 @@ export default class IseRecorder {
     if (jsonData.data && jsonData.data.data) {
       // let data = Base64.decode(jsonData.data.data)
       let data = window.atob(jsonData.data.data);
-      let grade = parser.parse(data, {
+      const xmlParser = new XMLParser({
         attributeNamePrefix: '',
         ignoreAttributes: false
-      })
+      });
+      let grade = xmlParser.parse(data)
       this.setResultText(grade)
     }
     if (jsonData.code === 0 && jsonData.data.status === 2) {

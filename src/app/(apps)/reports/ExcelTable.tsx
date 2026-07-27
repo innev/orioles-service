@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from "react";
-import ExcelJS from 'exceljs';
+// exceljs 体积约 1MB，改为使用处动态导入，避免打进首屏 bundle；此处仅保留类型导入
+import type ExcelJS from 'exceljs';
 
 const originNameIndex: number = 3;
 const originPriceIndex: number = 18;
@@ -51,7 +52,7 @@ const _cloudExcel = (rowData: ExcelJS.Row, rowNumber: number, excelData: any) =>
     }
 };
 
-const _verify = (jsonDatas: any[]) => {
+const _verify = (Workbook: typeof import('exceljs').Workbook, jsonDatas: any[]) => {
     const originData = jsonDatas.find(item => item.type === 'origin');
     const cloudData = jsonDatas.find(item => item.type === 'cloud');
 
@@ -76,7 +77,7 @@ const _verify = (jsonDatas: any[]) => {
     }
 
     const rowColors = ['FFFFFF00', 'FFFF00FF', 'FFFFFFFF'];
-    const workbook = new ExcelJS.Workbook();
+    const workbook = new Workbook();
     for( const jsonData of jsonDatas) {
         const worksheet = workbook.addWorksheet(`${jsonData.name} ${jsonData.sheet}`);
         worksheet.addRow(jsonData.header);
@@ -117,12 +118,14 @@ const _verify = (jsonDatas: any[]) => {
 };
 
 const FileUploadForm = ({ onFileUpload }: { onFileUpload: Function }) => {
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
+            // 使用时才加载 exceljs
+            const { Workbook } = await import('exceljs');
             Promise.all(Array.from(event.target.files).map(file => new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onload = e => {
-                    const workbook = new ExcelJS.Workbook();
+                    const workbook = new Workbook();
                     workbook.xlsx.load(e.target?.result as ArrayBuffer).then(() => {
                         const excelData: { name: string, sheet: string, type: string, header: String[], list: any[] } = { name: file.name.replace('.xlsx', ''), sheet: '', type: '', header: [], list: [] };
                         const cloudSheet: ExcelJS.Worksheet | undefined = workbook.worksheets.find(item => item.name === '财务云');
@@ -142,7 +145,7 @@ const FileUploadForm = ({ onFileUpload }: { onFileUpload: Function }) => {
                 reader.onerror = reject;
                 reader.readAsArrayBuffer(file);
             })))
-                .then(jsonDatas => onFileUpload(_verify(jsonDatas)))
+                .then(jsonDatas => onFileUpload(_verify(Workbook, jsonDatas)))
                 .catch(error => console.error('Error reading files:', error));
         }
     };
@@ -154,7 +157,7 @@ const FileUploadForm = ({ onFileUpload }: { onFileUpload: Function }) => {
     );
 }
 
-export default () => {
+export default function ExcelTable() {
     const [{ header, list }, setExcelData] = useState<{ type: string, header: String[], list: any[] }>({ type: '', header: [], list: [] });
 
     return (
@@ -167,6 +170,7 @@ export default () => {
                 <table className="w-full border">
                     <thead>
                         <tr>
+                            {/* Excel 数据为用户上传的静态内容，无唯一字段，key 保留 index */}
                             {header.length > 0 && header.map((header: any, index: number) => <th key={index} className="border p-2">{header}</th>)}
                         </tr>
                     </thead>

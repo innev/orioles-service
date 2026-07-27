@@ -66,6 +66,7 @@ model App {
   User         User?     @relation(fields: [user], references: [id], onDelete: Cascade)
 
   @@index([user])
+  @@index([group, visiable])
 }
 
 // 定义一个枚举类型
@@ -93,13 +94,12 @@ model Skills {
   User      User       @relation(fields: [user], references: [id], onDelete: Cascade)
 
   @@index([user])
+  @@index([type])
 }
 
 // Isons
 model Icon {
   name String @unique
-
-  @@index([name])
 }
 
 // gitmojis
@@ -111,16 +111,12 @@ model GitMojis {
   description String  @db.VarChar(200)
   semver      String?
   color       String
-
-  @@index([name])
 }
 
 // Github colors
 model GithubColor {
   name  String @unique
   color String
-
-  @@index([name])
 }
 
 // 定义一个枚举类型
@@ -142,8 +138,6 @@ model Video {
   cover    String      @db.VarChar(500)
   url      String      @db.Text
   visiable Boolean     @default(true)
-
-  @@index([id])
 }
 
 model OneTimePassword {
@@ -154,7 +148,7 @@ model OneTimePassword {
   expires   DateTime?
   createdAt DateTime  @default(now())
 
-  @@index([id])
+  @@index([email])
 }
 
 enum StockSource {
@@ -173,8 +167,6 @@ model Stock {
   code   String      @unique @db.VarChar(50)
   source StockSource
   type   StockType
-
-  @@index([id])
 }
 
 // 暂时未用上
@@ -192,7 +184,7 @@ model StockData {
   percent   Float
   amplitude Float
 
-  @@index([id])
+  @@index([stock, date])
 }
 
 // Device
@@ -203,7 +195,6 @@ model DeviceService {
   device    Int
   Device    Device  @relation(fields: [device], references: [id], onDelete: Cascade)
 
-  @@index([id])
   @@index([device])
 }
 
@@ -213,8 +204,6 @@ model Device {
   name      String
   isDeleted Boolean         @default(false)
   services  DeviceService[]
-
-  @@index([id])
 }
 
 // ==================== Stock Pool Models ====================
@@ -241,6 +230,7 @@ model AuditLog {
   agentId   String?  @map("agent_id") @db.VarChar(100)
   timestamp DateTime @default(now()) @db.Timestamp(0)
 
+  @@index([timestamp])
   @@map("audit_log")
 }
 

@@ -6,7 +6,7 @@ export const metadata = {
     title: '语音识别',
 }
 
-export default () => {
+const ASRPage = () => {
     return (
         <FullContent paths={[
                 { name: '自然语言处理', url: '/nls' },
@@ -18,3 +18,5 @@ export default () => {
         </FullContent>
     )
 };
+
+export default ASRPage;

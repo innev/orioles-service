@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es2022",
     "lib": [
       "dom",
       "dom.iterable",
@@ -8,7 +8,7 @@
     ],
     "types": [],
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -34,7 +34,7 @@
     ]
   },
   "include": [
-    ".eslintrc.cjs",
+    ".eslintrc.json",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

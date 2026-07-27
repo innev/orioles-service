@@ -2,7 +2,7 @@
 
 import { useTranslation } from 'react-i18next';
 
-export default async ({ params }: { params: { locale: string } }) => {
+const AdminDashboardPage = ({ params }: { params: { locale: string } }) => {
   const { t } = useTranslation('common');
 
   return (
@@ -11,3 +11,5 @@ export default async ({ params }: { params: { locale: string } }) => {
     </div>
   );
 }
+
+export default AdminDashboardPage

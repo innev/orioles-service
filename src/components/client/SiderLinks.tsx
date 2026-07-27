@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-export default ({ className = '' }: { className?: string }) => {
+const SiderLinks = ({ className = '' }: { className?: string }) => {
     return (
         <div className={`md:flex hidden flex-col items-center space-y-2 text-gray-500 text-xs ${className}`}>
             <div className='flex flex-row space-x-1'>
@@ -28,3 +28,4 @@ export default ({ className = '' }: { className?: string }) => {
         </div>
     );
 };
+export default SiderLinks;

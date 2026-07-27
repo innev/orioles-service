@@ -43,7 +43,7 @@ const FolderItem = ({ label = 'Folder 1', nodes = [], size = 5, selected = false
     );
 };
 
-export default ({ chapter, onChange, className = '', selectedIndex }: { chapter: Array<IModuleTree>; onChange?: Function; className?: string; selectedIndex?: number }) => {
+export default function Tree({ chapter, onChange, className = '', selectedIndex }: { chapter: Array<IModuleTree>; onChange?: Function; className?: string; selectedIndex?: number }) {
     const [index, changeIndex] = useState<number>();
 
     useEffect(() => {
@@ -71,4 +71,4 @@ export default ({ chapter, onChange, className = '', selectedIndex }: { chapter:
             })}
         </ul>
     );
-};
+}

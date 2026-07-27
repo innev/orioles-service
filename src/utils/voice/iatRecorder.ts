@@ -258,7 +258,8 @@ export default class IatRecorder {
       let resultStr = ''
       let ws = data.ws
       for (let i = 0; i < ws.length; i++) {
-        str = str + ws[i].cw[0].w
+        // cw 可能为空数组，加可选链兜底
+        str = str + (ws[i]?.cw?.[0]?.w ?? '')
       }
       // 开启wpgs会有此字段(前提：在控制台开通动态修正功能)
       // 取值为 "apd"时表示该片结果是追加到前面的最终结果；取值为"rpl" 时表示替换前面的部分结果，替换范围为rg字段

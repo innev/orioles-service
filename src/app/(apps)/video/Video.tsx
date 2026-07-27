@@ -1,7 +1,6 @@
 'use client'
 
-import moment from "moment";
-import 'moment/locale/zh-cn';
+import dayjs from "@/utils/dayjs";
 import { Location } from '@/components/Icons';
 import { ImageSkeleton } from "@/components/iv-ui";
 import { TVideo } from "./type";
@@ -47,7 +46,7 @@ export default function Video({ video, onPlay }: VideoProps) {
                             </a>
                         )
                     }
-                    <span className="text-gray-500">{moment(video.create_time * 1000).fromNow()}</span>
+                    <span className="text-gray-500">{dayjs(video.create_time * 1000).fromNow()}</span>
                 </div>
             </div>
         </div>

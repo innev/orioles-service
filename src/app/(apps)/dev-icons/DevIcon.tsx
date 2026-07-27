@@ -26,7 +26,7 @@ export const DevIcon =  ({ icon }: { icon: DevIconProps }) => {
     )
 }
 
-export default () => {
+const DevIconList = () => {
     const { data: icons = [], error, isLoading } = useSWR<DevIconProps[]>(ICON_SERVICE.ICONS, http.find_);
 
     return (
@@ -39,3 +39,5 @@ export default () => {
         </div>
     );
 }
+
+export default DevIconList;

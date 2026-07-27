@@ -14,6 +14,7 @@ out/
 
 # Logs
 logs/*.log
+.chrome-profile
 
 # production
 build
@@ -23,7 +24,7 @@ build
 *.pem
 
 # prisma
-prisma/data/sql*]/*.sql
+prisma/data/sql/*.sql
 
 # debug
 npm-debug.log*
@@ -74,3 +75,5 @@ MANIFEST
 .swc/
 .vscode/
 pages/account
+.kimi-code/
+tsconfig.tsbuildinfo

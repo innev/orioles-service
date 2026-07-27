@@ -1,6 +1,6 @@
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-export default () => {
+export default function Navbars() {
     return (
         <div className="bg-gray-100 h-48 min-h-fit">
         <div className="bg-gray-800">
@@ -58,4 +58,4 @@ export default () => {
         </div>
       </div>
     );
-};
+}

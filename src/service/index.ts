@@ -11,7 +11,7 @@ export const LAYOUT_SERVICE = {
  */
 export const APP_SERVICE = {
     APPS: '/api/apps',
-    GROUP_APPS: 'api/apps'
+    GROUP_APPS: '/api/apps'
 };
 
 export const ICON_SERVICE = {
@@ -30,10 +30,6 @@ export const STOCK_SERVICE = {
     STOCKS: '/api/stocks'
 };
 
-export const ONE_TIME_PASSWORD_SERVICE = {
-    STOCKS: '/api/2fa'
-};
-
 export const EBOOK_SERVICE = {
     BOOKS: '/api/ebook/qiniu',
     DETAIL: '/api/ebook/detail',
@@ -42,7 +38,8 @@ export const EBOOK_SERVICE = {
 
 export const NLS_SERVICE = {
     ALI_TOKEN: '/api/nls/ali-token',
-    TTS: '/api/wechat/articles'
+    // TTS 经 WebSocket 直连阿里云 NLS（凭证取自 ALI_TOKEN），不存在独立的 TTS HTTP 接口；
+    // 原值 '/api/wechat/articles' 为复制粘贴错误且无任何调用方，故移除
 };
 
 export const EXPLORER_SERVICE = {

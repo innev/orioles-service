@@ -19,7 +19,8 @@ export const config = {
 export const middleware = async (request: NextRequest) => {
   // 1. 认证检查
   const authResponse = await withPageAuth(request)
-  if (authResponse?.status === 307) return authResponse; // 307 是重定向状态码
+  // 307 是页面重定向，401 是 /api/mongo 未登录，都需要直接返回
+  if (authResponse && authResponse.status !== 200) return authResponse;
   
   // 2. 速率限制检查
   const rateLimitResponse = withRateLimit(request);
@@ -36,17 +37,11 @@ export const middleware = async (request: NextRequest) => {
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-
-  /*
-  // 没效果
-  if(pathname.startsWith('/api/')) {
-    // const cacheParams = 'no-store, max-age=0';
-    const cacheParams = 'private, no-store';
-    response.headers.set('Cache-Control', cacheParams);
-    response.headers.set('CDN-Cache-Control', cacheParams);
-    response.headers.set('Vercel-CDN-Cache-Control', cacheParams);
-  }
-  */
+  // 强制 HTTPS（站点已全量启用 HTTPS）
+  response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  // 限制浏览器特性权限；microphone 保留 self，项目有语音（NLS/whisper）功能
+  response.headers.set('Permissions-Policy', 'camera=(), microphone=(self), geolocation=()');
+  // 注意：暂不加 CSP —— 项目存在内联脚本/样式与第三方 CDN 资源，配置不当会直接破坏页面
 
   return response;
 }

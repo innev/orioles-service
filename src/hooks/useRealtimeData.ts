@@ -43,7 +43,7 @@ export function useRealtimeData(options: UseRealtimeOptions = {}) {
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await fetch('/api/realtime');
+      const response = await fetch('/stock-pool/api/realtime');
       if (!response.ok) throw new Error('Failed to fetch');
       
       const result = await response.json();
@@ -64,13 +64,24 @@ export function useRealtimeData(options: UseRealtimeOptions = {}) {
   useEffect(() => {
     if (!enabled) return;
 
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout>;
+
+    // 自调度轮询：上一次请求完成后再安排下一次，避免请求叠加
+    const tick = async () => {
+      await fetchData();
+      if (!cancelled) {
+        timer = setTimeout(tick, interval);
+      }
+    };
+
     // 立即执行一次
-    fetchData();
+    tick();
 
-    // 定时轮询
-    const timer = setInterval(fetchData, interval);
-
-    return () => clearInterval(timer);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
   }, [fetchData, interval, enabled]);
 
   const refresh = useCallback(() => {

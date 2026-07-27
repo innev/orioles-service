@@ -1,7 +1,6 @@
 'use client'
 
-import moment from "moment";
-import 'moment/locale/zh-cn';
+import dayjs from "@/utils/dayjs";
 import { ImageSkeleton } from "@/components/iv-ui";
 import { Location } from "@/components/Icons";
 import { TPhoto } from "./type";
@@ -22,7 +21,7 @@ export default function Photo({ photo, onPlay }: PhotoProps) {
                     <Location className="h-4 w-4" />
                     <span className="" >{photo.name}</span>
                 </a>
-                <span className="text-gray-500">{moment(photo.create_time).fromNow()}</span>
+                <span className="text-gray-500">{dayjs(photo.create_time).fromNow()}</span>
             </div>
         </div>
     )

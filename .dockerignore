@@ -1,3 +1,8 @@
 .next/
 .swc/
 node_modules/
+logs/
+.chrome-profile/
+.env
+.env.*
+!.env.example

@@ -5,10 +5,12 @@ export const metadata = {
     title: '相册',
 }
 
-export default () => {
+const PhotoPage = () => {
     return (
         <FullContent paths={[{ name: '相册' }]} >
             <Photos />
         </FullContent>
     )
 }
+
+export default PhotoPage;

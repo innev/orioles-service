@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ChevronRightIcon, HomeIcon } from "./icons";
 import { IBreadcrumb } from './typings/Interfaces';
 
-export default ({ main = "/", pages = [] }: { main?: string, pages: Array<IBreadcrumb> }) => {
+export default function Breadcrumb({ main = "/", pages = [] }: { main?: string, pages: Array<IBreadcrumb> }) {
   
   return (
     <nav className="flex w-full" aria-label="Breadcrumb">
@@ -37,4 +37,4 @@ export default ({ main = "/", pages = [] }: { main?: string, pages: Array<IBread
       </ol>
     </nav>
   )
-};
+}

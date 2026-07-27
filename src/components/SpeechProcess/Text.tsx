@@ -1,7 +1,7 @@
 import { classNames } from '@/utils/classNames';
 import { RightScore, TopScore } from './Score';
 
-export default ({ data, evalType, wordIdex, updateState, recordType }: { data: any, evalType: any, wordIdex: any, updateState: any, recordType: any }) => {
+const Text = ({ data, evalType, wordIdex, updateState, recordType }: { data: any, evalType: any, wordIdex: any, updateState: any, recordType: any }) => {
   
   const resultText = (text: any, type: string) =>{
     if(recordType === 'wholestory'){
@@ -63,3 +63,5 @@ export default ({ data, evalType, wordIdex, updateState, recordType }: { data: a
     </>
   )
 };
+
+export default Text;

@@ -7,7 +7,7 @@ import NLSClient, { INLSConfig } from '@/utils/NLSClient';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 
-export default () => {
+const TTS = () => {
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState("迢迢牵牛星，皎皎河汉女。");
   const [audioUrl, setAudioUrl] = useState<string>('');
@@ -79,3 +79,5 @@ export default () => {
     </div>
   )
 };
+
+export default TTS;

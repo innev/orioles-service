@@ -3,7 +3,7 @@
 import GroupApps from "./GroupApps";
 import SiderLinks from "./SiderLinks";
 
-export default () => {
+const GroupSider = () => {
     return (
         <div className='flex flex-col gap-4 md:gap-6'>
             <GroupApps />
@@ -11,3 +11,4 @@ export default () => {
         </div>
     );
 };
+export default GroupSider;

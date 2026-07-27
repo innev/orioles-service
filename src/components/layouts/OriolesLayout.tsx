@@ -52,7 +52,7 @@ export const Sider = ({ user }: {  user: UserInfo }) => {
             </div>
 
             <div className='content-opacity rounded-lg w-full md:w-72 flex flex-row space-x-6 items-center justify-center py-4'>
-                {Object.values(skills).map((item, index) => <Dock key={index} children={item}></Dock>)}
+                {Object.values(skills).map((item, index) => <Dock key={index} items={item} />)}
             </div>
             
             {status === 'authenticated' && <div onClick={() => signOut({ callbackUrl: '/' })} className="btn-logout"><span>退出登录</span></div>}

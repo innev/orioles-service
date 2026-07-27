@@ -1,5 +1,4 @@
 import prisma from '@/lib/prisma';
-import { assign } from 'lodash';
 
 export type TGithubColor = {
     name: string
@@ -7,10 +6,11 @@ export type TGithubColor = {
 }
 
 export const getGithubColors = async (): Promise<{ [key: string]: string }> => {
+    // 返回 { [语言名]: 颜色值 } 的映射
     return prisma.githubColor.findMany({
         select: {
             name: true,
             color: true
         }
-    }).then(_c => assign({}, ..._c));
+    }).then(list => Object.fromEntries(list.map(({ name, color }) => [name, color])));
 };

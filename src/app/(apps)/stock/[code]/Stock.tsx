@@ -1,7 +1,6 @@
 'use client'
 
-import moment from "moment";
-import 'moment/locale/zh-cn';
+import dayjs from "@/utils/dayjs";
 import useSWR from "swr";
 import { Loading } from "@/components/Icons";
 import http from "@/utils/http";
@@ -46,7 +45,7 @@ export default function Stock({ code }: { code: string }) {
         "delisting_date"
     ]
 
-    const { data: realResp } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
+    const { data: realResp } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 15000, revalidateOnFocus: false })
 
     if (!realResp) {
         return (
@@ -93,7 +92,7 @@ export default function Stock({ code }: { code: string }) {
                         {
                             stockObj['trade_status'] === 'HALT' && <span className="border rounded px-2 py-1 mr-2 border-red-500 text-red-500">停牌</span>
                         }
-                        <span>{moment((stockObj['update_time'] as number) * 1000).format('YYYY-MM-DD HH:mm:ss')}</span>
+                        <span>{dayjs((stockObj['update_time'] as number) * 1000).format('YYYY-MM-DD HH:mm:ss')}</span>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import { ArrowRightOnRectangleIcon, ArrowsPointingInIcon, ArrowsPointingOutIcon, ArrowUturnLeftIcon, PencilSquareIcon, QuestionMarkCircleIcon, SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/20/solid';
 import React, { MouseEventHandler, useMemo } from 'react';
 
-export default ({ text, iconType, onClick }: { text: string; iconType?: string; onClick?: MouseEventHandler<HTMLButtonElement> }) => {
+export default function Tooltip({ text, iconType, onClick }: { text: string; iconType?: string; onClick?: MouseEventHandler<HTMLButtonElement> }) {
 
     const icons = useMemo(() => {
         if (!iconType) return null;
@@ -30,4 +30,4 @@ export default ({ text, iconType, onClick }: { text: string; iconType?: string; 
             </button>
         </div>
     )
-};
+}

@@ -170,10 +170,13 @@ export const randomID = (randomLength = 8) => {
 }
 
 /**
- * 生成UUID
+ * 生成UUID（优先使用加密安全的 crypto.randomUUID）
  * @returns {String}
  */
 export const generateUUID = (): string => {
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+        return crypto.randomUUID();
+    }
     let d: number = new Date().getTime();
     if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
         d += performance.now(); // 用于提高精度，如果 performance.now() 可用

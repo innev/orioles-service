@@ -15,7 +15,7 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
     const videoRef = useRef<HTMLVideoElement>(null)
 
     useEffect(() => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             if (isOpen) {
                 let videoPlayer = videoRef.current;
                 if (videoPlayer) {
@@ -27,6 +27,7 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
             }
         }, 100)
         return () => {
+            clearTimeout(timer)
             let videoPlayer = videoRef.current;
             if (videoPlayer) {
                 videoPlayer.pause()

@@ -16,7 +16,7 @@ interface EvaluationProps {
   reset: any
 }
 
-export default ({ evalUpdate, data, evalType, wordIdex, clickAudio, clickStop, recordType, updateState, reset }: EvaluationProps) => {
+const EvaluationOption = ({ evalUpdate, data, evalType, wordIdex, clickAudio, clickStop, recordType, updateState, reset }: EvaluationProps) => {
   const audioRef = useRef()
   const audioDataRef = useRef()
 
@@ -242,3 +242,5 @@ export default ({ evalUpdate, data, evalType, wordIdex, clickAudio, clickStop, r
     </>
   )
 };
+
+export default EvaluationOption;

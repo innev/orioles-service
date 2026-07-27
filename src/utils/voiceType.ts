@@ -270,7 +270,8 @@ const parseSyll = (data: any, array: Array<any>) => {
     ? array = array?.filter(item => !!item?.global_index)
     : array?.map(im => {
       if (isArray(im.syll)) {
-        im.dp_message = im?.syll?.filter((dc: any) => dc.rec_node_type === 'paper')[0].dp_message
+        // filter 结果可能为空，加可选链兜底
+        im.dp_message = im?.syll?.filter((dc: any) => dc.rec_node_type === 'paper')[0]?.dp_message ?? null
       } else {
         im.dp_message = im?.syll?.dp_message
       }

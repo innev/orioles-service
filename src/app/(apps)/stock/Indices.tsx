@@ -9,7 +9,7 @@ import { NumberFlowFormat, StockFormat } from '@/utils/format';
 import { STOCK_SERVICE } from '@/service';
 import { TStock } from '@/model/Stock';
 
-export default ({ refreshInterval = 5000 }) => {
+export default function Indices({ refreshInterval = 5000 }) {
 
     const fields = [
         'prod_code',

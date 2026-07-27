@@ -5,7 +5,7 @@ import { DModule } from "../iv-ui/typings/DBook";
 import Carousel from "./Carousel";
 import styles from "./index.module.css";
 
-export default ({ modules = [], route }: { modules: Array<DModule>; route: string }) => {
+const ModuleCarousel = ({ modules = [], route }: { modules: Array<DModule>; route: string }) => {
   const [activeIdx, setActiveIdx] = useState<Number>(0);
   const [width, setWidth] = useState(0);
 
@@ -61,3 +61,4 @@ export default ({ modules = [], route }: { modules: Array<DModule>; route: strin
     </>
   );
 };
+export default ModuleCarousel;

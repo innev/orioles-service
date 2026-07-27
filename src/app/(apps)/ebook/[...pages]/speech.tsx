@@ -12,7 +12,7 @@ import { EBOOK_SERVICE } from '@/service';
 import http from '@/utils/http';
 import { DModule } from '@/templates/interfaces/IModule';
 
-export default ({ pages, origin = 'cloud', goBack }: TParams) => {
+const Speech = ({ pages, origin = 'cloud', goBack }: TParams) => {
   const [ id = '', page = '', module = '', selectedIndex = 0 ] = pages;
   const [src, changeSrc] = useState<string>();
   const [showTree, setShowTree] = useState<Boolean>(false);
@@ -48,3 +48,5 @@ export default ({ pages, origin = 'cloud', goBack }: TParams) => {
     </Spin>
   );
 };
+
+export default Speech;

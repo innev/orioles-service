@@ -2,6 +2,7 @@ import { DAuth } from '@/components/iv-ui/typings/DAuth';
 import { getOtpByEmail } from '@/model/OneTimePassword';
 import { handleApiError } from '@/utils/api-response'
 import { NextRequest, NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 import { authenticator } from 'otplib';
 
 /**
@@ -11,6 +12,12 @@ interface RouteParams {
   params: { email: string }
 };
 
+// 鉴权：2FA 动态码属于敏感数据，未登录一律拒绝
+const requireAuth = async (req: NextRequest) => {
+  const session = await getToken({ req });
+  return session ? null : NextResponse.json({ code: 401, data: null, msg: '未登录' }, { status: 401 });
+}
+
 /**
  * 获取详情
  * @param {NextRequest} _ - 暂时用不上
@@ -18,6 +25,8 @@ interface RouteParams {
  * @property {RouteParams} [payload.param]
  */
 export const GET = async (_: NextRequest, { params }: RouteParams) => {
+  const unauthorized = await requireAuth(_);
+  if (unauthorized) return unauthorized;
   try {
     const timeRemaining = authenticator.timeRemaining();
     const data: DAuth = await getOtpByEmail(params.email).then(secret => {
@@ -54,6 +63,8 @@ export const GET = async (_: NextRequest, { params }: RouteParams) => {
  * @property {RouteParams} [payload.param]
  */
 export const PATCH = async (request: NextRequest, { params }: RouteParams) => {
+  const unauthorized = await requireAuth(request);
+  if (unauthorized) return unauthorized;
   try {
     const body = await request.json()
     return NextResponse.json({ success: true, data: body })
@@ -72,6 +83,8 @@ export const PATCH = async (request: NextRequest, { params }: RouteParams) => {
  * @property {RouteParams} [payload.param]
  */
 export const DELETE = async (_: NextRequest, { params }: RouteParams) => {
+  const unauthorized = await requireAuth(_);
+  if (unauthorized) return unauthorized;
   try {
     return NextResponse.json({ success: true, code: 200 })
   } catch (error) {

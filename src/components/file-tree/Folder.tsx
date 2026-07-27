@@ -9,7 +9,7 @@ import { FaFile, FaFileMedical, FaFolderPlus } from "react-icons/fa";
 import { FaFolderOpen, FaFolderClosed } from "react-icons/fa6";
 import { TExplorerItem } from "@/model/Explorer";
 
-export default (folderData: TExplorerItem) => {
+const Folder = (folderData: TExplorerItem) => {
   // const dispatch = useAppDispatch();
   const [showFolderOption, setShowFolderOption] = useState(false);
   const [showAddFolderInput, setShowAddFolderInput] = useState(false);
@@ -143,3 +143,4 @@ export default (folderData: TExplorerItem) => {
     </div>
   );
 };
+export default Folder;

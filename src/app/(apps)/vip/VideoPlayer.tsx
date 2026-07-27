@@ -10,7 +10,7 @@ import useSWR from "swr";
 
 const baseUrl = 'https://jx.xmflv.com/?url=';
 
-export default () => {
+export default function VideoPlayer() {
     const [videoUrl, setVideoUrl] = useState('');
     const { data = [], error, isLoading } = useSWR<TVideo[]>(VIDEO_SERVICE.VIDEOS, http.find_);
 
@@ -45,7 +45,7 @@ export default () => {
                 {
                     isLoading
                     ? <div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>
-                    : data.map(video => <button type="submit" className="bg-purple-600 hover:bg-purple-800 px-6 py-2 text-white rounded-md" onClick={() => setVideoUrl(video.url)} >{video.name}</button>)
+                    : data.map(video => <button key={video.url} type="submit" className="bg-purple-600 hover:bg-purple-800 px-6 py-2 text-white rounded-md" onClick={() => setVideoUrl(video.url)} >{video.name}</button>)
                 }
             </div>
 

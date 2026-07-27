@@ -17,7 +17,7 @@ export interface DTabs {
   onChange?: Function
 }
 
-export default ({ items = [], activeKey, defaultActiveKey = "", className = "", onChange }: DTabs) => {
+export default function Tabs({ items = [], activeKey, defaultActiveKey = "", className = "", onChange }: DTabs) {
   const [activeTab, setActiveTab] = useState<string>(defaultActiveKey || activeKey);
 
   const handleTabClick = (tabKey: string) => {
@@ -55,4 +55,4 @@ export default ({ items = [], activeKey, defaultActiveKey = "", className = "", 
       </div>
     </div>
   );
-};
+}

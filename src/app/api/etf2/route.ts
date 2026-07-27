@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { handleApiError } from '@/utils/api-response';
 
 // 声明为动态路由，因为使用了外部 API 调用
 export const dynamic = 'force-dynamic';
@@ -31,10 +32,7 @@ export const GET = async (_: NextRequest) => {
         });
 
     } catch (error) {
-        return NextResponse.json({
-            code: 500,
-            data: null,
-            msg: error instanceof Error ? error.message : 'Internal Server Error'
-        }, {  status: 500 });
+        // 统一错误处理，不向客户端透传原始错误信息
+        return NextResponse.json(handleApiError(error), { status: 500 });
     }
 }

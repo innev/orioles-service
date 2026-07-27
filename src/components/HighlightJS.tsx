@@ -9,7 +9,7 @@ export default function HighlightJS() {
             </Head>
 
             <Script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js" strategy="beforeInteractive" />
-            <Script>
+            <Script id="highlight-all">
                 {`hljs.highlightAll();`}
             </Script>
         </>

@@ -1,5 +1,11 @@
 import { NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 import prisma from '@/lib/prisma';
+
+// 支持的市场枚举
+const VALID_MARKETS = ['sh', 'sz', 'bj', 'hk', 'us'];
+// 股票代码格式（会被拼进外部行情 URL，必须严格校验）
+const CODE_PATTERN = /^[0-9A-Za-z.]{1,12}$/;
 
 // GET /api/stocks - 获取所有股票
 export async function GET() {
@@ -28,40 +34,65 @@ export async function GET() {
 // POST /api/stocks - 创建股票
 export async function POST(request: Request) {
   try {
+    const session = await getToken({ req: request as any });
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: '未登录' },
+        { status: 401 }
+      );
+    }
+
     const body = await request.json();
-    
+
     const { code, name, market, type, cost, alerts } = body;
-    
+
     if (!code || !name || !market) {
       return NextResponse.json(
         { success: false, error: 'Missing required fields' },
         { status: 400 }
       );
     }
-    
-    const stock = await prisma.watchlist.create({
-      data: {
-        code,
-        name,
-        market,
-        type: type || 'individual',
-        cost: cost || 0,
-        alertsJson: JSON.stringify(alerts || {})
-      }
-    });
-    
-    // 记录日志
-    await prisma.auditLog.create({
-      data: {
-        action: 'CREATE',
-        code,
-        details: `Created stock: ${name} (${code})`,
-        agentId: 'web-ui'
-      }
-    });
-    
-    return NextResponse.json({ 
-      success: true, 
+
+    if (!CODE_PATTERN.test(code)) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid stock code' },
+        { status: 400 }
+      );
+    }
+
+    if (!VALID_MARKETS.includes(market)) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid market' },
+        { status: 400 }
+      );
+    }
+
+    const agentId = session.email || session.name || 'web-ui';
+
+    // 写操作与审计日志包在同一事务中
+    const [stock] = await prisma.$transaction([
+      prisma.watchlist.create({
+        data: {
+          code,
+          name,
+          market,
+          type: type || 'individual',
+          cost: cost || 0,
+          alertsJson: JSON.stringify(alerts || {})
+        }
+      }),
+      prisma.auditLog.create({
+        data: {
+          action: 'CREATE',
+          code,
+          details: `Created stock: ${name} (${code})`,
+          agentId
+        }
+      })
+    ]);
+
+    return NextResponse.json({
+      success: true,
       data: { ...stock, alerts: JSON.parse(stock.alertsJson) }
     });
     

@@ -24,7 +24,7 @@ const Card = ({ code, name, email, countdown }: { code: string; name: string; em
   );
 };
 
-export default () => {
+const List = () => {
   const { data: _data = {}, error, isLoading } = useSWR<{ timeRemaining: number, data: DAuth[]}>(AUTHENTICATORS_SERVICE.OTPS, http.find_);
   const { timeRemaining = 0, data = [] } = _data as { timeRemaining: number, data: DAuth[]};
   const [countdown, setCountdown] = useState(-1);
@@ -56,3 +56,5 @@ export default () => {
     </div>
   );
 };
+
+export default List;

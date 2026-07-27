@@ -149,12 +149,9 @@ async function exportTable(prisma, tableDef) {
   }
 
   try {
-    // 使用 Prisma Client 查询数据（model 已经是 camelCase）
-    const rows = await prisma[model].findMany({
-      orderBy: { [pk]: 'asc' }
-    });
-
-    if (rows.length === 0) {
+    // 先取总行数，再用 cursor 分页查询，避免大表一次 findMany 全量载入内存
+    const total = await prisma[model].count();
+    if (total === 0) {
       return { content: `-- Table \`${table}\` is empty\n`, rowCount: 0 };
     }
 
@@ -162,21 +159,34 @@ async function exportTable(prisma, tableDef) {
     output += `-- ----------------------------------------\n`;
     output += `-- Export of table \`${table}\`\n`;
     output += `-- Date: ${new Date().toISOString()}\n`;
-    output += `-- Rows: ${rows.length}\n`;
+    output += `-- Rows: ${total}\n`;
     output += `-- ----------------------------------------\n\n`;
 
     output += `SET FOREIGN_KEY_CHECKS=0;\n`;
     output += `SET UNIQUE_CHECKS=0;\n`;
     output += `SET AUTOCOMMIT=0;\n\n`;
 
-    output += generateInsertSql(table, rows);
+    const PAGE_SIZE = 1000;
+    let cursor;
+    let exported = 0;
+    while (exported < total) {
+      const rows = await prisma[model].findMany({
+        orderBy: { [pk]: 'asc' },
+        take: PAGE_SIZE,
+        ...(cursor !== undefined ? { skip: 1, cursor: { [pk]: cursor } } : {})
+      });
+      if (rows.length === 0) break;
+      output += generateInsertSql(table, rows);
+      cursor = rows[rows.length - 1][pk];
+      exported += rows.length;
+    }
     output += '\n';
 
     output += `COMMIT;\n`;
     output += `SET UNIQUE_CHECKS=1;\n`;
     output += `SET FOREIGN_KEY_CHECKS=1;\n`;
 
-    return { content: output, rowCount: rows.length };
+    return { content: output, rowCount: exported };
 
   } catch (error) {
     // 检查是否是表不存在的错误

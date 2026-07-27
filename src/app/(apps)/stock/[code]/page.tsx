@@ -1,4 +1,3 @@
-import 'moment/locale/zh-cn'
 import AppHeader from "@/components/server/AppNav"
 import FullContainer from "@/components/server/Containers"
 import Stock from "./Stock"

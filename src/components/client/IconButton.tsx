@@ -9,7 +9,7 @@ import { useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { ImageSkeleton } from '@/components/iv-ui';
 
-export default ({ item, isCDN = false }: { item: TApp|TDockItem, isCDN?: boolean }) => {
+const IconButton = ({ item, isCDN = false }: { item: TApp|TDockItem, isCDN?: boolean }) => {
     const router = useRouter();
     const { status } = useSession();
     const { setShowLoginModal } = useAuth();
@@ -32,3 +32,5 @@ export default ({ item, isCDN = false }: { item: TApp|TDockItem, isCDN?: boolean
         </div>
     )
 }
+
+export default IconButton;

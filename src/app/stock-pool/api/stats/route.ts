@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma, initDb } from '@/lib/db';
+import prisma from '@/lib/prisma';
 
 // GET /api/stats - 获取统计数据
 export async function GET() {

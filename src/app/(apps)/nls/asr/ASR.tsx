@@ -6,7 +6,7 @@ import { audioReader, transcriptions, localWhisper } from '@/utils';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 
-export default () => {
+const ASR = () => {
   const [message, setMessage] = useState<string>('');
   const { startOrStop, audioBlob, audioBlobUrl, recording } = useMediaRecorder();
   const { t } = useTranslation('common');
@@ -60,3 +60,5 @@ export default () => {
     </div>
   );
 };
+
+export default ASR;

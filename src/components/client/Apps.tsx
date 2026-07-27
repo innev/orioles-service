@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default () => {
+const Apps = () => {
     const router = useRouter();
     const { data: session, status } = useSession();
     const { setShowLoginModal } = useAuth();
@@ -20,7 +20,8 @@ export default () => {
 
     useEffect(() => {
         const url = searchParams?.get('auth-redirect');
-        if(url) {
+        // 仅允许站内路径（拒绝 //evil.com 及含 : 的绝对 URL），防开放重定向
+        if(url && url.startsWith('/') && !url.startsWith('//') && !url.includes(':')) {
             if(status === 'authenticated') {
                 router.push(url);
             } else if (status === 'unauthenticated') {
@@ -34,8 +35,9 @@ export default () => {
             {
                 isLoading
                     ? <div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>
-                    : apps.map((app: TApp, index: number) => app.visiable === true && <IconButton item={app} key={index} />)
+                    : apps.map((app: TApp) => app.visiable === true && <IconButton item={app} key={app.url} />)
             }
         </div>
     );
 };
+export default Apps;

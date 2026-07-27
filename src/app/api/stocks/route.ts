@@ -2,7 +2,7 @@ import { handleApiError } from '@/utils/api-response'
 import { NextRequest, NextResponse } from 'next/server';
 import { getStocks } from '@/model/Stock';
 
-// 声明为动态路由，这样可以使用 searchParams
+// 声明为动态路由：数据来自数据库，避免构建期静态化/缓存
 export const dynamic = 'force-dynamic';
 
 export const GET = async (_: NextRequest) => {

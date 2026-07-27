@@ -6,7 +6,7 @@ export const metadata = {
     title: '自然语言处理',
 }
 
-export default () => {
+const NLSPage = () => {
     return (
         <FullContent
             paths={[{ name: '自然语言处理' }]}
@@ -16,3 +16,5 @@ export default () => {
         </FullContent>
     )
 };
+
+export default NLSPage;

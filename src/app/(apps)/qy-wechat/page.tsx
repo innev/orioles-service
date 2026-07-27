@@ -6,7 +6,7 @@ export const metadata = {
     title: '企业微信'
 }
 
-export default () => {
+export default function QyWechatPage() {
     ww.register({
         corpId: 'ww7ca4776b2a70000',       // 必填，当前用户企业所属企业ID
         jsApiList: ['getExternalContact'], // 必填，需要使用的JSAPI列表

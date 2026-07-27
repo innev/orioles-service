@@ -7,7 +7,7 @@ export type TAppNav = Array<{
     url?: string
 }>;
 
-export default ({ paths }: { paths: TAppNav }) => {
+const AppNav = ({ paths }: { paths: TAppNav }) => {
 
     return (
         <div className='content-opacity rounded-lg flex flex-row items-center justify-between space-x-2 p-4'>
@@ -32,3 +32,5 @@ export default ({ paths }: { paths: TAppNav }) => {
     )
 
 }
+
+export default AppNav;

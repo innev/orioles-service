@@ -92,6 +92,7 @@ export default function StockPoolPage() {
       if (statsData.success) setStats(statsData.data);
     } catch (error) {
       console.error('Failed to fetch data:', error);
+      alert('加载数据失败，请稍后重试');
     } finally {
       setLoading(false);
     }
@@ -143,9 +144,13 @@ export default function StockPoolPage() {
         setEditingStock(null);
         setFormData({ code: '', name: '', market: 'sh', type: 'individual', cost: 0, alerts: DefaultAlerts });
         fetchData();
+      } else {
+        const result = await res.json().catch(() => null);
+        alert(`保存失败：${result?.error || res.statusText}`);
       }
     } catch (error) {
       console.error('Failed to save stock:', error);
+      alert('保存失败，请稍后重试');
     }
   };
 
@@ -153,10 +158,16 @@ export default function StockPoolPage() {
     if (!confirm(`确定要删除 ${code} 吗？`)) return;
     
     try {
-      await fetch(`/stock-pool/api/stocks/${code}`, { method: 'DELETE' });
-      fetchData();
+      const res = await fetch(`/stock-pool/api/stocks/${code}`, { method: 'DELETE' });
+      if (res.ok) {
+        fetchData();
+      } else {
+        const result = await res.json().catch(() => null);
+        alert(`删除失败：${result?.error || res.statusText}`);
+      }
     } catch (error) {
       console.error('Failed to delete stock:', error);
+      alert('删除失败，请稍后重试');
     }
   };
 
@@ -209,6 +220,7 @@ export default function StockPoolPage() {
       }
     } catch (error) {
       console.error('Fetch alert history failed:', error);
+      alert('获取预警历史失败');
     }
   };
 

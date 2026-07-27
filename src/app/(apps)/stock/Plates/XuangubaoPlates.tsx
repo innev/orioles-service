@@ -5,7 +5,7 @@ import Skeleton from '@/components/server/Skeleton'
 import http from '@/utils/http'
 import { StockPlatesProps, TXuangubaoPlate, TXuangubaoPlates } from '../type'
 
-export default ({ limit, is_acs }: StockPlatesProps) => {
+export default function XuangubaoPlates({ limit, is_acs }: StockPlatesProps) {
 
     const data_fields = [
         'plate_id',

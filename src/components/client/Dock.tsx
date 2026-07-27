@@ -6,7 +6,7 @@ import { TDockItem } from '@/model/Skills';
 import CDN from '@/utils/cdn';
 import IconButton from './IconButton';
 
-export default ({ children = [] }: { children: Array<TDockItem>|undefined }) => {
+const Dock = ({ items = [] }: { items: Array<TDockItem>|undefined }) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const closeModal = () => setIsOpen(false);
@@ -16,10 +16,10 @@ export default ({ children = [] }: { children: Array<TDockItem>|undefined }) => 
             <div className='flex flex-col gap-2 text-center cursor-pointer' onClick={openModal}>
                 <div className='w-16 h-16 rounded-2xl bg-slate-100 p-1'>
                     {
-                        children.length > 0 && <img src={CDN.icon(children[0]?.icon||'')} alt='' />
+                        items.length > 0 && <img src={CDN.icon(items[0]?.icon||'')} alt='' />
                     }
                 </div>
-                <span className='text-gray-800 text-xs'>{children[0]?.typeName}</span>
+                <span className='text-gray-800 text-xs'>{items[0]?.typeName}</span>
             </div>
 
             <Transition appear show={isOpen} as={Fragment}>
@@ -40,12 +40,12 @@ export default ({ children = [] }: { children: Array<TDockItem>|undefined }) => 
                             leaveTo="opacity-0 scale-95"
                         >
                             <div className='w-full md:h-full transition-all transform'>
-                                <p className='text-gray-500 text-lg mb-4 w-fit mx-auto'>{children[0]?.typeName}</p>
+                                <p className='text-gray-500 text-lg mb-4 w-fit mx-auto'>{items[0]?.typeName}</p>
                                 <div className='bg-white w-full h-full p-2 md:p-4 shadow-xl rounded-2xl overflow-y-scroll'>
                                     <div className="flex flex-wrap justify-center gap-2 md:gap-4">
                                         {
-                                            children.map((item: TDockItem, index: number) =>
-                                                <div className='flex flex-row flex-wrap gap-1' key={index}>
+                                            items.map((item: TDockItem) =>
+                                                <div className='flex flex-row flex-wrap gap-1' key={`${item.typeName}-${item.name}`}>
                                                     <IconButton item={item} isCDN={true} />
                                                 </div>
                                             )
@@ -60,3 +60,4 @@ export default ({ children = [] }: { children: Array<TDockItem>|undefined }) => 
         </>
     )
 }
+export default Dock;

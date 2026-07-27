@@ -7,7 +7,7 @@ import Skeleton from "@/components/server/Skeleton"
 import NumberFlow from '@number-flow/react'
 import { NumberFlowFormat } from "@/utils/format"
 
-export default () => {
+export default function QQPlates() {
     const { data = { data: { rank_list: [] } } } = useSWR(
         'https://proxy.finance.qq.com/cgi/cgi-bin/rank/pt/getRank?board_type=hy&sort_type=priceRatio&direct=down&offset=0&count=40',
         http.getAll,

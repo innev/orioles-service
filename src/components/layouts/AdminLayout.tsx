@@ -32,7 +32,7 @@ export const Sider = ({ className }: ContainerProps) => {
     );
 };
 
-export default ({ breadcrumbs = [ { name: '内容管理', href: '/article', current: true } ], children }: LayoutProps) => {
+const AdminLayout = ({ breadcrumbs = [ { name: '内容管理', href: '/article', current: true } ], children }: LayoutProps) => {
     return (
         <div className="flex flex-nowrap h-screen">
             <Head>
@@ -49,3 +49,4 @@ export default ({ breadcrumbs = [ { name: '内容管理', href: '/article', curr
         </div>
     );
 };
+export default AdminLayout;

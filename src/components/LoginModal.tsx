@@ -35,7 +35,7 @@ const SignInOAuth2Button = ({ label = 'Sign In', provider, icon }: { label: stri
   );
 };
 
-export default () => {
+const LoginModal = () => {
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const { showLoginModal, setShowLoginModal } = useAuth();
@@ -119,3 +119,4 @@ export default () => {
     </Modal>
   )
 };
+export default LoginModal;

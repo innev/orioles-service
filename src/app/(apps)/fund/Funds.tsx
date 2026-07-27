@@ -3,6 +3,7 @@
 import { debounce } from "lodash"
 import { useCallback, useEffect, useRef, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
+import toast from "react-hot-toast"
 import { Loading, SearchIcon } from '@/components/Icons'
 import FullContainer from "@/components/server/Containers"
 import http from "@/utils/http"
@@ -36,7 +37,7 @@ export const SH = {
     S1: '持有天数≥30天',
 }
 
-export default () => {
+const Funds = () => {
     const limit = 20
     const keys = [...Object.keys(TYPE), ...Object.keys(RISKLEVEL), ...Object.keys(SH)]
     const values = Array.from({ length: keys.length }, _ => false)
@@ -72,17 +73,28 @@ export default () => {
     const onSearch = useCallback(debounce((keyword: string) => setQuery(pre => ({ ...pre, page: 0, keyword })), 1000), [])
     const onFilter = useCallback(debounce((filter: any) => setQuery(pre => ({ ...pre, page: 0, filter })), 1000), [])
 
+    // 组件卸载时取消未执行的 debounce，避免卸载后仍触发 setQuery
+    useEffect(() => () => {
+        onSearch.cancel()
+        onFilter.cancel()
+    }, [onSearch, onFilter])
+
     useEffect(() => {
         if (query.page === 0) setData([])
         setLoading(true)
         http.post([`/api/mongo/find`, genBody(query)]).then(resp => {
             setHasMore(resp.has_more)
             if (query.page > 0) {
-                setData([...data, ...(resp.data)])
+                // 函数式拼接，避免闭包读取旧的 data
+                setData(pre => [...pre, ...(resp.data)])
             } else {
                 setData([...resp.data])
             }
             setLoading(false)
+        }).catch(err => {
+            console.error('加载基金列表失败：', err)
+            setLoading(false)
+            toast.error('加载失败，请稍后重试')
         })
     }, [query]);
 
@@ -251,3 +263,5 @@ export default () => {
         </>
     )
 }
+
+export default Funds;

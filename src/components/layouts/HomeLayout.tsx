@@ -11,7 +11,7 @@ export const Sider = ({ className }: ContainerProps) => {
     );
 };
 
-export default ({ children }: ContainerProps) => {
+const HomeLayout = ({ children }: ContainerProps) => {
     return (
         <div className="min-h-screen flex flex-col justify-center items-center px-2">
             <Head>
@@ -33,3 +33,4 @@ export default ({ children }: ContainerProps) => {
         </div>
     );
 };
+export default HomeLayout;

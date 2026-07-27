@@ -1,50 +1,28 @@
-import CryptoJS from 'crypto-js';
-
-const API_SECRET = 'MjAzZjcyMTQ3ODhhZmIxYmI3ZDEzZjRj';
-const API_KEY = 'f85706f0112784f1d25396adff45ba69';
-
-interface IUrlInfo {
-  url: string,
-  host: string,
-  origin: string,
-};
-
-const socketUrlList: { [key: string]: IUrlInfo } = {
-  ise: {
-    url: 'wss://ise-api.xfyun.cn/v2/open-ise',
-    host: 'ise-api.xfyun.cn',
-    origin: 'open-ise',
-  },
-  tts: {
-    url: 'wss://tts-api.xfyun.cn/v2/tts',
-    host: 'tts-api.xfyun.cn',
-    origin: 'tts',
-  },
-  iat: {
-    url: 'wss://iat-api.xfyun.cn/v2/iat',
-    host: 'iat-api.xfyun.cn',
-    origin: 'iat',
-  }
-};
-
+/**
+ * 讯飞语音 websocket 签名 URL 获取。
+ * 签名在服务端完成（/api/nls/fyun-token），前端不再持有 API_KEY / API_SECRET。
+ * APPID 本身非密钥（建立连接后会随业务参数明文发送），保留在前端用于构造业务参数。
+ */
 export const APPID: string = '641228cb';
 
+interface IFyunTokenResp {
+  code: number,
+  data?: {
+    url: string,
+    appID?: string
+  },
+  msg?: string
+};
+
 /**
- * 获取websocket url
+ * 获取websocket url（服务端签名）
  */
-export const getWebSocketUrl = (type: string): Promise<string> => new Promise((resolve, reject) => {
-  // 请求地址根据语种不同变化
-  const apiKey: string = API_KEY;
-  const apiSecret: string = API_SECRET;
-  // const date: string = new Date().toGMTString();
-  const date: string = new Date().toUTCString();
-  const algorithm: string = 'hmac-sha256';
-  const headers: string = 'host date request-line';
-  const signatureOrigin: string = `host: ${socketUrlList[type]?.host}\ndate: ${date}\nGET /v2/${socketUrlList[type]?.origin} HTTP/1.1`;
-  const signatureSha: CryptoJS.lib.WordArray = CryptoJS.HmacSHA256(signatureOrigin, apiSecret);
-  const signature: string = CryptoJS.enc.Base64.stringify(signatureSha);
-  const authorizationOrigin: string = `api_key="${apiKey}", algorithm="${algorithm}", headers="${headers}", signature="${signature}"`;
-  const authorization: string = btoa(authorizationOrigin);
-  const url: string = `${socketUrlList[type]?.url}?authorization=${authorization}&date=${date}&host=${socketUrlList[type]?.host}`;
-  resolve(url);
-});
+export const getWebSocketUrl = async (type: string): Promise<string> => {
+  const resp: IFyunTokenResp = await fetch(`/api/nls/fyun-token?type=${encodeURIComponent(type)}`)
+    .then(res => res.json());
+  if (resp.code !== 200 || !resp.data?.url) {
+    // 401 时后端会返回提示信息（如未登录），优先透传
+    throw new Error(resp.msg || '获取讯飞签名URL失败');
+  }
+  return resp.data.url;
+};

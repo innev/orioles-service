@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import Pagination from "./Pagination";
 import DArticle from './typings/DArticle';
 
-export default ({ data = [], pagination = false }: { data: Array<DArticle>, pagination: Boolean | ReactNode }) => {
+export default function List({ data = [], pagination = false }: { data: Array<DArticle>, pagination: Boolean | ReactNode }) {
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg">
       <ul role="list" className="divide-y divide-gray-200">
@@ -35,4 +35,4 @@ export default ({ data = [], pagination = false }: { data: Array<DArticle>, pagi
       {pagination === true ? <Pagination /> : null}
     </div>
   );
-};
+}

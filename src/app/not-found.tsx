@@ -1,6 +1,6 @@
 import { FullContent } from "@/components/layouts/OriolesLayout"
 
-export default () => {
+const NotFound = () => {
     return (
         <FullContent paths={[{ name: 'Not found' }]}>
             <div className="text-center p-8 rounded-lg">
@@ -10,3 +10,5 @@ export default () => {
         </FullContent>
     )
 }
+
+export default NotFound
