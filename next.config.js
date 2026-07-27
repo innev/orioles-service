@@ -2,9 +2,7 @@
 module.exports = {
   // 输出 standalone 产物，用于 Docker 多阶段构建（见 Dockerfile）
   output: 'standalone',
-  // 启用 instrumentation.ts（Node 启动时注册定时任务，见 src/instrumentation.ts）
   experimental: {
-    instrumentationHook: true,
     missingSuspenseWithCSRBailout: false
   },
   async rewrites() {

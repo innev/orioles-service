@@ -26,10 +26,6 @@ export const VIDEO_SERVICE = {
     VIDEOS: '/api/videos'
 };
 
-export const STOCK_SERVICE = {
-    STOCKS: '/api/stocks'
-};
-
 export const EBOOK_SERVICE = {
     BOOKS: '/api/ebook/qiniu',
     DETAIL: '/api/ebook/detail',
