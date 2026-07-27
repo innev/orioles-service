@@ -247,3 +247,63 @@ model AlertHistory {
   @@index([code, alertType, createdAt])
   @@map("alert_history")
 }
+
+// A股股票清单（每日同步自东方财富）
+model StockBasic {
+  id         Int       @id @default(autoincrement())
+  code       String    @unique @db.VarChar(10)
+  name       String    @db.VarChar(50)
+  market     String    @db.VarChar(10) // sh/sz/bj
+  listedDate DateTime? @map("listed_date")
+  isActive   Boolean   @default(true) @map("is_active") // 退市置 false
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  @@map("stock_basic")
+}
+
+// A股日线行情（每日收盘后同步）
+model StockDaily {
+  id        Int      @id @default(autoincrement())
+  code      String   @db.VarChar(10)
+  date      DateTime @db.Date
+  open      Float
+  close     Float
+  high      Float
+  low       Float
+  volume    Float
+  amount    Float
+  changePct Float    @map("change_pct")
+  turnover  Float? // 换手率（筹码分布计算需要）
+
+  @@unique([code, date])
+  @@index([date])
+  @@map("stock_daily")
+}
+
+// 分析信号（底部放量/顶部放量等）
+model StockSignal {
+  id     Int      @id @default(autoincrement())
+  code   String   @db.VarChar(10)
+  date   DateTime @db.Date
+  type   String   @db.VarChar(30) // bottom_volume / top_volume
+  detail String?  @db.Text // JSON：量比、位置分位等
+
+  @@unique([code, date, type])
+  @@index([date, type])
+  @@map("stock_signal")
+}
+
+// 资讯快讯（定时抓取落库，codes 为关联到的股票代码）
+model NewsFlash {
+  id          Int      @id @default(autoincrement())
+  source      String   @db.VarChar(20) // wallstcn / xuangubao
+  externalId  String   @map("external_id") @db.VarChar(50)
+  title       String?  @db.VarChar(500)
+  content     String   @db.Text
+  codes       String?  @db.Text // 匹配到的股票代码，逗号分隔（TEXT 不能带默认值，用 NULL 表示无匹配）
+  publishedAt DateTime @map("published_at")
+
+  @@unique([source, externalId])
+  @@index([publishedAt])
+  @@map("news_flash")
+}

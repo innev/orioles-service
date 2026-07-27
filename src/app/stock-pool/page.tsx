@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -31,7 +32,7 @@ import { useRealtimeData } from '@/hooks/useRealtimeData';
 import { StockDetailModal } from '@/components/stock-pool/stock-detail-modal';
 import {
   Plus, Search, RefreshCw, TrendingUp, Wallet, BarChart3, Globe,
-  Edit2, Trash2, Bell, Activity, Clock, AlertTriangle, History
+  Edit2, Trash2, Bell, Activity, Clock, AlertTriangle, History, LineChart
 } from 'lucide-react';
 
 export default function StockPoolPage() {
@@ -261,6 +262,14 @@ export default function StockPoolPage() {
           </div>
 
           <div className="flex items-center gap-3">
+            {/* 市场分析入口 */}
+            <Button variant="outline" size="sm" asChild className="hidden sm:flex">
+              <Link href="/stock-pool/analysis">
+                <LineChart className="w-4 h-4 mr-2" />
+                市场分析
+              </Link>
+            </Button>
+
             {/* 实时数据状态 */}
             <div
               className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border ${

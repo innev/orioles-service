@@ -5,8 +5,8 @@ DROP INDEX `Video_id_idx` ON `Video`;
 DROP INDEX `OneTimePassword_id_idx` ON `OneTimePassword`;
 DROP INDEX `Stock_id_idx` ON `Stock`;
 DROP INDEX `StockData_id_idx` ON `StockData`;
-DROP INDEX `DeviceService_id_idx` ON `DeviceService`;
-DROP INDEX `Device_id_idx` ON `Device`;
+-- 注：Device/DeviceService 两张表由 db push 创建、不在迁移历史中，
+-- 其 DROP INDEX 语句已从本文件移除，否则迁移无法在空库（shadow database）重放。
 
 -- DropIndex（冗余：name 已有唯一索引）
 DROP INDEX `Icon_name_idx` ON `Icon`;

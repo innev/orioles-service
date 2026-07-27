@@ -65,7 +65,7 @@ export function StockChart({ code, market, name }: StockChartProps) {
   const fetchKLineData = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/stocks/${code}/kline?market=${market}`);
+      const response = await fetch(`/stock-pool/api/stocks/${code}/kline?market=${market}`);
       const result = await response.json();
       
       if (!result.success) {

@@ -2,6 +2,11 @@
 module.exports = {
   // 输出 standalone 产物，用于 Docker 多阶段构建（见 Dockerfile）
   output: 'standalone',
+  // 启用 instrumentation.ts（Node 启动时注册定时任务，见 src/instrumentation.ts）
+  experimental: {
+    instrumentationHook: true,
+    missingSuspenseWithCSRBailout: false
+  },
   async rewrites() {
     return [
       {
@@ -29,8 +34,5 @@ module.exports = {
         destination: `https://yunhq.sse.com.cn:32042/v1/sh1/list/exchange/ebs?select=code%2Cname%2Copen%2Chigh%2Clow%2Clast%2Cprev_close%2Cchg_rate%2Cvolume%2Camount%2Ccpxxextendname%2Ctradephase`
       }
     ];
-  },
-  experimental: {
-    missingSuspenseWithCSRBailout: false
   }
 };

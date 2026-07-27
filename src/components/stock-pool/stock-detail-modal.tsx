@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -8,9 +9,12 @@ import {
 } from '@/components/ui/dialog';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { RealtimeStock } from '@/hooks/useRealtimeData';
 import { StockChart } from '@/components/stock-pool/stock-chart';
-import { TrendingUp, TrendingDown, DollarSign, BarChart3, Clock } from 'lucide-react';
+import { StockChips } from '@/components/stock-pool/stock-chips';
+import { StockNews } from '@/components/stock-pool/stock-news';
+import { TrendingUp, TrendingDown, DollarSign, BarChart3, Clock, Layers, Newspaper } from 'lucide-react';
 
 interface StockDetailModalProps {
   stock: RealtimeStock | null;
@@ -18,7 +22,19 @@ interface StockDetailModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
+type DetailTab = 'kline' | 'chips' | 'news';
+
 export function StockDetailModal({ stock, open, onOpenChange }: StockDetailModalProps) {
+  const [tab, setTab] = useState<DetailTab>('kline');
+  // 记录已激活过的 Tab，数据在首次激活时才请求，之后保持挂载避免重复请求
+  const [visited, setVisited] = useState<Set<DetailTab>>(new Set(['kline']));
+
+  const handleTabChange = (value: string) => {
+    const next = value as DetailTab;
+    setTab(next);
+    setVisited(prev => prev.has(next) ? prev : new Set(prev).add(next));
+  };
+
   if (!stock) return null;
 
   const isProfit = stock.pnlPct > 0;
@@ -140,13 +156,46 @@ export function StockDetailModal({ stock, open, onOpenChange }: StockDetailModal
           </div>
         )}
 
-        {/* K线图表 */}
+        {/* K线 / 筹码分布 / 相关资讯 */}
         <div className="mt-6">
-          <StockChart 
-            code={stock.code} 
-            market={stock.market || 'sh'} 
-            name={stock.name}
-          />
+          <Tabs value={tab} onValueChange={handleTabChange} className="w-full">
+            <TabsList className="bg-muted/50 mb-4">
+              <TabsTrigger value="kline" className="gap-1">
+                <BarChart3 className="w-4 h-4" /> K线走势
+              </TabsTrigger>
+              <TabsTrigger value="chips" className="gap-1">
+                <Layers className="w-4 h-4" /> 筹码分布
+              </TabsTrigger>
+              <TabsTrigger value="news" className="gap-1">
+                <Newspaper className="w-4 h-4" /> 相关资讯
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+
+          <div className={tab === 'kline' ? '' : 'hidden'}>
+            <StockChart
+              code={stock.code}
+              market={stock.market || 'sh'}
+              name={stock.name}
+            />
+          </div>
+          {visited.has('chips') && (
+            <div className={tab === 'chips' ? '' : 'hidden'}>
+              <StockChips
+                code={stock.code}
+                market={stock.market || 'sh'}
+                currentPrice={stock.current}
+              />
+            </div>
+          )}
+          {visited.has('news') && (
+            <div className={tab === 'news' ? '' : 'hidden'}>
+              <StockNews
+                code={stock.code}
+                market={stock.market || 'sh'}
+              />
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>
