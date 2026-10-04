@@ -61,4 +61,8 @@ USER nextjs
 
 EXPOSE 3000
 
+# runtime-node 基础镜像自带 ENTRYPOINT ["runtime-entry.sh"]（install+build 型入口，非 exec 透传），
+# 不重置会把 CMD 的 "node server.js" 当构建参数吞掉：进程秒退、零日志、容器被 unless-stopped 无限拉起
+ENTRYPOINT []
+
 CMD ["node", "server.js"]
