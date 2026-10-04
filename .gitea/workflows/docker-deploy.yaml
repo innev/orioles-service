@@ -204,12 +204,16 @@ jobs:
           grep -q '^NEXTAUTH_SECRET=.' "$INNEV_ENV_FILE" || { echo "::error::$INNEV_ENV_FILE 缺少 NEXTAUTH_SECRET"; exit 1; }
           docker rm -f orioles-service 2>/dev/null || true
           # 靠后的 -e 覆盖 --env-file 同名变量（容器端口固定 3000，不受 .env 影响）。
+          # --entrypoint node 覆盖 runtime-node 镜像自带的 install+build 入口——
+          # 本镜像 runner 段是 standalone 产物，直接 node server.js 启动；
+          # 不覆盖会在 /app 里跑 pnpm install 并因权限报 ERR_PNPM_LOCKFILE_WRITE_FILE
           docker run -d --name orioles-service --restart unless-stopped \
             -p "${INNEV_HOST_PORT}:3000" \
             --env-file "$INNEV_ENV_FILE" \
             -e HOSTNAME=0.0.0.0 \
             -e PORT=3000 \
             --add-host host.docker.internal:host-gateway \
+            --entrypoint node \
             "$IMAGE"
 
       # 本项目无健康检查端点（src 中无 /health 类路由），按规范省略健康检查步——部署后需人工确认。
