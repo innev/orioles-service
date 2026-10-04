@@ -19,23 +19,29 @@ export type UserInfo = {
 
 // 用 React cache 包装，消除同一请求内 layout 与 page 的重复查询
 export const getUserInfo_ = cache(async (email: string = process.env.DEFAULT_USER_EMAIL || 'zhaozhao200295@gmail.com'): Promise<any> => {
-    return prisma.user.findUnique({
-        where: { email },
-        select: {
-            id: true,
-            name: true,
-            nickname: true,
-            email: true,
-            avatar: true,
-            bio: true,
-            UserBrand: {
-                select: {
-                    icon: true,
-                    url: true
+    try {
+        return await prisma.user.findUnique({
+            where: { email },
+            select: {
+                id: true,
+                name: true,
+                nickname: true,
+                email: true,
+                avatar: true,
+                bio: true,
+                UserBrand: {
+                    select: {
+                        icon: true,
+                        url: true
+                    },
                 },
             },
-        },
-    });
+        });
+    } catch {
+        // 数据库不可达（如 docker build 期间无库可连）时返回 null 兜底，
+        // 否则会打断所有页面的静态预渲染导致构建失败；调用方已判空
+        return null;
+    }
 });
 
 export const userLogin = async ({ email, password }: { email: string, password: string }): Promise<any> => {
