@@ -112,7 +112,7 @@ test/                     # REST Client 格式的 .http 测试文件
 
 - **PM2（主要方式）**：`pm2.json` 定义了 `Orioles-Service` 应用（`pnpm start`，端口 3000，`fork` 模式单实例 —— 内存限流依赖单进程，日志输出到 `./logs/`）。线上地址：https://orioles.innev.cn。
 - **Vercel**：`vercel.json` 仅为 `src/pages/api/**/*.ts` 设置了 `maxDuration: 9`。
-- **Docker**：`Dockerfile` 为 node:20-alpine + corepack/pnpm 多阶段构建（deps → build → runner），依赖 `next.config.js` 的 `output: 'standalone'`，运行时 `node server.js`。
+- **Docker**：`Dockerfile` 为 runner-node（Alpine，CI 构建前经强制网络检测把 FROM 改写为 `<registry>/images/runner-node:latest`，内网 livebook:8418 / 外网 code.innev.cn）+ corepack/pnpm（固定 12.9.1）多阶段构建（deps → build → runner），依赖 `next.config.js` 的 `output: 'standalone'`，运行时 `node server.js`。依赖构建脚本白名单在 `pnpm-workspace.yaml`（`allowBuilds` / `onlyBuiltDependencies` 双键）。
 
 ## 安全注意事项
 

@@ -1,0 +1,16 @@
+# pnpm 10+ 默认不执行依赖的安装构建脚本，需显式批准；pnpm 12（Rust 重写版）起
+# 配置键为 pnpm-workspace.yaml 的 allowBuilds（package.json 的 pnpm.* 已失效）。
+# prisma 系包需要 postinstall 放置查询引擎。
+# onlyBuiltDependencies 供 pnpm 10/11（本地开发旧版本）识别，allowBuilds 供 pnpm 12+ 识别，两键并存。
+onlyBuiltDependencies:
+  - '@prisma/client'
+  - '@prisma/engines'
+  - bufferutil
+  - msw
+  - prisma
+allowBuilds:
+  '@prisma/client': true
+  '@prisma/engines': true
+  bufferutil: true
+  msw: true
+  prisma: true

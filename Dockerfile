@@ -2,12 +2,15 @@
 
 # 多阶段构建：deps（安装依赖）→ build（构建 standalone 产物）→ runner（精简运行时）
 # 参考 Next.js 官方 Docker 示例；需要 next.config.js 开启 output: 'standalone'
+# 基础镜像用组织维护的 runner-node（Alpine，体积小）；CI 构建前经强制网络检测把 FROM
+# 改写为 <registry>/images/runner-node:latest（内网 livebook:8418 / 外网 code.innev.cn）
 
-FROM node:20-alpine AS base
+FROM runner-node:latest AS base
 # 部分依赖（如 sharp、prisma 引擎）需要 libc6-compat
 RUN apk add --no-cache libc6-compat
-# 启用 corepack 以使用 pnpm（版本由 packageManager/锁文件决定，也可在此固定）
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# pnpm 固定 12.9.1，不用 latest——避免大版本漂移破坏构建（本次失败即 pnpm 12 默认阻断
+# 依赖构建脚本所致，配套 pnpm-workspace.yaml 的 allowBuilds）。镜像无 corepack 时回退 npm 全局安装
+RUN corepack enable && corepack prepare pnpm@12.9.1 --activate || npm install -g pnpm@12.9.1
 WORKDIR /app
 
 # ---- deps：仅安装依赖 ----
@@ -26,7 +29,7 @@ COPY . .
 RUN pnpm db:gen && pnpm build
 
 # ---- runner：最小运行时镜像 ----
-FROM node:20-alpine AS runner
+FROM runner-node:latest AS runner
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
