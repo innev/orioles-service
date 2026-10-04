@@ -1,0 +1,315 @@
+# Docker 化部署流水线：
+#   push tag v* → ① buildx 构建镜像并推送 Gitea Packages → ② 本机 docker 拉取镜像、重建并启动容器
+#               → ③ 清理旧版本镜像/退出容器（本机 + Gitea Packages 注册表），只保留当前部署的成品镜像。
+# 发布方式：git tag v1.2.3 && git push origin v1.2.3（推 main 不再触发）。
+# 手动触发（Actions → Run workflow）可用 job 选项单跑某个任务：all（全链路）/ image / deploy / cleanup。
+# 零第三方 action：run 步骤直连 git/docker，runner 无需访问 github.com。
+# 命名约定：自定义变量/密钥一律 INNEV_ 前缀（仓库 → 设置 → Actions 配置，清单见本文件尾部注释）。
+# 凭证回退链：INNEV_REGISTRY_USER / INNEV_REGISTRY_TOKEN → gitea.actor / 内置 GITHUB_TOKEN；
+#             INNEV_CI_TOKEN → GITHUB_TOKEN。加了即生效。
+# 基础镜像：拉取前强制网络检测选址（内网 livebook:8418 / 外网 code.innev.cn），FROM 优先
+# <registry>/images 命名空间，未命中回退官方源；改写只作用 CI 克隆副本，不动仓库 Dockerfile。
+# 镜像 tag = 版本号（git tag，如 v1.2.3）+ latest；手动 dispatch 无 tag 上下文时回退提交短 sha。
+name: docker-deploy
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      job:
+        description: 要运行的任务（all = 构建+部署+清理）
+        type: choice
+        options: [all, image, deploy, cleanup]
+        default: all
+        required: true
+
+permissions:
+  contents: read    # git clone 源码（内置 GITHUB_TOKEN）
+  packages: write   # 推 Gitea Packages（内置 GITHUB_TOKEN）
+
+env:
+  INNEV_REGISTRY: ${{ vars.INNEV_REGISTRY || 'livebook:8418' }}
+  INNEV_IMAGE_PREFIX: ${{ vars.INNEV_IMAGE_PREFIX || 'livebook:8418/projects' }}
+  # docker.io 加速镜像（逗号分隔）——buildx docker-container 驱动的 buildkitd 不继承 runner 宿主
+  # daemon.json 的 registry-mirrors，必须经 buildkitd.toml 注入
+  INNEV_DOCKERHUB_MIRRORS: ${{ vars.INNEV_DOCKERHUB_MIRRORS || 'docker.fnnas.com,registry.docker-cn.com,registry.hub.docker.com,docker.1panel.live,docker.1panel.dev,docker.1ms.run' }}
+  INNEV_HOST_PORT: ${{ vars.INNEV_HOST_PORT || '3110' }}
+  # 服务器上单独维护的 .env 绝对路径（key 与仓库 .env.example 一致）；.env 不进 git/镜像
+  INNEV_ENV_FILE: ${{ vars.INNEV_ENV_FILE || '/etc/orioles-service/.env' }}
+  # 基础镜像内网源 registry——默认空 = 强制网络检测自动选址（内网 livebook:8418 / 外网
+  # code.innev.cn）；显式设置覆盖探测结果。FROM 命中 <该值>/images 即改写为内部引用，缺失回退官方源
+  INNEV_IMAGES_REGISTRY: ${{ vars.INNEV_IMAGES_REGISTRY || '' }}
+
+jobs:
+  # 任务 1：构建镜像并推送到本机 Gitea Packages（$INNEV_IMAGE_PREFIX/orioles-service）
+  # push 或手动选择 all/image 时运行
+  image:
+    if: github.event_name == 'push' || github.event.inputs.job == 'all' || github.event.inputs.job == 'image'
+    runs-on: self-hosted
+    steps:
+      # 仓库变量误带 http:// scheme 时在此剥掉，避免拼出非法镜像引用（docker tag 不允许 "://"）
+      - name: 归一化镜像变量（剥离误配的 URL scheme）
+        run: |
+          PREFIX="${INNEV_IMAGE_PREFIX#*://}"; PREFIX="${PREFIX%/}"
+          echo "INNEV_REGISTRY=${INNEV_REGISTRY#*://}" >> "$GITHUB_ENV"
+          echo "INNEV_IMAGE_PREFIX=$PREFIX" >> "$GITHUB_ENV"
+          # 镜像 tag：tag 推送取版本号（如 v1.2.3）；手动 dispatch（branch 上下文）回退提交短 sha
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then TAG="$GITHUB_REF_NAME"; else TAG="${GITHUB_SHA:0:8}"; fi
+          echo "IMAGE_TAG=$TAG" >> "$GITHUB_ENV"
+          # 日志开头明示推送目标，变量配错时第一时间可见
+          echo "构建目标镜像：$PREFIX/orioles-service:$TAG"
+
+      # 从 <registry>/images 拉基础镜像之前必须强制网络检测选址：livebook:8418 是 LAN 明文 HTTP、
+      # code.innev.cn 是 WAN TLS——写死任一地址，换个网络环境流水线必挂。均不可达则置空，
+      # 后续优选步整体回退官方源（buildkitd.toml 的 docker.io mirrors 兜底）。
+      - name: 强制网络检测（基础镜像源选址）
+        run: |
+          REG="${INNEV_IMAGES_REGISTRY#*://}"
+          if [ -n "$REG" ]; then
+            echo "仓库变量显式指定基础镜像源：$REG"
+          elif curl -fsS -m 5 http://livebook:8418/api/v1/version >/dev/null 2>&1; then
+            REG=livebook:8418; echo "内网探测命中，基础镜像源：$REG/images"
+          elif curl -fsS -m 5 https://code.innev.cn/api/v1/version >/dev/null 2>&1; then
+            REG=code.innev.cn; echo "外网探测命中，基础镜像源：$REG/images"
+          else
+            REG=''; echo "::warning::内网/外网镜像源均不可达，基础镜像全部回退官方源"
+          fi
+          echo "INNEV_IMAGES_REGISTRY=$REG" >> "$GITHUB_ENV"
+
+      - name: 取出源码（免 actions/checkout，纯 git）
+        env:
+          GIT_TOKEN: ${{ secrets.INNEV_CI_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch "$GITHUB_REF_NAME" \
+            "http://x-access-token:${GIT_TOKEN}@${INNEV_REGISTRY#*://}/${{ gitea.repository }}.git" src 2>&1 | grep -v "$GIT_TOKEN" || true
+          [ -f src/Dockerfile ] || { echo "源码克隆失败"; exit 1; }
+          cd src && git checkout "$GITHUB_SHA"
+
+      - name: 登录 Gitea Packages
+        env:
+          LOGIN_USER: ${{ secrets.INNEV_REGISTRY_USER || gitea.actor }}
+          LOGIN_TOKEN: ${{ secrets.INNEV_REGISTRY_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$LOGIN_TOKEN" | docker login "$INNEV_REGISTRY" -u "$LOGIN_USER" --password-stdin
+          # 基础镜像源与推送 registry 不同端点（如外网 code.innev.cn）时补登录——同一 Gitea 实例，凭证通用
+          if [ -n "$INNEV_IMAGES_REGISTRY" ] && [ "$INNEV_IMAGES_REGISTRY" != "$INNEV_REGISTRY" ]; then
+            echo "$LOGIN_TOKEN" | docker login "$INNEV_IMAGES_REGISTRY" -u "$LOGIN_USER" --password-stdin
+          fi
+
+      # buildkitd.toml 里对 $INNEV_REGISTRY 声明 http=true（强制明文 HTTP）：buildkitd 不继承宿主
+      # daemon.json 的 insecure-registries，纯 HTTP registry 不声明会在 push 阶段失败。
+      # 每次重建构建器以确保 buildkitd.toml 变更生效（无外部层缓存，每次构建均为全量）。
+      - name: 创建 buildx 构建器（注入 docker.io 加速镜像 + 推送目标 HTTP 声明）
+        run: |
+          docker buildx rm -f orioles-servicebuilder 2>/dev/null || true
+          {
+            echo '[registry."docker.io"]'
+            printf '%s' "$INNEV_DOCKERHUB_MIRRORS" | sed 's/[^,]*/"&"/g; s/,/, /g' | sed 's/^/  mirrors = [/; s/$/]/'
+            echo ''
+            echo "[registry.\"$INNEV_REGISTRY\"]"
+            echo '  http = true'
+            # LAN 明文的基础镜像源与推送 registry 不同端点时补 http 声明（TLS 端点如 code.innev.cn 不需要）
+            if [ "$INNEV_IMAGES_REGISTRY" = "livebook:8418" ] && [ "$INNEV_IMAGES_REGISTRY" != "$INNEV_REGISTRY" ]; then
+              echo ''
+              echo "[registry.\"$INNEV_IMAGES_REGISTRY\"]"
+              echo '  http = true'
+            fi
+          } > buildkitd.toml
+          cat buildkitd.toml
+          docker buildx create --use --name orioles-servicebuilder --config buildkitd.toml
+
+      # 基础镜像强制优选内部源：src 副本 Dockerfile 里命中 <registry>/images 的 FROM 改写为内部引用，
+      # 未命中保持原样（构建时经 buildkitd.toml 的 docker.io mirrors 回退官方源），不硬失败。
+      # 只改 CI 克隆出的副本，不动仓库 Dockerfile——同一 Dockerfile 在任意网络环境都要可构建。
+      - name: 基础镜像优选内部源（images 命名空间，缺失回退官方源）
+        run: |
+          if [ -z "$INNEV_IMAGES_REGISTRY" ]; then
+            echo "内部镜像源不可用，跳过优选，基础镜像全部走官方源"
+            exit 0
+          fi
+          cd src
+          # 构建阶段名（FROM ... AS <name>）不是镜像引用，收集起来跳过
+          STAGES=$(awk 'toupper($1)=="FROM"{for(i=2;i<=NF;i++) if(toupper($i)=="AS") print $(i+1)}' Dockerfile)
+          { grep -niE '^[[:space:]]*FROM[[:space:]]' Dockerfile || true; } | cut -d: -f1 | while read -r N; do
+            REF=$(awk -v n="$N" 'NR==n{for(i=2;i<=NF;i++){if($i ~ /^--/) continue; print $i; exit}}' Dockerfile)
+            case "$REF" in ''|scratch|'$'*|*@*) echo "跳过 ${REF:-空引用}（scratch/ARG/digest）"; continue ;; esac
+            W="${REF#docker.io/}"   # 显式 docker.io 前缀视同官方源，纳入优选
+            # 仅当含 / 时才可能带 registry：首段含 . 或 : 或是 localhost 即视为已带 registry，保持原样
+            case "$W" in */*) case "${W%%/*}" in *.*|*:*|localhost) echo "跳过 $REF（已带 registry）"; continue ;; esac ;; esac
+            if echo "$STAGES" | grep -qx "$W"; then echo "跳过 $REF（构建阶段名）"; continue; fi
+            NAME="${W%%:*}"; if [ "$NAME" = "$W" ]; then TAG=latest; else TAG="${W##*:}"; fi
+            NAME="${NAME#library/}"
+            CAND="$INNEV_IMAGES_REGISTRY/images/$NAME:$TAG"
+            if docker buildx imagetools inspect "$CAND" >/dev/null 2>&1; then
+              ESC=$(printf '%s' "$REF" | sed 's/[.[\*^$/]/\\&/g')
+              sed -i "${N}s|$ESC|$CAND|" Dockerfile
+              echo "优选命中：$REF → $CAND"
+            else
+              echo "内部源未命中，保留官方源：$REF"
+            fi
+          done
+          echo '--- 优选后的 FROM 行 ---'
+          grep -niE '^[[:space:]]*FROM[[:space:]]' Dockerfile || true
+
+      # 构建上下文 = 仓库根（根级 Dockerfile）。不使用层缓存（每次全量构建）。
+      # 单架构原生构建——部署目标即本机，无需 QEMU 多架构。
+      - name: 构建并推送 orioles-service 镜像
+        run: |
+          docker buildx build --push \
+            --label org.opencontainers.image.source="http://$INNEV_REGISTRY/${{ gitea.repository }}" \
+            -t "$INNEV_IMAGE_PREFIX/orioles-service:$IMAGE_TAG" \
+            -t "$INNEV_IMAGE_PREFIX/orioles-service:latest" \
+            src
+
+      # docker-container 驱动的构建器会常驻一个 buildx_buildkit_orioles-servicebuilder0 容器，用完即删（无论成败）。
+      - name: 清理 buildx 构建器容器
+        if: always()
+        run: docker buildx rm -f orioles-servicebuilder 2>/dev/null || true
+
+  # 任务 2：把刚推送的镜像拉到本机 docker，重建并启动容器
+  # push 或手动选择 all/deploy 时运行；自定义 if 取代默认 success() 门控——
+  # 手动单跑 deploy 时 image 被跳过（needs 结果为 skipped），此处显式放行
+  deploy:
+    needs: image
+    if: ${{ !failure() && !cancelled() && (github.event_name == 'push' || github.event.inputs.job == 'all' || github.event.inputs.job == 'deploy') }}
+    runs-on: self-hosted
+    steps:
+      - name: 归一化镜像变量（剥离误配的 URL scheme）
+        run: |
+          PREFIX="${INNEV_IMAGE_PREFIX#*://}"; PREFIX="${PREFIX%/}"
+          echo "INNEV_REGISTRY=${INNEV_REGISTRY#*://}" >> "$GITHUB_ENV"
+          echo "INNEV_IMAGE_PREFIX=$PREFIX" >> "$GITHUB_ENV"
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then TAG="$GITHUB_REF_NAME"; else TAG="${GITHUB_SHA:0:8}"; fi
+          echo "IMAGE_TAG=$TAG" >> "$GITHUB_ENV"
+
+      # docker pull/login 走宿主 daemon：LAN 明文 registry 需在宿主 daemon.json 登记
+      # insecure-registries（见文件尾部注释），或把 INNEV_IMAGE_PREFIX 配成 TLS 地址。
+      - name: 登录并拉取镜像
+        env:
+          LOGIN_USER: ${{ secrets.INNEV_REGISTRY_USER || gitea.actor }}
+          LOGIN_TOKEN: ${{ secrets.INNEV_REGISTRY_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          IMAGE="$INNEV_IMAGE_PREFIX/orioles-service:$IMAGE_TAG"
+          echo "$LOGIN_TOKEN" | docker login "$INNEV_REGISTRY" -u "$LOGIN_USER" --password-stdin
+          docker pull "$IMAGE"
+
+      # 运行期环境变量来自服务器上单独维护的 .env（key 与仓库 .env.example 一致），
+      # 路径由变量 INNEV_ENV_FILE 指定；.env 不进 git/镜像，仅在此做 --env-file 注入。
+      - name: 重建 orioles-service 容器
+        run: |
+          IMAGE="$INNEV_IMAGE_PREFIX/orioles-service:$IMAGE_TAG"
+          [ -f "$INNEV_ENV_FILE" ] || { echo "::error::服务器上未找到 $INNEV_ENV_FILE——请按 .env.example 的 key 创建，或用仓库变量 INNEV_ENV_FILE 指向实际路径"; exit 1; }
+          grep -q '^DATABASE_URL=.' "$INNEV_ENV_FILE" || { echo "::error::$INNEV_ENV_FILE 缺少 DATABASE_URL"; exit 1; }
+          grep -q '^NEXTAUTH_SECRET=.' "$INNEV_ENV_FILE" || { echo "::error::$INNEV_ENV_FILE 缺少 NEXTAUTH_SECRET"; exit 1; }
+          docker rm -f orioles-service 2>/dev/null || true
+          # 靠后的 -e 覆盖 --env-file 同名变量（容器端口固定 3000，不受 .env 影响）。
+          docker run -d --name orioles-service --restart unless-stopped \
+            -p "${INNEV_HOST_PORT}:3000" \
+            --env-file "$INNEV_ENV_FILE" \
+            -e HOSTNAME=0.0.0.0 \
+            -e PORT=3000 \
+            --add-host host.docker.internal:host-gateway \
+            "$IMAGE"
+
+      # 本项目无健康检查端点（src 中无 /health 类路由），按规范省略健康检查步——部署后需人工确认。
+
+  # 任务 3：清理旧版本产物，只保留当前部署的成品镜像（当前版本 tag + latest，二者同 ID）。
+  # tag 全链路在部署成功后自动跑；也可手动单跑（job=cleanup，保留当前 ref 解析出的镜像 tag）。
+  # 只动 $INNEV_IMAGE_PREFIX/orioles-service 名下的 tag 与名为 orioles-service 的退出容器——
+  # 本机还跑着其他项目的镜像与容器，不做全局 prune。
+  cleanup:
+    needs: deploy
+    if: ${{ !failure() && !cancelled() && (github.event.inputs.job == 'cleanup' || needs.deploy.result == 'success') }}
+    runs-on: self-hosted
+    steps:
+      - name: 归一化镜像变量（剥离误配的 URL scheme）
+        run: |
+          PREFIX="${INNEV_IMAGE_PREFIX#*://}"; PREFIX="${PREFIX%/}"
+          echo "INNEV_REGISTRY=${INNEV_REGISTRY#*://}" >> "$GITHUB_ENV"
+          echo "INNEV_IMAGE_PREFIX=$PREFIX" >> "$GITHUB_ENV"
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then TAG="$GITHUB_REF_NAME"; else TAG="${GITHUB_SHA:0:8}"; fi
+          echo "IMAGE_TAG=$TAG" >> "$GITHUB_ENV"
+
+      - name: 清理本机旧镜像与退出容器
+        run: |
+          KEEP="$INNEV_IMAGE_PREFIX/orioles-service:$IMAGE_TAG"
+          # 旧版本 tag：容器按镜像 ID 引用，删 tag 不影响正在运行的容器；
+          # 若某 tag 仍被容器独占引用，docker rmi 会拒绝，|| true 跳过
+          docker images "$INNEV_IMAGE_PREFIX/orioles-service" --format '{{.Repository}}:{{.Tag}}' | while read -r ref; do
+            case "$ref" in
+              "$KEEP" | "$INNEV_IMAGE_PREFIX/orioles-service:latest") echo "保留 $ref" ;;
+              *) echo "删除 $ref"; docker rmi "$ref" || true ;;
+            esac
+          done
+          # 退出/未启动的 orioles-service 容器（正常不会有——deploy 已 docker rm -f；name 过滤加锚点，
+          # 避免误伤 buildx_buildkit_orioles-servicebuilder0 这类名字包含 orioles-service 的容器）
+          docker ps -aq --filter 'name=^orioles-service$' --filter status=exited --filter status=created | xargs -r docker rm
+          echo "当前保留的 orioles-service 镜像："
+          docker images "$INNEV_IMAGE_PREFIX/orioles-service"
+
+      # 注册表侧同步清理：本机删 tag 不影响 Gitea Packages 里已推送的旧版本，版本号模型下
+      # 每个 tag 都会在 Packages 堆积，必须经 API 删除。列 tag 走 OCI Registry API（/v2/.../tags/list），
+      # 删除走 Gitea Packages API（DELETE /api/v1/packages/<owner>/<type>/<name>/<version>）。
+      # best-effort：全程 || true，token 缺 scope 或 API 不通只告警不阻塞流水线。
+      - name: 清理 Gitea Packages 旧版本（best-effort）
+        env:
+          LOGIN_USER: ${{ secrets.INNEV_REGISTRY_USER || gitea.actor }}
+          LOGIN_TOKEN: ${{ secrets.INNEV_REGISTRY_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          REPO_PATH="${INNEV_IMAGE_PREFIX#$INNEV_REGISTRY/}/orioles-service"   # 如 projects/orioles-service
+          OWNER="${INNEV_IMAGE_PREFIX#$INNEV_REGISTRY/}"; OWNER="${OWNER%%/*}"  # 如 projects
+          TAGS=$(curl -fsS -u "$LOGIN_USER:$LOGIN_TOKEN" \
+            "http://$INNEV_REGISTRY/v2/$REPO_PATH/tags/list" \
+            | grep -o '"[^"]*"' | grep -v '^"name"$' | grep -v '^"tags"$' | tr -d '"' \
+            | grep -v "^$REPO_PATH$") || { echo "::warning::列出注册表 tag 失败，跳过注册表清理"; exit 0; }
+          for tag in $TAGS; do
+            case "$tag" in
+              "$IMAGE_TAG" | latest) echo "注册表保留 $tag" ;;
+              *) echo "注册表删除 $tag"
+                 curl -fsS -X DELETE -u "$LOGIN_USER:$LOGIN_TOKEN" \
+                   "http://$INNEV_REGISTRY/api/v1/packages/$OWNER/container/orioles-service/$tag" \
+                   || echo "::warning::删除注册表版本 $tag 失败（token 需 write:package scope）" ;;
+            esac
+          done
+
+# =============================================================================
+# 一次性人工准备：
+#   1. runner 用实例级（标签 self-hosted），与 Docker 同机、可直接执行宿主 docker 命令
+#      （job 里的 docker run/pull 操作的就是部署目标机的 daemon）。
+#   2. deploy job 的 docker pull/login 走宿主 daemon：LAN 明文 registry（如 livebook:8418）需在宿主
+#      /etc/docker/daemon.json 的 insecure-registries 中登记并重启 docker——推送侧已由 buildkitd.toml
+#      http=true 覆盖，不受此限；或将 INNEV_IMAGE_PREFIX 配成 TLS 地址（如 code.innev.cn/...）。
+#   3. 仓库 → 设置 → 仓库 → 功能（Units）中启用 Actions。
+#   4. 首次运行后到 Packages 确认镜像包 orioles-service 已生成。
+#   5. 数据库迁移与种子数据（如适用）为手动步骤——镜像不含迁移工具，在本地 checkout 里把
+#      数据库地址指向同一库后执行项目自己的迁移命令。
+#   6. 在部署服务器上按仓库 .env.example 的 key 新建专用 .env（默认路径 /etc/orioles-service/.env，
+#      可用仓库变量 INNEV_ENV_FILE 改指别处）。
+#      数据库地址指向宿主/同机服务时，容器内由 --add-host ...:host-gateway 解析；
+#      注意访问的是同机 docker 发布端口（如 5433），宿主系统服务端口（如 pg 5432）从容器经
+#      host-gateway 访问不通——实测踩坑，切勿写错。
+#   7. 日常发布：git tag v1.2.3 && git push origin v1.2.3（tag 需 v 开头才会触发流水线）；
+#      部署成功后 cleanup 自动删除本机与 Gitea Packages 里的旧版本镜像，无需人工干预。
+#   8. 基础镜像内网源：组织已在 Gitea images 命名空间同步常用基础镜像（如 images/golang:1.25-alpine）。
+#      构建前强制网络检测选址（内网 livebook:8418 / 外网 code.innev.cn），命中即把 src 副本
+#      Dockerfile 的 FROM 改写为 <registry>/images/*，未命中自动回退官方源——全自动无需人工干预，
+#      只需保证 images 命名空间持续同步需要的基镜像。
+#
+# 仓库 → 设置 → Actions 配置清单
+# 变量（Variables）：
+#   INNEV_IMAGE_PREFIX      镜像前缀（推送/拉取地址），默认 livebook:8418/projects——
+#                           镜像全名 $INNEV_IMAGE_PREFIX/orioles-service:<版本tag|latest>
+#   INNEV_REGISTRY          registry / git 端点，默认 livebook:8418（与 Gitea 同机，LAN 明文 HTTP）
+#   INNEV_DOCKERHUB_MIRRORS docker.io 加速镜像（逗号分隔），默认 docker.fnnas.com,registry.docker-cn.com,
+#                           registry.hub.docker.com,docker.1panel.live,docker.1panel.dev,docker.1ms.run
+#   INNEV_HOST_PORT         容器对外发布端口，默认 3110（容器内固定 3000）
+#   INNEV_ENV_FILE          服务器上 .env 的绝对路径，默认 /etc/orioles-service/.env（见上方准备 6）
+#   INNEV_IMAGES_REGISTRY   基础镜像内网源 registry——默认空 = 强制网络检测自动选址
+#                           （内网 livebook:8418 / 外网 code.innev.cn）；显式设置覆盖探测结果。
+#                           FROM 命中 <该值>/images 即改写为内部引用，缺失回退官方源
+# 密钥（Secrets）：
+#   INNEV_REGISTRY_USER     docker login 账号——跨命名空间推包时必需（同命名空间可回退 gitea.actor）
+#   INNEV_REGISTRY_TOKEN    docker login token（scope: write:package + read:package）；
+#                           cleanup 的注册表旧版本删除也用它，缺 write:package 时该步只告警不阻塞
+#   INNEV_CI_TOKEN          git clone token（scope: read:repository）；仅内置 GITHUB_TOKEN 不足时添加

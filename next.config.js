@@ -9,7 +9,9 @@ module.exports = {
     return [
       {
         source: '/api/mongo/:path*',
-        destination: `${process.env.PROXY_API}/api/mongo/:path*`
+        // 未配置 PROXY_API 时给占位地址（discard 端口）保证 next build 通过；
+        // 该环境下 /api/mongo/* 本就不可用，配置了真实地址即生效
+        destination: `${process.env.PROXY_API || 'http://127.0.0.1:9'}/api/mongo/:path*`
       },
       {
         source: '/wechat/:path*',

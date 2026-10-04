@@ -16,7 +16,7 @@
 ### 技术栈
 
 - **框架**: Next.js 14.2（App Router 为主，Pages Router 仅用于 `/api/wechat` 等遗留接口）、React 18.2、TypeScript ~5.0
-- **数据库**: MySQL（TiDB）+ Prisma 6（`relationMode = "prisma"`，不建外键）；另有通过 HTTP 代理访问的 MongoDB Atlas Data API（`/api/mongo/*` 由 `next.config.js` 重写转发到 `PROXY_API`）
+- **数据库**: PostgreSQL（livebook:5433/orioles，docker 发布端口）+ Prisma 6（`relationMode = "prisma"`，不建外键）；另有通过 HTTP 代理访问的 MongoDB Atlas Data API（`/api/mongo/*` 由 `next.config.js` 重写转发到 `PROXY_API`）
 - **认证**: NextAuth 4（GitHub / Google / Credentials 三种 provider，JWT session 策略）
 - **UI**: Tailwind CSS 3、Radix UI / Headless UI、lucide-react、framer-motion、recharts（antd 与 Less 主题链已移除）
 - **国际化**: i18next + react-i18next，语言包在 `public/locales/{en,zh}`
@@ -48,11 +48,11 @@ pnpm db:export           # 导出数据（prisma/export-data.js）
 pnpm db:import           # 导入数据（prisma/import-data.js）
 ```
 
-Schema 位于 `prisma/schema.prisma`，迁移文件在 `prisma/migrations/`。主要模型：`User`、`Session`、`App`、`Skills`、`Video`、`Device`/`DeviceService`、`OneTimePassword`（带 `@@map` 蛇形表名）。注意：历史库存在 db push 漂移（`Device`/`DeviceService` 不在迁移历史中），`migrate dev` 会因漂移要求 reset，**不要 reset**；变更表结构用手写迁移 SQL + `prisma db execute` + `migrate resolve --applied` 的方式（参见 `20260727120000_add_ashare_analysis_models`、`20260727140000_drop_stock_tables`）。
+Schema 位于 `prisma/schema.prisma`，迁移文件在 `prisma/migrations/`。主要模型：`User`、`Session`、`App`、`Skills`、`Video`、`Device`/`DeviceService`、`OneTimePassword`。2026-10 数据库从 MySQL（TiDB Cloud）迁移到 PostgreSQL：旧 MySQL 迁移历史归档在 `prisma/migrations-mysql-legacy/`（仅供追溯，勿移回 `prisma/migrations/`），PG 侧以 `20261004000000_init_postgres` 为 baseline。新库干净无漂移，`migrate dev` 可正常使用。注意：`prisma/export-data.js` / `prisma/import-data.js` 生成与执行的是 MySQL 方言 SQL（`INSERT IGNORE`、反引号、`TRUNCATE`），**对 PostgreSQL 不可用**，改写前不要对 PG 库使用。
 
 ### 环境变量
 
-复制 `.env.example` 为 `.env` 并按需填写。关键变量：`DATABASE_URL`（MySQL/TiDB）、`NEXTAUTH_SECRET`、`GITHUB_CLIENT_ID/SECRET`、`GOOGLE_CLIENT_ID/SECRET`、MongoDB（`MONGODB_API` 等）、`PROXY_API`（Mongo 代理）、阿里云 OSS / NLS、七牛云、企业微信、CDN_HOST 等。`.env` 已在 `.gitignore` 中，**不要提交**。
+复制 `.env.example` 为 `.env` 并按需填写。关键变量：`DATABASE_URL`（PostgreSQL）、`NEXTAUTH_SECRET`、`GITHUB_CLIENT_ID/SECRET`、`GOOGLE_CLIENT_ID/SECRET`、MongoDB（`MONGODB_API` 等）、`PROXY_API`（Mongo 代理）、阿里云 OSS / NLS、七牛云、企业微信、CDN_HOST 等。`.env` 已在 `.gitignore` 中，**不要提交**。
 
 ## 目录结构与模块划分
 
